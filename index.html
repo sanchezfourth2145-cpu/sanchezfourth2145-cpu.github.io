@@ -11,324 +11,228 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Arial, sans-serif;
         }
-
         body {
             background: #e9e9e9;
             min-height: 100vh;
-            padding: 40px 20px;
-            animation: pageFadeIn 1s ease-out;
+            padding: 20px;
         }
-
-        @keyframes pageFadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        /* Navigation Bar */
+        .nav-bar {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            background: #333;
+            padding: 15px;
+            border-radius: 4px;
+            opacity: 0;
+            animation: fadeInDown 1s forwards;
         }
-
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        .nav-bar a:hover {
+            color: #ccc;
+        }
+        .nav-bar a:first-child {
+            color: #ddd;
+            font-weight: bold;
+        }
+        
+        /* Main Card */
         .portfolio-card {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: #444446;
             color: #ffffff;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             border-radius: 4px;
             overflow: hidden;
-            animation: cardSlideIn 0.8s ease-out;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.3s;
         }
-
-        @keyframes cardSlideIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* HEADER SECTION */
+        
+        /* Header Section */
         .header-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 35px 40px;
-            position: relative;
-            flex-wrap: wrap;
-            gap: 20px;
+            padding: 50px 40px;
+            text-align: center;
         }
-
-        .header-text h1 {
-            font-size: 2.2rem;
+        h1 {
+            font-size: 2rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            line-height: 1.2;
-            transition: color 0.3s ease;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.6s;
         }
-
-        .header-text h1:hover {
-            color: #c5c5c5;
+        .subtitle {
+            color: #ccc;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.8s;
         }
-
-        .header-text p {
-            margin-top: 12px;
-            color: #cccccc;
-            text-transform: uppercase;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            line-height: 1.5;
-        }
-
-        .profile-pic-container {
-            position: relative;
-        }
-
-        .profile-pic-container::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            right: -40px;
-            width: 180px;
-            height: 180px;
-            background: #666668;
-            border-radius: 50% 0 0 50%;
-            z-index: 0;
-        }
-
+        
+        /* Profile Image with Animation */
         .profile-img {
-            width: 160px;
-            height: 160px;
-            object-fit: cover;
-            position: relative;
-            z-index: 1;
+            max-width: 200px;
+            border-radius: 50%;
+            border: 4px solid #88888a;
+            margin: 15px 0;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            border: 3px solid #444446;
+            opacity: 0;
+            animation: scaleIn 1s forwards 1s;
         }
-
         .profile-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
         }
-
-        /* TAGLINE */
+        
         .tagline {
             background: #88888a;
-            padding: 14px 40px;
-            font-size: 1.05rem;
+            padding: 18px 40px;
+            font-size: 1.1rem;
             font-style: italic;
-            letter-spacing: 1px;
-            transition: background 0.3s ease;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s forwards 1.2s;
         }
-
-        .tagline:hover {
-            background: #99999b;
-        }
-
-        /* MAIN CONTENT */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px;
+        
+        /* Content */
+        .content {
             padding: 40px;
         }
-
+        .section-row {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .section-half {
+            flex: 1;
+            min-width: 280px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 1.4s;
+        }
+        .section-half:last-child {
+            animation-delay: 1.6s;
+        }
         .section-title {
             background: #777779;
-            padding: 8px 14px;
+            padding: 10px 15px;
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 1px;
             margin-bottom: 15px;
-            transition: padding-left 0.3s ease;
+            transition: background 0.3s ease;
         }
-
         .section-title:hover {
-            padding-left: 20px;
-            background: #88888a;
+            background: #666;
         }
-
-        .section-content {
-            font-size: 0.95rem;
+        p {
             line-height: 1.7;
             color: #e0e0e0;
         }
-
-        ul {
-            list-style: none;
-            padding-left: 5px;
+        
+        /* Skills Section */
+        .skills-section {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards 1.8s;
         }
-
-        ul li {
-            padding: 4px 0;
-            position: relative;
-            padding-left: 15px;
-            transition: padding-left 0.2s ease;
-        }
-
-        ul li:hover {
-            padding-left: 20px;
-            color: #ffffff;
-        }
-
-        ul li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #aaaaaa;
-        }
-
-        /* PHOTO STYLES — 2 SIDE BY SIDE */
-        .photo-two-col {
+        .skills-list {
             display: flex;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 12px;
             margin-top: 15px;
         }
-
-        .photo-two-col img {
-            width: 48%;
-            height: 130px;
-            object-fit: cover;
-            border-radius: 2px;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .photo-two-col img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        }
-
-        .family-text {
-            margin-top: 12px;
+        .skill-tag {
+            background: #555;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            font-style: italic;
-            color: #cccccc;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
-
-        .family-text:hover {
-            color: #ffffff;
+        .skill-tag:hover {
+            background: #88888a;
+            transform: translateY(-3px);
         }
-
-        /* DIVIDER */
-        .divider {
-            height: 3px;
-            background: linear-gradient(90deg, #666, #888, #666);
-            margin: 0 40px;
+        
+        /* Animations */
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
-
-        /* RESPONSIVE FOR PHONES */
-        @media (max-width: 650px) {
-            .header-section {
-                flex-direction: column;
-                text-align: center;
-                gap: 25px;
+        @keyframes fadeInUp {
+            to { 
+                opacity: 1;
+                transform: translateY(0);
             }
-
-            .profile-pic-container::before {
-                display: none;
+        }
+        @keyframes fadeInDown {
+            to { 
+                opacity: 1;
+                transform: translateY(0);
             }
-
-            .main-content {
-                grid-template-columns: 1fr;
+        }
+        @keyframes scaleIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
             }
-
-            .photo-two-col img {
-                height: 100px;
+            100% {
+                opacity: 1;
+                transform: scale(1);
             }
         }
     </style>
 </head>
 <body>
+    <div class="nav-bar">
+        <a href="index.html">🏠 Home</a>
+        <a href="personal.html">📋 Personal Page</a>
+        <a href="achievements.html">🏆 Achievements</a>
+        <a href="parents.html">❤️ My Parents</a>
+    </div>
+
     <div class="portfolio-card">
-        <!-- HEADER -->
         <div class="header-section">
-            <div class="header-text">
-                <h1>Ma. Luisa Victoria S. Sanchez</h1>
-                <p>Bachelor of Science in Information Technology<br>Enterprise Resources and Planning Track</p>
-            </div>
-            <div class="profile-pic-container">
-                <img src="6ac168f3-6031-4833-a875-8cf81e31b670.jpg" alt="Ma. Luisa Victoria S. Sanchez" class="profile-img">
-            </div>
+            <h1>Ma. Luisa Victoria S. Sanchez</h1>
+            <p class="subtitle">Bachelor of Science in Information Technology — Enterprise Resources and Planning Track</p>
+            
+            <img src="6ac168f3-6031-4833-a875-8cf81e31b670.jfif" alt="Ma. Luisa Victoria S. Sanchez" class="profile-img">
+            
+            <p style="font-style: italic; font-size: 1.1rem; margin-top: 10px;">"Building one system at a time."</p>
         </div>
 
-        <!-- TAGLINE -->
-        <div class="tagline">
-            "BUILDING IT SOLUTIONS, ONE SYSTEM AT A TIME."
-        </div>
+        <div class="tagline">Dedicated • Growing • Future IT Professional</div>
 
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
-            <!-- LEFT COLUMN -->
-            <div class="left-column">
-                <!-- ABOUT ME -->
-                <div class="section-block">
+        <div class="content">
+            <div class="section-row">
+                <div class="section-half">
                     <div class="section-title">About Me</div>
-                    <div class="section-content">
-                        I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills. In this portfolio, I will share my achievements, skills, and experiences, as well as my goals for the future in the field of Information Technology.
-                    </div>
+                    <p>I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills. In this portfolio, I will share my achievements, skills, and experiences, as well as my goals for the future in the field of Information Technology.</p>
                 </div>
-
-                <!-- PAST ACHIEVEMENT -->
-                <div class="section-block" style="margin-top: 30px;">
-                    <div class="section-title">Past Achievement</div>
-                    <div class="section-content">
-                        <ul>
-                            <li>Graduated from Baguio City High School</li>
-                            <li>Received academic recognition With Honors and Outstanding Performance in sports</li>
-                            <li>Developed interest in computers, technology, and business systems</li>
-                            <li>Participated in School ICT activities and varsity sports programs</li>
-                        </ul>
-                        <div class="photo-two-col">
-                            <img src="7050e778-637e-47f5-a636-26d4629acb25.jpg" alt="Certificates and Awards">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PRESENT ACHIEVEMENT -->
-                <div class="section-block" style="margin-top: 30px;">
-                    <div class="section-title">Present Achievement</div>
-                    <div class="section-content">
-                        <ul>
-                            <li>Currently a first-year BSIT Enterprise student</li>
-                            <li>Studying fundamentals of programming, computer systems, and business processes — Learning skills in:</li>
-                            <li style="padding-left: 15px;">Basic coding</li>
-                            <li style="padding-left: 15px;">Computer operations</li>
-                            <li style="padding-left: 15px;">Systems analysis basics</li>
-                            <li>Working hard to build a strong foundation for my future career</li>
-                        </ul>
-                    </div>
+                <div class="section-half">
+                    <div class="section-title">Future Goals</div>
+                    <p>In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.</p>
                 </div>
             </div>
-
-            <!-- RIGHT COLUMN -->
-            <div class="right-column">
-                <!-- FUTURE -->
-                <div class="section-block">
-                    <div class="section-title">Future</div>
-                    <div class="section-content">
-                        In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.
-                    </div>
-                </div>
-
-                <!-- SKILLS -->
-                <div class="section-block" style="margin-top: 30px;">
-                    <div class="section-title">Skills</div>
-                    <div class="section-content">
-                        <ul>
-                            <li>Basic Coding</li>
-                            <li>Computer Systems Knowledge</li>
-                            <li>Time Management</li>
-                            <li>Communication Skills</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- FAMILY PHOTOS — 2 SIDE BY SIDE -->
-                <div class="section-block" style="margin-top: 30px;">
-                    <div class="photo-two-col">
-                        <img src="a1361a52-4479-446f-90a2-b1c9d1227dd1.jpg" alt="My Family">
-                        <img src="c4faf3d1-b29b-43a7-99ff-015ad5c79f80.jpg" alt="My Family">
-                    </div>
-                    <p class="family-text">My family has been my greatest support throughout my journey. Their guidance, encouragement, and love motivate me to pursue my BSIT degree and work hard for a better future.</p>
+            
+            <div class="skills-section">
+                <div class="section-title">My Skills</div>
+                <div class="skills-list">
+                    <span class="skill-tag">💻 Basic Computer Skills</span>
+                    <span class="skill-tag">🗣️ Communication</span>
+                    <span class="skill-tag">👥 Leadership</span>
+                    <span class="skill-tag">⏰ Time Management</span>
+                    <span class="skill-tag">📝 Willingness to Learn</span>
                 </div>
             </div>
         </div>
-
-        <!-- BOTTOM DIVIDER -->
-        <div class="divider"></div>
     </div>
 </body>
 </html>
