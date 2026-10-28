@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information | Ma. Luisa Victoria S. Sanchez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Times New Roman', serif;
+        }
+        body {
+            background: linear-gradient(135deg, #2c2c2c 0%, #444444 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(44, 44, 44, 0.95);
+            z-index: 100;
+            animation: slideDown 1s ease-out;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #a8c7e1;
+            letter-spacing: 2px;
+        }
+        .nav-links a {
+            color: #ddd;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #a8c7e1;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a8c7e1;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        .content-section {
+            padding: 120px 50px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+        .page-title {
+            font-size: 2.2rem;
+            color: #a8c7e1;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(168, 199, 225, 0.2);
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(168, 199, 225, 0.15);
+            border-color: #a8c7e1;
+        }
+        .info-card h3 {
+            color: #a8c7e1;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(168, 199, 225, 0.3);
+            padding-bottom: 10px;
+        }
+        .info-row {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .info-label {
+            width: 200px;
+            font-weight: 600;
+            color: #ccc;
+        }
+        .info-value {
+            flex: 1;
+            color: #fff;
+        }
+        .about-text, .future-text {
+            line-height: 1.8;
+            color: #ddd;
+        }
+        .skills-list {
+            list-style-position: inside;
+            line-height: 2;
+            color: #ddd;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: transparent;
+            color: #a8c7e1;
+            border: 2px solid #a8c7e1;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+        }
+        .back-btn:hover {
+            background: #a8c7e1;
+            color: #2c2c2c;
+            transform: translateY(-3px);
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .content-section { padding: 100px 20px 40px; }
+            .info-row { flex-direction: column; }
+            .info-label { width: 100%; margin-bottom: 5px; }
+            nav { padding: 15px 20px; flex-direction: column; gap: 10px; }
+            .nav-links a { margin: 0 8px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MLVS</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="personal.html" class="active">Personal Information</a>
+            <a href="achievements.html">Achievements</a>
+            <a href="parents.html">My Parents</a>
+        </div>
+    </nav>
+
+    <section class="content-section">
+        <h1 class="page-title">PERSONAL INFORMATION</h1>
+
+        <div class="info-card">
+            <h3>📋 Basic Details</h3>
+            <div class="info-row">
+                <span class="info-label">Full Name:</span>
+                <span class="info-value">Ma. Luisa Victoria S. Sanchez</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Date of Birth:</span>
+                <span class="info-value">February 24, 2008</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Place of Birth:</span>
+                <span class="info-value">Baguio City, Benguet</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Age:</span>
+                <span class="info-value">18 years old</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Nationality:</span>
+                <span class="info-value">Filipino</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Current Residence:</span>
+                <span class="info-value">Baguio City</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Religion:</span>
+                <span class="info-value">[Enter your religion here]</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>🎓 Educational Background</h3>
+            <div class="info-row">
+                <span class="info-label">Elementary:</span>
+                <span class="info-value">Doña Aurora H. Bueno Elementary School</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">High School:</span>
+                <span class="info-value">Baguio City High School</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">College:</span>
+                <span class="info-value">University of the Cordilleras</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Program:</span>
+                <span class="info-value">Bachelor of Science in Information Technology — Enterprise Resources and Planning Track</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>👋 About Me</h3>
+            <p class="about-text">
+                I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student from Baguio City. I was born on February 24, 2008, and have always called the beautiful City of Pines my home. I am passionate about technology, business systems, and continuous learning. I enjoy exploring new ideas, improving my skills, and finding ways to use technology to solve everyday problems. Through this portfolio, I want to share my personal background, education, and aspirations in the field of Information Technology. I believe that with determination, curiosity, and hard work, I can build a meaningful career in IT and make a positive impact in the future.
+            </p>
+        </div>
+
+        <div class="info-card">
+            <h3>💡 Skills & Strengths</h3>
+            <ul class="skills-list">
+                <li>Basic Coding & Programming</li>
+                <li>Computer Systems Knowledge</li>
+                <li>Time Management & Organization</li>
+                <li>Effective Communication Skills</li>
+                <li>Willingness to Learn & Adapt</li>
+                <li>Teamwork & Collaboration</li>
+                <li>Problem Solving</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>🌟 Future Goals</h3>
+            <p class="future-text">
+                In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations through the use of technology. My goal is to grow professionally in the IT industry, continuously learn new skills, and contribute to meaningful projects. I also hope to inspire other students, especially those from Baguio City, to pursue careers in technology and believe in their own potential.
+            </p>
+        </div>
+
+        <a href="index.html" class="back-btn">← Back to Home</a>
+    </section>
+</body>
+</html>
