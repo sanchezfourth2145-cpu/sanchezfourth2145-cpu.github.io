@@ -3,199 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ma. Luisa Victoria S. Sanchez | Portfolio</title>
+    <title>Home | Ma. Luisa Victoria S. Sanchez</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', 'Times New Roman', serif;
         }
         body {
-            background: #e9e9e9;
+            background: linear-gradient(135deg, #2c2c2c 0%, #444444 100%);
             min-height: 100vh;
-            padding: 20px;
+            color: #fff;
         }
-        
-        .portfolio-card {
-            max-width: 900px;
-            margin: 30px auto;
-            background: #444446;
-            color: #ffffff;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            border-radius: 4px;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1.2s forwards;
-        }
-        
-        .header-section {
-            padding: 50px 40px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            opacity: 0;
-            animation: fadeIn 1s forwards 0.4s;
-        }
-        
-        .subtitle {
-            color: #ccc;
-            margin-bottom: 25px;
-            opacity: 0;
-            animation: fadeIn 1s forwards 0.6s;
-        }
-        
-        .profile-img {
-            max-width: 200px;
-            border-radius: 50%;
-            border: 4px solid #88888a;
-            margin: 15px 0;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            opacity: 0;
-            animation: scaleIn 1s forwards 0.8s;
-        }
-        
-        .profile-img:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
-        }
-        
-        .tagline {
-            background: #88888a;
-            padding: 18px 40px;
-            font-size: 1.1rem;
-            font-style: italic;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 1s forwards 1s;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .section-row {
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
             display: flex;
-            gap: 30px;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(44, 44, 44, 0.95);
+            z-index: 100;
+            animation: slideDown 1s ease-out;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #a8c7e1;
+            letter-spacing: 2px;
+        }
+        .nav-links a {
+            color: #ddd;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #a8c7e1;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a8c7e1;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 50px;
+            padding-top: 100px;
+            gap: 60px;
             flex-wrap: wrap;
-            margin-bottom: 30px;
         }
-        
-        .section-half {
+        .profile-img-container {
+            position: relative;
+            animation: scaleIn 1.2s ease-out;
+        }
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 3px solid #a8c7e1;
+            animation: pulseBorder 2.5s infinite;
+        }
+        .profile-img {
+            width: 320px;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        .hero-text {
             flex: 1;
-            min-width: 280px;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: fadeInUp 1s forwards 1.2s;
+            min-width: 350px;
+            animation: fadeInRight 1.2s ease-out;
         }
-        
-        .section-half:last-child {
-            animation-delay: 1.4s;
-        }
-        
-        .section-title {
-            background: #777779;
-            padding: 10px 15px;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
+        .hero-text h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            letter-spacing: 4px;
             margin-bottom: 15px;
         }
-        
-        p {
-            line-height: 1.7;
-            color: #e0e0e0;
+        .hero-text h2 {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #a8c7e1;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
-        
-        .skills-title {
+        .tagline {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #ccc;
+            border-left: 3px solid #a8c7e1;
+            padding-left: 20px;
+            margin-bottom: 40px;
             opacity: 0;
-            animation: fadeIn 1s forwards 1.6s;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
         }
-        
-        .skills-list {
+        .buttons {
             display: flex;
+            gap: 20px;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 15px;
             opacity: 0;
-            animation: fadeIn 1s forwards 1.8s;
+            animation: fadeInUp 1s ease-out 0.8s forwards;
         }
-        
-        .skill-tag {
-            background: #555;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+        .btn {
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s ease;
         }
-        
-        .skill-tag:hover {
-            background: #88888a;
-            transform: translateY(-3px);
+        .btn-primary {
+            background: #a8c7e1;
+            color: #2c2c2c;
+            border: 2px solid #a8c7e1;
         }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .btn-primary:hover {
+            background: transparent;
+            color: #a8c7e1;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(168, 199, 225, 0.3);
         }
-        
-        @keyframes fadeInUp {
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
         }
-        
+        .btn-secondary:hover {
+            background: #fff;
+            color: #2c2c2c;
+            transform: translateY(-5px);
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
         @keyframes scaleIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseBorder {
+            0% { box-shadow: 0 0 0 0 rgba(168, 199, 225, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(168, 199, 225, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(168, 199, 225, 0); }
+        }
+        @media (max-width: 900px) {
+            .hero { text-align: center; padding: 100px 20px 40px; }
+            .tagline { border-left: none; border-top: 3px solid #a8c7e1; padding-left: 0; padding-top: 15px; }
+            .buttons { justify-content: center; }
+            nav { padding: 15px 20px; flex-direction: column; gap: 10px; }
+            .nav-links a { margin: 0 8px; font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
-    <div class="portfolio-card">
-        <div class="header-section">
-            <h1>Ma. Luisa Victoria S. Sanchez</h1>
-            <p class="subtitle">Bachelor of Science in Information Technology — Enterprise Resources and Planning Track</p>
-            
-            <img src="6ac168f3-6031-4833-a875-8cf81e31b670.jfif" alt="Ma. Luisa Victoria S. Sanchez" class="profile-img">
-            
-            <p style="font-style: italic; font-size: 1.1rem; margin-top: 10px;">"Building one system at a time."</p>
+    <nav>
+        <div class="logo">MLVS</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="personal.html">Personal Information</a>
+            <a href="achievements.html">Achievements</a>
+            <a href="parents.html">My Parents</a>
         </div>
+    </nav>
 
-        <div class="tagline">Dedicated • Growing • Future IT Professional</div>
-
-        <div class="content">
-            <div class="section-row">
-                <div class="section-half">
-                    <div class="section-title">About Me</div>
-                    <p>I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills.</p>
-                </div>
-                <div class="section-half">
-                    <div class="section-title">Future Goals</div>
-                    <p>In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses grow using technology.</p>
-                </div>
-            </div>
-            
-            <div class="section-title skills-title">My Skills</div>
-            <div class="skills-list">
-                <span class="skill-tag">💻 Basic Computer Skills</span>
-                <span class="skill-tag">🗣️ Communication</span>
-                <span class="skill-tag">👥 Leadership</span>
-                <span class="skill-tag">⏰ Time Management</span>
+    <section class="hero">
+        <div class="profile-img-container">
+            <img src="6ac168f3-6031-4833-a875-81e31b670fff.jpg" alt="Ma. Luisa Victoria S. Sanchez" class="profile-img">
+        </div>
+        <div class="hero-text">
+            <h1>MA. LUISA VICTORIA S. SANCHEZ</h1>
+            <h2>Bachelor of Science in Information Technology<br>Enterprise Resources and Planning Track</h2>
+            <p class="tagline">"Building IT Solutions, One System at a Time."</p>
+            <div class="buttons">
+                <a href="personal.html" class="btn btn-primary">Get to Know Me →</a>
+                <a href="achievements.html" class="btn btn-secondary">See My Journey</a>
             </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>
