@@ -214,25 +214,140 @@
 
         .info-item strong { color: #2f503f; display: block; font-size: 14px; margin-bottom: 4px; }
 
-        .skills-container { margin-top: 15px; }
-        .skill-item { margin-bottom: 22px; }
+        .skills-container { margin-top: 25px; }
+        
+        .skill-item { 
+            margin-bottom: 32px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .skill-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-3px);
+        }
+        
         .skill-name { 
             color: #2f503f; 
-            font-size: 16px; 
-            margin-bottom: 8px;
+            font-size: 17px; 
+            margin-bottom: 10px;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            transition: all 0.4s ease;
         }
-        .skill-bar-bg {
-            height: 12px;
-            background: rgba(120, 180, 148, 0.15);
-            border-radius: 6px;
+        
+        .skill-name::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #47705b, #78b494);
+            transition: width 0.4s ease;
+        }
+        
+        .skill-item:hover .skill-name {
+            color: #47705b;
+            letter-spacing: 1px;
+        }
+        
+        .skill-item:hover .skill-name::after {
+            width: 100%;
+        }
+        
+        .skill-bar-wrapper {
+            position: relative;
             overflow: hidden;
+            border-radius: 10px;
+            padding: 2px;
+            background: linear-gradient(90deg, transparent, rgba(120, 180, 148, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: borderGlow 3s linear infinite;
         }
+        
+        @keyframes borderGlow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .skill-bar-bg {
+            height: 18px;
+            background: rgba(120, 180, 148, 0.12);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);
+        }
+        
+        .skill-bar-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 2s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(400%); }
+        }
+        
         .skill-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, #47705b, #78b494);
-            border-radius: 6px;
+            background: linear-gradient(90deg, #47705b, #52806b, #60967c, #78b494);
+            background-size: 200% 100%;
+            border-radius: 8px;
             width: 0;
-            transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: width 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            animation: gradientShift 4s ease infinite;
+            box-shadow: 0 0 10px rgba(71, 112, 91, 0.2);
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .skill-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #78b494, 0 0 15px #78b494;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .skill-bar-fill.complete::after {
+            opacity: 1;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); box-shadow: 0 0 8px #78b494; }
+            50% { transform: translateY(-50%) scale(1.3); box-shadow: 0 0 15px #78b494, 0 0 25px #78b494; }
+        }
+        
+        .skill-item:hover .skill-bar-bg {
+            transform: scaleY(1.1);
+            transition: transform 0.3s ease;
         }
 
         .future-box {
@@ -241,6 +356,8 @@
             border-radius: 12px;
             border-left: 4px solid #47705b;
             margin-top: 10px;
+            position: relative;
+            overflow: hidden;
         }
 
         .future-box h3 {
@@ -255,6 +372,14 @@
             color: #5a856f;
             margin-top: 50px;
             font-size: 17px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -276,7 +401,7 @@
     <div class="container">
         <div class="card">
             <h2>About Me <span class="line"></span></h2>
-            <p>I am <strong>Ma. Luisa Victoria S. Sanchez</strong>, a BSIT Enterprise student. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills. Through this portfolio, I will share my journey, skills, and goals in the field of Information Technology.</p>
+            <p>I am <strong>Ma. Luisa Victoria S. Sanchez</strong>, a BSIT Enterprise student at the University of the Cordilleras. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills. Through this portfolio, I will share my journey, skills, and goals in the field of Information Technology.</p>
         </div>
 
         <div class="card">
@@ -296,7 +421,7 @@
                 </div>
                 <div class="info-item">
                     <strong>School</strong>
-                    Your School Name Here
+                    University of the Cordilleras
                 </div>
             </div>
         </div>
@@ -306,68 +431,28 @@
             <div class="skills-container">
                 <div class="skill-item">
                     <div class="skill-name">Basic Coding</div>
-                    <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-width="65"></div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" data-width="65"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-name">Computer Systems Knowledge</div>
-                    <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-width="70"></div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" data-width="70"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-name">Time Management</div>
-                    <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-width="85"></div>
+                    <div class="skill-bar-wrapper">
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" data-width="85"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-name">Communication Skills</div>
-                    <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-width="80"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Future Goals <span class="line"></span></h2>
-            <div class="future-box">
-                <h3>My Vision</h3>
-                <p>In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.</p>
-            </div>
-        </div>
-    </div>
-
-    <p class="tagline">"Building IT Solutions, One System at a Time."</p>
-
-    <script>
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 20; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.width = (Math.random() * 8 + 4) + 'px';
-            particle.style.height = particle.style.width;
-            particlesContainer.appendChild(particle);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(function(card, index) {
-                setTimeout(function() {
-                    card.classList.add('visible');
-                }, index * 250);
-            });
-
-            setTimeout(function() {
-                document.querySelectorAll('.skill-bar-fill').forEach(function(bar) {
-                    bar.style.width = bar.getAttribute('data-width') + '%';
-                });
-            }, 800);
-        });
-    </script>
-</body>
-</html>
+                    <div
