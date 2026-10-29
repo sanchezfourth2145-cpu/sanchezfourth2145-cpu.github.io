@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Information | Ma. Luisa Victoria S. Sanchez</title>
+    <title>Personal Information — Ma. Luisa Victoria S. Sanchez</title>
     <style>
         * {
             margin: 0;
@@ -11,158 +11,256 @@
             box-sizing: border-box;
             font-family: 'Georgia', 'Times New Roman', serif;
         }
+
         body {
-            background-color: #f8f6f2;
-            color: #2c2c2c;
+            background-color: #e8f5ee;
+            background-image: 
+                radial-gradient(circle at top left, rgba(120, 180, 148, 0.15), transparent 40%),
+                radial-gradient(circle at bottom right, rgba(71, 112, 91, 0.1), transparent 40%),
+                linear-gradient(135deg, #e8f5ee, #d9efdf, #cde8d4);
+            background-attachment: fixed;
             min-height: 100vh;
-            padding: 20px;
+            color: #333333;
             line-height: 1.7;
+            overflow-x: hidden;
         }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(120, 180, 148, 0.2);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
         nav {
-            background-color: #1a365d;
-            padding: 18px;
+            position: relative;
+            z-index: 10;
+            padding: 35px 20px;
             text-align: center;
-            border-radius: 4px;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            animation: fadeInDown 0.8s ease-out;
+            animation: slideDown 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-15px); }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         nav a {
-            color: #ffffff;
+            color: #47705b;
             text-decoration: none;
-            margin: 0 20px;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
+            margin: 0 22px;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        nav a::after {
+
+        nav a::before, nav a::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -4px;
-            left: 50%;
-            background-color: #d4af37;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+            bottom: -5px;
+            background: linear-gradient(90deg, #47705b, #78b494, #47705b);
+            transition: width 0.5s ease;
         }
-        nav a:hover::after, nav a.active::after {
-            width: 100%;
+
+        nav a::before { left: 0; }
+        nav a::after { right: 0; }
+        nav a:hover::before, nav a:hover::after,
+        nav a.active::before, nav a.active::after { width: 50%; }
+        nav a:hover, nav a.active { color: #2f503f; transform: translateY(-2px); }
+
+        .page-header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 30px 0 60px;
         }
-        nav a:hover, nav a.active {
-            color: #d4af37;
+
+        .page-header h1 {
+            font-size: 44px;
+            color: #2f503f;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            opacity: 0;
+            animation: scaleIn 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 50px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            animation: fadeInUp 1s ease-out;
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.7) translateY(-20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
+
+        .page-header .subtitle {
+            color: #5a856f;
+            font-style: italic;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        h1 {
-            text-align: center;
-            color: #1a365d;
-            font-size: 28px;
-            letter-spacing: 3px;
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 30px 80px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 20px rgba(71, 112, 91, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .card.visible { opacity: 1; transform: translateY(0) scale(1); }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.7s ease;
+            pointer-events: none;
+        }
+        .card:hover::before { left: 100%; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(71, 112, 91, 0.15); }
+
+        .card h2 {
+            font-size: 22px;
+            color: #2f503f;
             text-transform: uppercase;
-            margin-bottom: 40px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #d4af37;
-            animation: fadeIn 1.2s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        h2 {
-            color: #1a365d;
-            font-size: 18px;
-            margin: 30px 0 15px 0;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #d4af37;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-        }
-        h2:hover {
-            color: #d4af37;
-        }
-        .info-row {
+            letter-spacing: 4px;
+            margin-bottom: 25px;
             display: flex;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background-color 0.3s ease, padding-left 0.3s ease;
+            align-items: center;
+            gap: 12px;
         }
-        .info-row:hover {
-            background-color: #f9f7f2;
-            padding-left: 8px;
-        }
-        .info-label {
-            width: 180px;
-            font-weight: 600;
-            color: #444444;
-        }
-        .info-value {
+
+        .card h2 .line {
             flex: 1;
-            color: #2c2c2c;
+            height: 2px;
+            background: linear-gradient(90deg, #78b494, transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease-out;
         }
-        .text-block {
-            padding: 15px 0;
-            color: #3a3a3a;
-            text-align: justify;
-            transition: color 0.3s ease;
+
+        .card.visible h2 .line { transform: scaleX(1); }
+        .card p { color: #446050; font-size: 16px; line-height: 1.8; }
+        .card p strong { color: #2f503f; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
         }
-        .text-block:hover {
-            color: #1a365d;
-        }
-        ul {
-            padding-left: 20px;
-            margin: 15px 0;
-        }
-        ul li {
-            padding: 8px 0;
-            color: #3a3a3a;
-            transition: all 0.3s ease;
-        }
-        ul li:hover {
-            color: #1a365d;
-            padding-left: 5px;
-        }
-        .back-btn {
-            display: inline-block;
-            margin-top: 40px;
-            padding: 10px 25px;
-            background-color: #1a365d;
-            color: #ffffff;
-            text-decoration: none;
-            border: none;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-        .back-btn:hover {
-            background-color: #d4af37;
-            color: #1a365d;
-        }
+
         @media (max-width: 600px) {
-            .container { padding: 25px; }
-            .info-row { flex-direction: column; }
-            .info-label { width: 100%; margin-bottom: 4px; }
-            nav a { margin: 0 10px; font-size: 14px; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        .info-item {
+            padding: 12px 15px;
+            background: rgba(120, 180, 148, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #78b494;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: rgba(120, 180, 148, 0.12);
+            transform: translateX(8px);
+            border-left-color: #47705b;
+        }
+
+        .info-item strong { color: #2f503f; display: block; font-size: 14px; margin-bottom: 4px; }
+
+        .skills-container { margin-top: 15px; }
+        .skill-item { margin-bottom: 22px; }
+        .skill-name { 
+            color: #2f503f; 
+            font-size: 16px; 
+            margin-bottom: 8px;
+        }
+        .skill-bar-bg {
+            height: 12px;
+            background: rgba(120, 180, 148, 0.15);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #47705b, #78b494);
+            border-radius: 6px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .future-box {
+            background: linear-gradient(135deg, rgba(71, 112, 91, 0.06), rgba(120, 180, 148, 0.1));
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #47705b;
+            margin-top: 10px;
+        }
+
+        .future-box h3 {
+            font-size: 18px;
+            color: #2f503f;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            text-align: center;
+            font-style: italic;
+            color: #5a856f;
+            margin-top: 50px;
+            font-size: 17px;
         }
     </style>
 </head>
 <body>
+    <div class="particles" id="particles"></div>
+
     <nav>
         <a href="index.html">Home</a>
         <a href="personal.html" class="active">Personal Information</a>
@@ -170,75 +268,106 @@
         <a href="parents.html">My Parents</a>
     </nav>
 
-    <div class="container">
+    <div class="page-header">
         <h1>Personal Information</h1>
-
-        <h2>Basic Details</h2>
-        <div class="info-row">
-            <span class="info-label">Full Name</span>
-            <span class="info-value">Ma. Luisa Victoria S. Sanchez</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Date of Birth</span>
-            <span class="info-value">February 24, 2008</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Place of Birth</span>
-            <span class="info-value">Baguio City, Benguet</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Age</span>
-            <span class="info-value">18 years old</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Nationality</span>
-            <span class="info-value">Filipino</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Current Residence</span>
-            <span class="info-value">Baguio City</span>
-        </div>
-
-        <h2>Educational Background</h2>
-        <div class="info-row">
-            <span class="info-label">Elementary</span>
-            <span class="info-value">Doña Aurora H. Bueno Elementary School</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">High School</span>
-            <span class="info-value">Baguio City High School</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">College</span>
-            <span class="info-value">University of the Cordilleras</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Program</span>
-            <span class="info-value">Bachelor of Science in Information Technology — Enterprise Resources and Planning Track</span>
-        </div>
-
-        <h2>About Me</h2>
-        <p class="text-block">
-            I am a dedicated and conscientious BSIT student with a strong commitment to academic excellence and professional growth. I approach my studies with discipline, attention to detail, and a genuine eagerness to learn. I value integrity, punctuality, and continuous improvement in all my endeavors. My goal is to build a solid foundation in information technology and develop the skills necessary to contribute meaningfully to the professional community. I am grateful for the guidance and opportunities provided to me as I work toward my career objectives.
-        </p>
-
-        <h2>Skills and Strengths</h2>
-        <ul>
-            <li>Basic Coding and Programming</li>
-            <li>Computer Systems Knowledge</li>
-            <li>Time Management and Organization</li>
-            <li>Effective Written and Verbal Communication</li>
-            <li>Willingness to Learn and Follow Instructions</li>
-            <li>Teamwork and Collaboration</li>
-            <li>Problem Solving and Critical Thinking</li>
-        </ul>
-
-        <h2>Future Goals</h2>
-        <p class="text-block">
-            My objective is to complete my degree in Information Technology and establish a career as a competent IT professional. I aspire to work in enterprise systems and contribute to the efficient operation of organizations through technology. I believe in the value of hard work, continuous learning, and maintaining high ethical standards. I am committed to becoming a responsible professional who makes a positive contribution to my community and the industry.
-        </p>
-
-        <a href="index.html" class="back-btn">← Back to Home</a>
+        <p class="subtitle">Get to know the person behind the portfolio</p>
     </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>About Me <span class="line"></span></h2>
+            <p>I am <strong>Ma. Luisa Victoria S. Sanchez</strong>, a BSIT Enterprise student. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills. Through this portfolio, I will share my journey, skills, and goals in the field of Information Technology.</p>
+        </div>
+
+        <div class="card">
+            <h2>Education & Details <span class="line"></span></h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Full Name</strong>
+                    Ma. Luisa Victoria S. Sanchez
+                </div>
+                <div class="info-item">
+                    <strong>Course</strong>
+                    Bachelor of Science in Information Technology
+                </div>
+                <div class="info-item">
+                    <strong>Track</strong>
+                    Enterprise Resources and Planning
+                </div>
+                <div class="info-item">
+                    <strong>School</strong>
+                    Your School Name Here
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>My Skills <span class="line"></span></h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-name">Basic Coding</div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-width="65"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Computer Systems Knowledge</div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-width="70"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Time Management</div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Communication Skills</div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" data-width="80"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Future Goals <span class="line"></span></h2>
+            <div class="future-box">
+                <h3>My Vision</h3>
+                <p>In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.</p>
+            </div>
+        </div>
+    </div>
+
+    <p class="tagline">"Building IT Solutions, One System at a Time."</p>
+
+    <script>
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.width = (Math.random() * 8 + 4) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(function(card, index) {
+                setTimeout(function() {
+                    card.classList.add('visible');
+                }, index * 250);
+            });
+
+            setTimeout(function() {
+                document.querySelectorAll('.skill-bar-fill').forEach(function(bar) {
+                    bar.style.width = bar.getAttribute('data-width') + '%';
+                });
+            }, 800);
+        });
+    </script>
 </body>
 </html>
