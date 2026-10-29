@@ -1,1 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Ma. Luisa Victoria S. Sanchez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        body {
+            background-color: #f8f6f2;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.7;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Subtle floating decorative elements */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05), transparent 70%);
+            z-index: -1;
+            animation: floatDecor 20s ease-in-out infinite;
+        }
+        body::before {
+            top: -100px;
+            right: -100px;
+        }
+        body::after {
+            bottom: -100px;
+            left: -100px;
+            animation-delay: -10s;
+        }
+        @keyframes floatDecor {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+        nav {
+            background-color: #1a365d;
+            padding: 18px;
+            text-align: center;
+            border-radius: 4px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 15px rgba(26, 54, 93, 0.15);
+            animation: fadeInDown 0.8s ease-out;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            position: relative;
+            display: inline-block;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background-color: #d4af37;
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+        }
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+        nav a:hover, nav a.active {
+            color: #d4af37;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 60px 50px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            animation: scaleIn 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            position: relative;
+            overflow: hidden;
+        }
+        @keyframes scaleIn {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        /* Shimmer border effect on container */
+        .hero-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            animation: shimmerBorder 3s ease-in-out infinite;
+        }
+        @keyframes shimmerBorder {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+        .photo-frame {
+            border: 4px solid #d4af37;
+            padding: 8px;
+            background: #ffffff;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: photoFloat 6s ease-in-out infinite;
+        }
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .photo-frame::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+        .photo-frame:hover::after {
+            left: 150%;
+        }
+        .photo-frame:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+            border-color: #b8962e;
+        }
+        .photo-frame img {
+            width: 220px;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+        .info-section {
+            flex: 1;
+            opacity: 0;
+            animation: slideInRight 1s ease-out forwards;
+            animation-delay: 0.4s;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .info-section h1 {
+            color: #1a365d;
+            font-size: 32px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            position: relative;
+            display: inline-block;
+        }
+        .divider {
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #1a365d, #d4af37, #1a365d);
+            background-size: 200% 100%;
+            margin-bottom: 20px;
+            animation: expandLine 1.5s ease-out forwards, shimmerLine 3s linear infinite;
+            animation-delay: 0.6s, 2s;
+        }
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 100px; }
+        }
+        @keyframes shimmerLine {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .info-section p.degree {
+            color: #444444;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .info-section p.tagline {
+            color: #666666;
+            font-style: italic;
+            margin-bottom: 35px;
+            border-left: 3px solid #d4af37;
+            padding-left: 15px;
+            opacity: 0;
+            animation: fadeInLeft 1s ease-out forwards;
+            animation-delay: 1s;
+            transition: all 0.4s ease;
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .info-section p.tagline:hover {
+            border-left-width: 5px;
+            padding-left: 20px;
+            color: #1a365d;
+        }
+        .button-group {
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 1.2s;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn-primary {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #1a365d, #2a4a7a);
+            color: #ffffff;
+            text-decoration: none;
+            border: none;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        .btn-primary:hover {
+            background: #d4af37;
+            color: #1a365d;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+        }
+        .btn-secondary {
+            padding: 12px 28px;
+            background-color: transparent;
+            color: #1a365d;
+            text-decoration: none;
+            border: 2px solid #1a365d;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .btn-secondary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #1a365d;
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+        .btn-secondary:hover {
+            color: #ffffff;
+        }
+        .btn-secondary:hover::after {
+            width: 100%;
+        }
+        @media (max-width: 650px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px;
+            }
+            .divider {
+                margin: 0 auto 20px;
+            }
+            .button-group {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="personal.html">Personal Information</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="parents.html">My Parents</a>
+    </nav>
 
+    <div class="hero-container">
+        <div class="photo-frame">
+            <img src="6ac168f3-6031-4833-a875-8cf81e31b670.jfif" alt="Ma. Luisa Victoria S. Sanchez">
+        </div>
+        <div class="info-section">
+            <h1>Ma. Luisa Victoria<br>S. Sanchez</h1>
+            <div class="divider"></div>
+            <p class="degree">Bachelor of Science in Information Technology<br>Enterprise Resources and Planning Track</p>
+            <p class="tagline">"Building IT Solutions, One System at a Time."</p>
+            <div class="button-group">
+                <a href="personal.html" class="btn-primary">Get to Know Me →</a>
+                <a href="achievements.html" class="btn-secondary">See My Journey</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
