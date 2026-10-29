@@ -131,6 +131,7 @@
             width: 280px;
             height: 370px;
             overflow: hidden;
+            border: 1px solid #e0e0e0;
             box-shadow: 0 15px 50px rgba(95, 115, 103, 0.12);
             transition: transform 0.6s ease, box-shadow 0.6s ease;
             position: relative;
@@ -155,20 +156,21 @@
             box-shadow: 0 25px 60px rgba(95, 115, 103, 0.18);
         }
 
+        /* Clean subtle border instead of gold */
         .photo-accent {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 18px;
+            left: 18px;
             width: 100%;
             height: 100%;
-            border: 2px solid #b8a98f;
+            border: 1px solid #d8d8d8;
             z-index: 1;
             transition: all 0.5s ease;
         }
 
         .photo-container:hover .photo-accent {
-            top: 8px;
-            left: 8px;
+            top: 12px;
+            left: 12px;
         }
 
         /* Soft shimmer line on photo */
@@ -203,7 +205,7 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* ✨ YOUR FULL NAME — WITH ANIMATIONS ✨ */
+        /* Your full name with animations */
         .text-content h1 {
             font-size: 42px;
             letter-spacing: 3px;
@@ -357,139 +359,4 @@
             white-space: nowrap;
             position: relative;
             overflow: hidden;
-        }
-
-        .btn-primary {
-            background-color: #5f7367;
-            color: #ffffff;
-            border: 2px solid #5f7367;
-        }
-
-        .btn-primary:hover {
-            background-color: #4a5c4f;
-            border-color: #4a5c4f;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(95, 115, 103, 0.25);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: #5f7367;
-            border: 2px solid #b8a98f;
-        }
-
-        .btn-secondary:hover {
-            background-color: #b8a98f;
-            color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(184, 169, 143, 0.25);
-        }
-
-        /* Button shimmer effect */
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                gap: 50px;
-            }
-
-            .divider-line {
-                margin: 0 auto 25px;
-            }
-
-            .buttons-wrapper {
-                justify-content: center;
-            }
-
-            .text-content h1 {
-                font-size: 36px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav {
-                padding: 25px 15px;
-            }
-
-            nav a {
-                margin: 0 10px;
-                font-size: 13px;
-            }
-
-            .photo-frame {
-                width: 240px;
-                height: 320px;
-            }
-
-            .text-content h1 {
-                font-size: 28px;
-            }
-
-            .btn {
-                padding: 10px 22px;
-                font-size: 13px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Floating background shapes -->
-    <div class="floating-circle circle-1"></div>
-    <div class="floating-circle circle-2"></div>
-    <div class="floating-circle circle-3"></div>
-
-    <!-- Navigation -->
-    <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="personal.html">Personal Information</a>
-        <a href="achievements.html">Achievements</a>
-        <a href="parents.html">My Parents</a>
-    </nav>
-
-    <!-- Main Hero Section -->
-    <section class="hero">
-        <div class="photo-container">
-            <div class="photo-frame">
-                <!-- ✅ YOUR EXACT PHOTO FILENAME HERE -->
-                <img src="6ac168f3-6031-4833-a875-8cf81e31b670.jfif" alt="Ma. Luisa Victoria S. Sanchez">
-            </div>
-            <div class="photo-accent"></div>
-        </div>
-
-        <div class="text-content">
-            <h1>
-                <span class="line-1">Ma. Luisa Victoria</span><br>
-                <span class="line-2">S. Sanchez</span>
-            </h1>
-            <p class="subtitle">IT Student & Future Professional</p>
-            <div class="divider-line"></div>
-            <p class="tagline">"Building IT Solutions, One System at a Time."</p>
-            <div class="buttons-wrapper">
-                <a href="personal.html" class="btn btn-primary">Get to Know Me</a>
-                <a href="achievements.html" class="btn btn-secondary">See My Journey</a>
-            </div>
-        </div>
-    </section>
-</body>
-</html>
+       <[SILENT_never_used_51bce0c785ca2f68081bfa7d91973934]></seed:tool_call_never_used_51bce0c785ca2f68081bfa7d91973934>
