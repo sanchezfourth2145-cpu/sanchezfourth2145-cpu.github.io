@@ -5,381 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Information — Ma. Luisa Victoria S. Sanchez</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Georgia', 'Times New Roman', serif;
-        }
-
+        * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', serif;}
         body {
             background-color: #e8f5ee;
-            background-image: 
-                radial-gradient(circle at top left, rgba(120, 180, 148, 0.15), transparent 40%),
-                radial-gradient(circle at bottom right, rgba(71, 112, 91, 0.1), transparent 40%),
+            background-image: radial-gradient(circle at top left, rgba(120,180,148,0.15), transparent 40%),
+                radial-gradient(circle at bottom right, rgba(71,112,91,0.1), transparent 40%),
                 linear-gradient(135deg, #e8f5ee, #d9efdf, #cde8d4);
             background-attachment: fixed;
             min-height: 100vh;
-            color: #333333;
+            color: #333;
             line-height: 1.7;
             overflow-x: hidden;
         }
-
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
+        .particles {position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;}
         .particle {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(120, 180, 148, 0.2);
+            width: 10px; height: 10px;
+            background: rgba(120,180,148,0.2);
             border-radius: 50%;
             animation: float 15s infinite;
         }
-
         @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+            0%,100% {transform: translateY(100vh) rotate(0deg); opacity: 0;}
+            10%,90% {opacity: 1;}
         }
-
         nav {
-            position: relative;
-            z-index: 10;
-            padding: 35px 20px;
-            text-align: center;
-            animation: slideDown 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative; z-index: 10;
+            padding: 35px 20px; text-align: center;
+            animation: slideDown 1.2s forwards; opacity: 0;
         }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes slideDown {to {opacity: 1; transform: translateY(0);}}
         nav a {
-            color: #47705b;
-            text-decoration: none;
-            margin: 0 22px;
-            font-size: 15px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            color: #47705b; text-decoration: none;
+            margin: 0 22px; font-size: 15px;
+            letter-spacing: 2px; text-transform: uppercase;
             position: relative;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
-        nav a::before, nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            background: linear-gradient(90deg, #47705b, #78b494, #47705b);
-            transition: width 0.5s ease;
-        }
-
-        nav a::before { left: 0; }
-        nav a::after { right: 0; }
-        nav a:hover::before, nav a:hover::after,
-        nav a.active::before, nav a.active::after { width: 50%; }
-        nav a:hover, nav a.active { color: #2f503f; transform: translateY(-2px); }
-
+        nav a.active {border-bottom: 2px solid #47705b; font-weight: bold;}
         .page-header {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 30px 0 60px;
+            position: relative; z-index: 1; text-align: center;
+            padding: 30px 0 60px; opacity: 0;
+            animation: fadeIn 1s forwards; animation-delay: 0.3s;
         }
-
+        @keyframes fadeIn {to {opacity: 1;}}
         .page-header h1 {
-            font-size: 44px;
-            color: #2f503f;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            opacity: 0;
-            animation: scaleIn 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            font-size: 44px; color: #2f503f;
+            text-transform: uppercase; letter-spacing: 8px; margin-bottom: 10px;
         }
-
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.7) translateY(-20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .page-header .subtitle {
-            color: #5a856f;
-            font-style: italic;
-            margin-top: 10px;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.5s;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        .page-header .subtitle {color: #5a856f; font-style: italic;}
         .container {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
+            position: relative; z-index: 1;
+            max-width: 900px; margin: 0 auto;
             padding: 0 30px 80px;
         }
-
         .card {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255,255,255,0.7);
             backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 16px;
+            padding: 40px; border-radius: 16px;
             margin-bottom: 35px;
-            box-shadow: 0 4px 20px rgba(71, 112, 91, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px) scale(0.95);
-            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 20px rgba(71,112,91,0.08);
+            opacity: 0; transform: translateY(50px);
+            transition: all 0.7s ease;
         }
-
-        .card.visible { opacity: 1; transform: translateY(0) scale(1); }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.7s ease;
-            pointer-events: none;
-        }
-        .card:hover::before { left: 100%; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(71, 112, 91, 0.15); }
-
+        .card.visible {opacity: 1; transform: translateY(0);}
+        .card:hover {transform: translateY(-5px);}
         .card h2 {
-            font-size: 22px;
-            color: #2f503f;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            font-size: 22px; color: #2f503f;
+            text-transform: uppercase; letter-spacing: 4px;
+            margin-bottom: 20px; padding-bottom: 10px;
+            border-bottom: 2px solid #78b494;
         }
-
-        .card h2 .line {
-            flex: 1;
-            height: 2px;
-            background: linear-gradient(90deg, #78b494, transparent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.6s ease-out;
-        }
-
-        .card.visible h2 .line { transform: scaleX(1); }
-        .card p { color: #446050; font-size: 16px; line-height: 1.8; }
-        .card p strong { color: #2f503f; }
-
+        .card p {color: #446050; font-size: 16px; line-height: 1.8;}
         .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 10px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 15px; margin-top: 10px;
         }
-
-        @media (max-width: 600px) {
-            .info-grid { grid-template-columns: 1fr; }
-        }
-
+        @media (max-width: 600px) {.info-grid {grid-template-columns: 1fr;}}
         .info-item {
-            padding: 12px 15px;
-            background: rgba(120, 180, 148, 0.05);
-            border-radius: 8px;
-            border-left: 3px solid #78b494;
-            transition: all 0.3s ease;
+            padding: 12px 15px; background: rgba(120,180,148,0.05);
+            border-radius: 8px; border-left: 3px solid #78b494;
         }
-
-        .info-item:hover {
-            background: rgba(120, 180, 148, 0.12);
-            transform: translateX(8px);
-            border-left-color: #47705b;
+        .info-item strong {color: #2f503f; display: block; margin-bottom: 4px;}
+        .skills-container {margin-top: 25px;}
+        .skill-item {
+            margin-bottom: 32px; opacity: 0; transform: translateY(20px);
+            transition: all 0.6s ease;
         }
-
-        .info-item strong { color: #2f503f; display: block; font-size: 14px; margin-bottom: 4px; }
-
-        .skills-container { margin-top: 25px; }
-        
-        .skill-item { 
-            margin-bottom: 32px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .skill-item.visible {opacity: 1; transform: translateY(0);}
+        .skill-name {
+            color: #2f503f; font-size: 17px; margin-bottom: 10px;
+            font-weight: 500; transition: color 0.3s ease;
         }
-        
-        .skill-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .skill-item:hover {
-            transform: translateY(-3px);
-        }
-        
-        .skill-name { 
-            color: #2f503f; 
-            font-size: 17px; 
-            margin-bottom: 10px;
-            font-weight: 500;
-            position: relative;
-            display: inline-block;
-            transition: all 0.4s ease;
-        }
-        
-        .skill-name::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #47705b, #78b494);
-            transition: width 0.4s ease;
-        }
-        
-        .skill-item:hover .skill-name {
-            color: #47705b;
-            letter-spacing: 1px;
-        }
-        
-        .skill-item:hover .skill-name::after {
-            width: 100%;
-        }
-        
+        .skill-item:hover .skill-name {color: #47705b;}
         .skill-bar-wrapper {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            padding: 2px;
-            background: linear-gradient(90deg, transparent, rgba(120, 180, 148, 0.1), transparent);
-            background-size: 200% 100%;
-            animation: borderGlow 3s linear infinite;
+            position: relative; overflow: hidden; border-radius: 10px;
+            padding: 2px; background: linear-gradient(90deg, transparent, rgba(120,180,148,0.15), transparent);
+            background-size: 200% 100%; animation: borderGlow 3s linear infinite;
         }
-        
-        @keyframes borderGlow {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        
+        @keyframes borderGlow {0% {background-position: 200% 0;} 100% {background-position: -200% 0;}}
         .skill-bar-bg {
-            height: 18px;
-            background: rgba(120, 180, 148, 0.12);
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);
+            height: 18px; background: rgba(120,180,148,0.12);
+            border-radius: 8px; overflow: hidden; position: relative;
         }
-        
         .skill-bar-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -50%;
-            width: 50%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: -50%;
+            width: 50%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             animation: shine 2s infinite;
         }
-        
-        @keyframes shine {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(400%); }
-        }
-        
+        @keyframes shine {100% {transform: translateX(400%);}}
         .skill-bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, #47705b, #52806b, #60967c, #78b494);
-            background-size: 200% 100%;
-            border-radius: 8px;
-            width: 0;
-            transition: width 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
+            background: linear-gradient(90deg, #47705b, #60967c, #78b494);
+            background-size: 200% 100%; border-radius: 8px;
+            width: 0; transition: width 2s ease; position: relative;
             animation: gradientShift 4s ease infinite;
-            box-shadow: 0 0 10px rgba(71, 112, 91, 0.2);
         }
-        
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
         }
-        
         .skill-bar-fill::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #78b494, 0 0 15px #78b494;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            content: ''; position: absolute; top: 50%; right: 0;
+            transform: translateY(-50%); width: 12px; height: 12px;
+            background: #fff; border-radius: 50%;
+            box-shadow: 0 0 8px #78b494; opacity: 0; transition: opacity 0.5s ease;
         }
-        
         .skill-bar-fill.complete::after {
-            opacity: 1;
-            animation: pulse 1.5s ease-in-out infinite;
+            opacity: 1; animation: pulse 1.5s ease-in-out infinite;
         }
-        
         @keyframes pulse {
-            0%, 100% { transform: translateY(-50%) scale(1); box-shadow: 0 0 8px #78b494; }
-            50% { transform: translateY(-50%) scale(1.3); box-shadow: 0 0 15px #78b494, 0 0 25px #78b494; }
+            0%,100% {transform: translateY(-50%) scale(1);}
+            50% {transform: translateY(-50%) scale(1.3);}
         }
-        
-        .skill-item:hover .skill-bar-bg {
-            transform: scaleY(1.1);
-            transition: transform 0.3s ease;
-        }
-
         .future-box {
-            background: linear-gradient(135deg, rgba(71, 112, 91, 0.06), rgba(120, 180, 148, 0.1));
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 4px solid #47705b;
+            background: linear-gradient(135deg, rgba(71,112,91,0.06), rgba(120,180,148,0.1));
+            padding: 25px; border-radius: 12px; border-left: 4px solid #47705b;
             margin-top: 10px;
-            position: relative;
-            overflow: hidden;
         }
-
-        .future-box h3 {
-            font-size: 18px;
-            color: #2f503f;
-            margin-bottom: 10px;
-        }
-
+        .future-box h3 {font-size: 18px; color: #2f503f; margin-bottom: 10px;}
         .tagline {
-            text-align: center;
-            font-style: italic;
-            color: #5a856f;
-            margin-top: 50px;
-            font-size: 17px;
-            opacity: 0;
-            animation: fadeIn 1.5s ease-out forwards;
-            animation-delay: 1.2s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            text-align: center; font-style: italic; color: #5a856f;
+            margin-top: 50px; font-size: 17px; opacity: 0;
+            animation: fadeIn 1.5s forwards; animation-delay: 1.5s;
         }
     </style>
 </head>
@@ -394,65 +163,90 @@
     </nav>
 
     <div class="page-header">
-        <h1>Personal Information</h1>
+        <h1>PERSONAL INFORMATION</h1>
         <p class="subtitle">Get to know the person behind the portfolio</p>
     </div>
 
     <div class="container">
         <div class="card">
-            <h2>About Me <span class="line"></span></h2>
+            <h2>About Me</h2>
             <p>I am <strong>Ma. Luisa Victoria S. Sanchez</strong>, a BSIT Enterprise student at the University of the Cordilleras. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills. Through this portfolio, I will share my journey, skills, and goals in the field of Information Technology.</p>
         </div>
 
         <div class="card">
-            <h2>Education & Details <span class="line"></span></h2>
+            <h2>Education & Details</h2>
             <div class="info-grid">
-                <div class="info-item">
-                    <strong>Full Name</strong>
-                    Ma. Luisa Victoria S. Sanchez
+                <div class="info-item"><strong>Full Name</strong>Ma. Luisa Victoria S. Sanchez</div>
+                <div class="info-item"><strong>Course</strong>Bachelor of Science in Information Technology</div>
+                <div class="info-item"><strong>Track</strong>Enterprise Resources and Planning</div>
+                <div class="info-item"><strong>School</strong>University of the Cordilleras</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-name">Basic Coding</div>
+                    <div class="skill-bar-wrapper"><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="65"></div></div></div>
                 </div>
-                <div class="info-item">
-                    <strong>Course</strong>
-                    Bachelor of Science in Information Technology
+                <div class="skill-item">
+                    <div class="skill-name">Computer Systems Knowledge</div>
+                    <div class="skill-bar-wrapper"><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div></div>
                 </div>
-                <div class="info-item">
-                    <strong>Track</strong>
-                    Enterprise Resources and Planning
+                <div class="skill-item">
+                    <div class="skill-name">Time Management</div>
+                    <div class="skill-bar-wrapper"><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
                 </div>
-                <div class="info-item">
-                    <strong>School</strong>
-                    University of the Cordilleras
+                <div class="skill-item">
+                    <div class="skill-name">Communication Skills</div>
+                    <div class="skill-bar-wrapper"><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h2>My Skills <span class="line"></span></h2>
-            <div class="skills-container">
-                <div class="skill-item">
-                    <div class="skill-name">Basic Coding</div>
-                    <div class="skill-bar-wrapper">
-                        <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" data-width="65"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Computer Systems Knowledge</div>
-                    <div class="skill-bar-wrapper">
-                        <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" data-width="70"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Time Management</div>
-                    <div class="skill-bar-wrapper">
-                        <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" data-width="85"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Communication Skills</div>
-                    <div
+            <h2>Future Goals</h2>
+            <div class="future-box">
+                <h3>My Vision</h3>
+                <p>In the future, I see myself growing as an IT professional, specializing in enterprise systems and business solutions. My goal is to bridge the gap between technology and business, helping organizations work smarter and more efficiently.</p>
+            </div>
+        </div>
+
+        <p class="tagline">"Building the future, one skill at a time."</p>
+    </div>
+
+    <script>
+        // Floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 15 + 's';
+            particlesContainer.appendChild(p);
+        }
+
+        // Show cards on load
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => card.classList.add('visible'), index * 200);
+            });
+
+            const skillItems = document.querySelectorAll('.skill-item');
+            skillItems.forEach((item, index) => {
+                setTimeout(() => item.classList.add('visible'), 600 + index * 250);
+            });
+
+            setTimeout(() => {
+                document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                    setTimeout(() => bar.classList.add('complete'), 2000);
+                });
+            }, 800);
+        });
+    </script>
+</body>
+</html>
