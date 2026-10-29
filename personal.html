@@ -1,1 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information | Ma. Luisa Victoria S. Sanchez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+        body {
+            background-color: #f8f6f2;
+            color: #2c2c2c;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.7;
+        }
+        nav {
+            background-color: #1a365d;
+            padding: 18px;
+            text-align: center;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background-color: #d4af37;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+        nav a:hover, nav a.active {
+            color: #d4af37;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 50px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            animation: fadeInUp 1s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            font-size: 28px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #d4af37;
+            animation: fadeIn 1.2s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h2 {
+            color: #1a365d;
+            font-size: 18px;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        h2:hover {
+            color: #d4af37;
+        }
+        .info-row {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s ease, padding-left 0.3s ease;
+        }
+        .info-row:hover {
+            background-color: #f9f7f2;
+            padding-left: 8px;
+        }
+        .info-label {
+            width: 180px;
+            font-weight: 600;
+            color: #444444;
+        }
+        .info-value {
+            flex: 1;
+            color: #2c2c2c;
+        }
+        .text-block {
+            padding: 15px 0;
+            color: #3a3a3a;
+            text-align: justify;
+            transition: color 0.3s ease;
+        }
+        .text-block:hover {
+            color: #1a365d;
+        }
+        ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        ul li {
+            padding: 8px 0;
+            color: #3a3a3a;
+            transition: all 0.3s ease;
+        }
+        ul li:hover {
+            color: #1a365d;
+            padding-left: 5px;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 25px;
+            background-color: #1a365d;
+            color: #ffffff;
+            text-decoration: none;
+            border: none;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background-color: #d4af37;
+            color: #1a365d;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 25px; }
+            .info-row { flex-direction: column; }
+            .info-label { width: 100%; margin-bottom: 4px; }
+            nav a { margin: 0 10px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="personal.html" class="active">Personal Information</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="parents.html">My Parents</a>
+    </nav>
 
+    <div class="container">
+        <h1>Personal Information</h1>
+
+        <h2>Basic Details</h2>
+        <div class="info-row">
+            <span class="info-label">Full Name</span>
+            <span class="info-value">Ma. Luisa Victoria S. Sanchez</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Date of Birth</span>
+            <span class="info-value">February 24, 2008</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Place of Birth</span>
+            <span class="info-value">Baguio City, Benguet</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Age</span>
+            <span class="info-value">18 years old</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Nationality</span>
+            <span class="info-value">Filipino</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Current Residence</span>
+            <span class="info-value">Baguio City</span>
+        </div>
+
+        <h2>Educational Background</h2>
+        <div class="info-row">
+            <span class="info-label">Elementary</span>
+            <span class="info-value">Doña Aurora H. Bueno Elementary School</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">High School</span>
+            <span class="info-value">Baguio City High School</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">College</span>
+            <span class="info-value">University of the Cordilleras</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Program</span>
+            <span class="info-value">Bachelor of Science in Information Technology — Enterprise Resources and Planning Track</span>
+        </div>
+
+        <h2>About Me</h2>
+        <p class="text-block">
+            I am a dedicated and conscientious BSIT student with a strong commitment to academic excellence and professional growth. I approach my studies with discipline, attention to detail, and a genuine eagerness to learn. I value integrity, punctuality, and continuous improvement in all my endeavors. My goal is to build a solid foundation in information technology and develop the skills necessary to contribute meaningfully to the professional community. I am grateful for the guidance and opportunities provided to me as I work toward my career objectives.
+        </p>
+
+        <h2>Skills and Strengths</h2>
+        <ul>
+            <li>Basic Coding and Programming</li>
+            <li>Computer Systems Knowledge</li>
+            <li>Time Management and Organization</li>
+            <li>Effective Written and Verbal Communication</li>
+            <li>Willingness to Learn and Follow Instructions</li>
+            <li>Teamwork and Collaboration</li>
+            <li>Problem Solving and Critical Thinking</li>
+        </ul>
+
+        <h2>Future Goals</h2>
+        <p class="text-block">
+            My objective is to complete my degree in Information Technology and establish a career as a competent IT professional. I aspire to work in enterprise systems and contribute to the efficient operation of organizations through technology. I believe in the value of hard work, continuous learning, and maintaining high ethical standards. I am committed to becoming a responsible professional who makes a positive contribution to my community and the industry.
+        </p>
+
+        <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
+</body>
+</html>
