@@ -130,13 +130,6 @@
             font-size: 14px; color: #2f503f; text-align: center; font-style: italic;
         }
         
-        .skills-list {
-            columns: 2; gap: 15px; margin-top: 10px;
-        }
-        .skill-item {
-            padding: 8px 0; opacity: 0; transform: translateX(-5px); transition: all 0.4s ease;
-        }
-        .skill-item.visible {opacity: 1; transform: translateX(0);}
         .future-card {
             background: linear-gradient(135deg, rgba(71,112,91,0.05), rgba(120,180,148,0.08));
             border-left: 4px solid #47705b;
@@ -149,6 +142,33 @@
             transition: all 0.4s ease;
         }
         .tagline:hover {color: #2f503f; letter-spacing: 2px;}
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from {box-shadow: 0 0 10px rgba(120,180,148,0.4);}
+            to {box-shadow: 0 0 20px rgba(71,112,91,0.6);}
+        }
+
+        .float-icon {
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+        @keyframes floatIcon {
+            0% {transform: translateY(0);}
+            50% {transform: translateY(-5px);}
+            100% {transform: translateY(0);}
+        }
     </style>
 </head>
 <body>
@@ -168,80 +188,69 @@
 
     <div class="container">
         <!-- PAST ACHIEVEMENTS -->
-        <div class="card">
+        <div class="card scroll-reveal">
             <h2>Past Achievements <span class="line"></span></h2>
             <div class="achievement-list">
                 <div class="achievement-item">
-                    <h3><span>🎓</span> Graduated from Baguio City High School</h3>
+                    <h3><span class="float-icon">🎓</span> Graduated from Baguio City High School</h3>
                     <p>Successfully completed high school education with dedication and hard work.</p>
                 </div>
                 <div class="achievement-item">
-                    <h3><span>🏅</span> Academic Recognition — With Honors</h3>
+                    <h3><span class="float-icon">🏅</span> Academic Recognition — With Honors</h3>
                     <p>Consistently maintained good grades and received recognition for academic excellence.</p>
                 </div>
                 <div class="achievement-item">
-                    <h3><span>🏆</span> Outstanding Performance in Sports</h3>
+                    <h3><span class="float-icon">🏆</span> Outstanding Performance in Sports</h3>
                     <p>Represented the school in varsity sports programs and demonstrated discipline and teamwork.</p>
                 </div>
                 <div class="achievement-item">
-                    <h3><span>💻</span> Developed Interest in Computers, Technology, and Business Systems</h3>
+                    <h3><span class="float-icon">💻</span> Developed Interest in Computers, Technology, and Business Systems</h3>
                     <p>Discovered passion for technology and IT, which inspired my college degree choice.</p>
                 </div>
                 <div class="achievement-item">
-                    <h3><span>🏫</span> Participated in School ICT Activities and Varsity Sports Programs</h3>
+                    <h3><span class="float-icon">🏫</span> Participated in School ICT Activities and Varsity Sports Programs</h3>
                     <p>Active in both academics and extracurricular activities — balancing studies and sports.</p>
                 </div>
             </div>
             
             <!-- Achievement Photos -->
             <div class="photo-gallery">
-                <div class="photo-card">
-                    <img src="a1361a52-4479-446f-90a2-b1c9d1227dd1.jfif" alt="Certificate of Recognition">
+                <div class="photo-card glow">
+                    <img src="7050e778-637e-47f5-a636-26d4629acb25.jfif" alt="Certificate of Recognition">
                     <div class="photo-caption">🏅 Certificate of Recognition & Awards</div>
                 </div>
-                <div class="photo-card">
-                    <img src="c4faf3d1-b29b-43a7-99ff-015ad5c79f80.jfif" alt="Carbutt Award">
+                <div class="photo-card glow">
+                    <img src="f6388415-7522-48fb-ade3-8baa9018feb5.jfif" alt="Carbutt Award">
                     <div class="photo-caption">🎓 Carbutt Award — Ma. Luisa Victoria S. Sanchez</div>
                 </div>
             </div>
         </div>
 
         <!-- PRESENT ACHIEVEMENTS -->
-        <div class="card">
+        <div class="card scroll-reveal">
             <h2>Present Achievements <span class="line"></span></h2>
             <div class="achievement-list">
                 <div class="achievement-item">
-                    <h3><span>📚</span> Currently a First-Year BSIT Enterprise Student</h3>
+                    <h3><span class="float-icon">📚</span> Currently a First-Year BSIT Enterprise Student</h3>
                     <p>Pursuing Bachelor of Science in Information Technology — Enterprise Resources and Planning Track.</p>
                 </div>
                 <div class="achievement-item">
-                    <h3><span>📖</span> Studying Fundamentals of Programming, Computer Systems, and Business Processes</h3>
+                    <h3><span class="float-icon">📖</span> Studying Fundamentals of Programming, Computer Systems, and Business Processes</h3>
                     <p>Building a strong foundation in IT concepts and business applications.</p>
                 </div>
                 <div class="achievement-item">
-                    <h3><span>🛠️</span> Learning Skills In:</h3>
+                    <h3><span class="float-icon">🛠️</span> Learning Skills In:</h3>
                     <p>Basic coding, computer operations, systems analysis basics, and problem-solving.</p>
                 </div>
                 <div class="achievement-item">
-                    <h3><span>🚀</span> Working Hard to Build a Strong Foundation for My Future IT Career</h3>
+                    <h3><span class="float-icon">🚀</span> Working Hard to Build a Strong Foundation for My Future IT Career</h3>
                     <p>Every lesson learned is a step closer to my dreams.</p>
                 </div>
             </div>
         </div>
 
-        <!-- SKILLS -->
-        <div class="card">
-            <h2>My Skills <span class="line"></span></h2>
-            <div class="skills-list">
-                <div class="skill-item">💻 Basic Coding</div>
-                <div class="skill-item">🖥️ Computer Systems Knowledge</div>
-                <div class="skill-item">⏰ Time Management</div>
-                <div class="skill-item">🗣️ Communication Skills</div>
-            </div>
-        </div>
-
         <!-- FUTURE GOALS -->
-        <div class="card future-card">
+        <div class="card future-card scroll-reveal">
             <h2>Future Goals & Career <span class="line"></span></h2>
             <div class="future-text">
                 <p><strong>🎯 My Vision:</strong><br>
@@ -285,12 +294,20 @@
             photoCards.forEach((card, i) => {
                 setTimeout(() => card.classList.add('visible'), 1000 + i * 200);
             });
+        });
 
-            // Skills fade in
-            const skills = document.querySelectorAll('.skill-item');
-            skills.forEach((skill, i) => {
-                setTimeout(() => skill.classList.add('visible'), 800 + i * 100);
+        // Scroll reveal animation
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
             });
+        }, {threshold: 0.1});
+
+        scrollRevealElements.forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
