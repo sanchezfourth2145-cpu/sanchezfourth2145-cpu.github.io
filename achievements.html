@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achievements — Ma. Luisa Victoria S. Sanchez</title>
     <style>
-        * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', serif;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
         body {
-            background-color: #e8f5ee;
+            background-color: #f4f7f5;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(120,180,148,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(71,112,91,0.08) 0%, transparent 50%);
+                radial-gradient(circle at top left, rgba(120,180,148,0.08), transparent 50%),
+                radial-gradient(circle at bottom right, rgba(71,112,91,0.06), transparent 50%);
             background-attachment: fixed;
             min-height: 100vh;
             color: #333;
@@ -18,32 +24,37 @@
         }
 
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
             background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
             padding: 18px 0;
             text-align: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
             z-index: 100;
-            box-shadow: 0 2px 20px rgba(71,112,91,0.06);
-            transform: translateY(-100%);
-            animation: slideDown 1s forwards cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: navFadeIn 0.8s forwards ease-out;
         }
-        @keyframes slideDown {
-            to {transform: translateY(0);}
+
+        @keyframes navFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         nav a {
             color: #47705b;
             text-decoration: none;
             margin: 0 22px;
             font-size: 15px;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             position: relative;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
+
         nav a::after {
             content: '';
             position: absolute;
@@ -55,42 +66,44 @@
             transition: all 0.4s ease;
             transform: translateX(-50%);
         }
-        nav a:hover::after, nav a.active::after {
+
+        nav a:hover::after,
+        nav a.active::after {
             width: 100%;
         }
+
+        nav a:hover,
         nav a.active {
             color: #2f503f;
-            font-weight: 600;
         }
 
         .page-header {
             text-align: center;
-            padding: 100px 0 60px;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
+            padding: 60px 0 40px;
         }
+
         .page-header h1 {
-            font-size: 44px;
+            font-size: 36px;
             color: #2f503f;
             text-transform: uppercase;
-            letter-spacing: 12px;
-            margin-bottom: 12px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s forwards ease-out;
-        }
-        .page-header .subtitle {
-            font-size: 18px;
-            color: #5a856f;
-            font-style: italic;
-            letter-spacing: 1.5px;
+            letter-spacing: 6px;
+            margin-bottom: 10px;
             opacity: 0;
             transform: translateY(20px);
-            animation: fadeInUp 1s forwards ease-out;
-            animation-delay: 0.3s;
+            animation: fadeUp 0.8s forwards ease-out;
         }
-        @keyframes fadeInUp {
+
+        .page-header .subtitle {
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeUp 0.8s forwards ease-out;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -98,182 +111,191 @@
         }
 
         .container {
-            max-width: 850px;
-            margin: 0 auto 80px;
+            max-width: 800px;
+            margin: 0 auto 60px;
             padding: 0 25px;
         }
 
         .card {
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(10px);
-            padding: 45px;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            box-shadow: 
-                0 4px 30px rgba(71,112,91,0.04),
-                0 1px 3px rgba(71,112,91,0.02);
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.04);
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
             position: relative;
             overflow: hidden;
         }
+
         .card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 3px;
             height: 0;
             background: linear-gradient(180deg, #47705b, #78b494);
-            transition: height 1s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: height 0.8s ease-out;
         }
+
         .card.revealed::before {
             height: 100%;
         }
+
         .card.revealed {
             opacity: 1;
             transform: translateY(0);
-            box-shadow: 
-                0 8px 40px rgba(71,112,91,0.08),
-                0 2px 6px rgba(71,112,91,0.04);
         }
+
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(71,112,91,0.08);
         }
 
         .card h2 {
-            font-size: 22px;
+            font-size: 20px;
             color: #2f503f;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 28px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(120,180,148,0.2);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e7e2;
+            position: relative;
+            display: inline-block;
         }
+
         .card h2::after {
             content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(120,180,148,0.3), transparent);
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #47705b, #78b494);
+            transition: width 0.6s ease-out;
+        }
+
+        .card.revealed h2::after {
+            width: 100%;
         }
 
         .achievement-item {
-            padding: 18px 0;
-            border-bottom: 1px solid rgba(120,180,148,0.1);
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
             opacity: 0;
             transform: translateX(-15px);
             transition: all 0.6s ease-out;
+            position: relative;
         }
-        .achievement-item:last-child {
-            border-bottom: none;
-        }
+
         .achievement-item.revealed {
             opacity: 1;
             transform: translateX(0);
         }
+
         .achievement-item:hover {
-            padding-left: 10px;
+            padding-left: 12px;
             background: linear-gradient(90deg, rgba(120,180,148,0.03), transparent);
         }
-        .achievement-item h3 {
-            color: #2f503f;
-            font-size: 17px;
-            margin-bottom: 6px;
-            font-weight: 600;
+
+        .achievement-item:last-child {
+            border-bottom: none;
         }
+
+        .achievement-item h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .achievement-item:hover h3 {
+            color: #47705b;
+        }
+
         .achievement-item p {
-            color: #5a856f;
-            font-size: 15px;
-            padding-left: 0;
+            color: #666;
+            font-size: 14px;
         }
 
         .photo-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            margin-top: 35px;
+            margin-top: 30px;
         }
+
         .photo-card {
-            border-radius: 16px;
+            border-radius: 8px;
             overflow: hidden;
-            background: white;
-            box-shadow: 0 4px 20px rgba(71,112,91,0.08);
+            background: #fff;
+            border: 1px solid #eee;
             opacity: 0;
-            transform: translateY(30px) scale(0.96);
-            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-            position: relative;
+            transform: translateY(20px) scale(0.97);
+            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .photo-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, transparent 60%, rgba(47,80,63,0.03) 100%);
-            pointer-events: none;
-        }
+
         .photo-card.revealed {
             opacity: 1;
             transform: translateY(0) scale(1);
         }
+
         .photo-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(71,112,91,0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(71,112,91,0.12);
         }
+
         .photo-card img {
             width: 100%;
-            height: 240px;
+            height: 200px;
             object-fit: cover;
             display: block;
-            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: transform 0.6s ease;
         }
+
         .photo-card:hover img {
             transform: scale(1.08);
         }
+
         .photo-caption {
-            padding: 15px 20px;
-            background: white;
+            padding: 15px;
             font-size: 14px;
-            color: #47705b;
+            color: #555;
             text-align: center;
-            letter-spacing: 1px;
-            border-top: 1px solid rgba(120,180,148,0.1);
-            font-style: italic;
+            background: #f9faf9;
+            transition: background 0.3s ease;
         }
 
-        .future-card {
-            background: linear-gradient(135deg, rgba(71,112,91,0.03), rgba(120,180,148,0.05));
-            border-left: 4px solid transparent;
-            border-image: linear-gradient(180deg, #47705b, #78b494) 1;
+        .photo-card:hover .photo-caption {
+            background: #f0f5f1;
         }
+
         .future-text {
             color: #444;
             line-height: 1.9;
-            font-size: 16px;
         }
+
         .future-text strong {
             color: #2f503f;
         }
 
         .tagline {
             text-align: center;
-            color: #5a856f;
-            margin-top: 50px;
-            padding: 30px;
-            font-size: 17px;
+            color: #777;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 15px;
             font-style: italic;
-            letter-spacing: 2px;
-            position: relative;
             opacity: 0;
-            animation: fadeInUp 1.2s forwards ease-out;
-            animation-delay: 0.8s;
+            animation: fadeUp 1s forwards ease-out;
+            animation-delay: 0.5s;
+            position: relative;
         }
-        .tagline::before, .tagline::after {
+
+        .tagline::before,
+        .tagline::after {
             content: '';
             position: absolute;
             left: 50%;
@@ -282,8 +304,9 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, rgba(120,180,148,0.4), transparent);
         }
-        .tagline::before {top: 0;}
-        .tagline::after {bottom: 0;}
+
+        .tagline::before { top: 0; }
+        .tagline::after { bottom: 0; }
     </style>
 </head>
 <body>
@@ -300,37 +323,40 @@
     </div>
 
     <div class="container">
-        <!-- PAST ACHIEVEMENTS -->
         <div class="card">
             <h2>Past Achievements</h2>
-            <div class="achievement-list">
-                <div class="achievement-item">
-                    <h3>Graduated from Baguio City High School</h3>
-                    <p>Successfully completed high school education with dedication and hard work.</p>
-                </div>
-                <div class="achievement-item">
-                    <h3>Academic Recognition — With Honors</h3>
-                    <p>Consistently maintained good grades and received recognition for academic excellence.</p>
-                </div>
-                <div class="achievement-item">
-                    <h3>Outstanding Performance in Sports</h3>
-                    <p>Represented the school in varsity sports programs and demonstrated discipline and teamwork.</p>
-                </div>
-                <div class="achievement-item">
-                    <h3>Developed Interest in Computers, Technology, and Business Systems</h3>
-                    <p>Discovered passion for technology and IT, which inspired my college degree choice.</p>
-                </div>
-                <div class="achievement-item">
-                    <h3>Participated in School ICT Activities and Varsity Sports Programs</h3>
-                    <p>Active in both academics and extracurricular activities — balancing studies and sports.</p>
-                </div>
+
+            <div class="achievement-item">
+                <h3>Graduated from Baguio City High School</h3>
+                <p>Successfully completed high school education with dedication and hard work.</p>
             </div>
-            
+
+            <div class="achievement-item">
+                <h3>Academic Recognition — With Honors</h3>
+                <p>Consistently maintained good grades and received recognition for academic excellence.</p>
+            </div>
+
+            <div class="achievement-item">
+                <h3>Outstanding Performance in Sports</h3>
+                <p>Represented the school in varsity sports programs and demonstrated discipline and teamwork.</p>
+            </div>
+
+            <div class="achievement-item">
+                <h3>Developed Interest in Computers, Technology, and Business Systems</h3>
+                <p>Discovered passion for technology and IT, which inspired my college degree choice.</p>
+            </div>
+
+            <div class="achievement-item">
+                <h3>Participated in School ICT Activities and Varsity Sports Programs</h3>
+                <p>Active in both academics and extracurricular activities — balancing studies and sports.</p>
+            </div>
+
             <div class="photo-gallery">
                 <div class="photo-card">
                     <img src="7050e778-637e-47f5-a636-26d4629acb25.jfif" alt="Medals and Certificate of Recognition">
                     <div class="photo-caption">Medals and Certificate of Recognition</div>
                 </div>
+
                 <div class="photo-card">
                     <img src="f6388415-7522-48fb-ade3-8baa9018feb5.jfif" alt="Carbutt Award — With Honors">
                     <div class="photo-caption">Carbutt Award — With Honors</div>
@@ -338,32 +364,33 @@
             </div>
         </div>
 
-        <!-- PRESENT ACHIEVEMENTS -->
         <div class="card">
             <h2>Present Achievements</h2>
-            <div class="achievement-list">
-                <div class="achievement-item">
-                    <h3>Currently a First-Year BSIT Enterprise Student</h3>
-                    <p>Pursuing Bachelor of Science in Information Technology — Enterprise Resources and Planning Track.</p>
-                </div>
-                <div class="achievement-item">
-                    <h3>Studying Fundamentals of Programming, Computer Systems, and Business Processes</h3>
-                    <p>Building a strong foundation in IT concepts and business applications.</p>
-                </div>
-                <div class="achievement-item">
-                    <h3>Learning Skills In</h3>
-                    <p>Basic coding, computer operations, systems analysis basics, and problem-solving.</p>
-                </div>
-                <div class="achievement-item">
-                    <h3>Working Toward a Strong Foundation for My Future IT Career</h3>
-                    <p>Every lesson learned is a step closer to my professional goals.</p>
-                </div>
+
+            <div class="achievement-item">
+                <h3>Currently a First-Year BSIT Enterprise Student</h3>
+                <p>Pursuing Bachelor of Science in Information Technology — Enterprise Resources and Planning Track.</p>
+            </div>
+
+            <div class="achievement-item">
+                <h3>Studying Fundamentals of Programming, Computer Systems, and Business Processes</h3>
+                <p>Building a strong foundation in IT concepts and business applications.</p>
+            </div>
+
+            <div class="achievement-item">
+                <h3>Learning Skills In</h3>
+                <p>Basic coding, computer operations, systems analysis basics, and problem-solving.</p>
+            </div>
+
+            <div class="achievement-item">
+                <h3>Working Toward a Strong Foundation for My Future IT Career</h3>
+                <p>Every lesson learned is a step closer to my professional goals.</p>
             </div>
         </div>
 
-        <!-- FUTURE GOALS -->
-        <div class="card future-card">
+        <div class="card">
             <h2>Future Goals & Career</h2>
+
             <div class="future-text">
                 <p><strong>My Vision:</strong><br>
                 In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.</p>
@@ -377,16 +404,14 @@
     </div>
 
     <script>
-        // Scroll reveal observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('revealed');
                 }
             });
-        }, {threshold: 0.1, rootMargin: '0px 0px -50px 0px'});
+        }, { threshold: 0.1 });
 
-        // Observe all elements to animate
         document.querySelectorAll('.card, .achievement-item, .photo-card').forEach(el => {
             observer.observe(el);
         });
