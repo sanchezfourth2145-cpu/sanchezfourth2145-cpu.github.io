@@ -1,237 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Information — Ma. Luisa Victoria S. Sanchez</title>
-    <style>
-        * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', serif;}
-        body {
-            background-color: #e8f5ee;
-            background-image: radial-gradient(circle at top left, rgba(120,180,148,0.15), transparent 40%),
-                radial-gradient(circle at bottom right, rgba(71,112,91,0.1), transparent 40%),
-                linear-gradient(135deg, #e8f5ee, #d9efdf, #cde8d4);
-            background-attachment: fixed;
-            min-height: 100vh;
-            color: #333;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-        .particles {position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;}
-        .particle {
-            position: absolute; width: 8px; height: 8px; background: rgba(120,180,148,0.25);
-            border-radius: 50%; animation: float 10s infinite ease-in-out;
-        }
-        @keyframes float {
-            0% {transform: translateY(100vh); opacity: 0;}
-            15% {opacity: 0.5;}
-            85% {opacity: 0.5;}
-            100% {transform: translateY(-10vh); opacity: 0;}
-        }
-        nav {
-            position: relative; z-index: 10; padding: 35px 20px; text-align: center;
-            opacity: 0; transform: translateY(-15px);
-            animation: navIn 1s forwards ease-out;
-        }
-        @keyframes navIn {to {opacity: 1; transform: translateY(0);}}
-        nav a {
-            color: #47705b; text-decoration: none; margin: 0 20px;
-            font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase;
-            position: relative;
-        }
-        nav a::after {
-            content: ''; position: absolute; bottom: -5px; left: 50%; width: 0; height: 2px;
-            background: linear-gradient(90deg, #47705b, #78b494);
-            transition: width 0.4s ease; transform: translateX(-50%);
-        }
-        nav a:hover::after, nav a.active::after {width: 100%;}
-        nav a.active {color: #2f503f;}
-        .page-header {
-            position: relative; z-index: 1; text-align: center; padding: 30px 0 50px;
-            opacity: 0; transform: translateY(20px);
-            animation: fadeUp 1s forwards ease-out; animation-delay: 0.2s;
-        }
-        @keyframes fadeUp {to {opacity: 1; transform: translateY(0);}}
-        .page-header h1 {
-            font-size: 42px; color: #2f503f; text-transform: uppercase;
-            letter-spacing: 6px; margin-bottom: 8px;
-            transition: letter-spacing 0.5s ease;
-        }
-        .page-header h1:hover {letter-spacing: 10px;}
-        .page-header .subtitle {
-            color: #5a856f; font-style: italic; opacity: 0;
-            animation: fadeIn 1s forwards; animation-delay: 0.6s;
-        }
-        @keyframes fadeIn {to {opacity: 1;}}
-        .container {max-width: 850px; margin: 0 auto; padding: 0 25px 60px; position: relative; z-index: 1;}
-        .card {
-            background: rgba(255,255,255,0.7); backdrop-filter: blur(10px);
-            padding: 35px; border-radius: 16px; margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(71,112,91,0.06);
-            opacity: 0; transform: translateY(40px);
-            transition: all 0.7s ease-out; position: relative; overflow: hidden;
-        }
-        .card.visible {opacity: 1; transform: translateY(0);}
-        .card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.6s ease; pointer-events: none;
-        }
-        .card:hover::before {left: 100%;}
-        .card:hover {transform: translateY(-5px); box-shadow: 0 8px 30px rgba(71,112,91,0.1);}
-        .card h2 {
-            font-size: 20px; color: #2f503f; text-transform: uppercase;
-            letter-spacing: 3px; margin-bottom: 20px; padding-bottom: 8px;
-            border-bottom: 2px solid #78b494; display: flex; align-items: center; gap: 10px;
-        }
-        .card h2 .line {
-            flex: 1; height: 2px; background: linear-gradient(90deg, #78b494, transparent);
-            transform: scaleX(0); transform-origin: left; transition: transform 0.6s ease-out;
-        }
-        .card.visible h2 .line {transform: scaleX(1);}
-        .card p {color: #446050; font-size: 16px; line-height: 1.8; opacity: 0; transform: translateX(-5px); transition: all 0.6s ease;}
-        .card.visible p {opacity: 1; transform: translateX(0);}
-        .info-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px;}
-        @media (max-width: 600px) {.info-grid {grid-template-columns: 1fr;}}
-        .info-item {
-            padding: 15px; background: rgba(120,180,148,0.04); border-radius: 8px;
-            border-left: 3px solid #78b494; opacity: 0; transform: translateX(-10px);
-            transition: all 0.4s ease;
-        }
-        .info-item.visible {opacity: 1; transform: translateX(0);}
-        .info-item:hover {background: rgba(120,180,148,0.1); transform: translateX(5px); border-left-color: #47705b;}
-        .info-item strong {color: #2f503f; display: block; font-size: 14px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;}
-        .skills-container {margin-top: 25px;}
-        .skill-item {margin-bottom: 25px; opacity: 0; transform: translateY(15px); transition: all 0.5s ease;}
-        .skill-item.visible {opacity: 1; transform: translateY(0);}
-        .skill-name {color: #2f503f; font-size: 16px; margin-bottom: 8px; position: relative; display: inline-block; transition: all 0.3s ease;}
-        .skill-name::after {content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #78b494; transition: width 0.3s ease;}
-        .skill-item:hover .skill-name {transform: translateX(5px); color: #47705b;}
-        .skill-item:hover .skill-name::after {width: 100%;}
-        .skill-bar-wrapper {position: relative; border-radius: 8px; padding: 2px; background: linear-gradient(90deg, transparent, rgba(120,180,148,0.15), transparent); background-size: 200% 100%; animation: shimmer 2s linear infinite;}
-        @keyframes shimmer {0% {background-position: 200% 0;} 100% {background-position: -200% 0;}}
-        .skill-bar-bg {height: 16px; background: rgba(120,180,148,0.15); border-radius: 6px; overflow: hidden;}
-        .skill-bar-fill {height: 100%; background: linear-gradient(90deg, #47705b, #78b494); border-radius: 6px; width: 0; transition: width 1.5s ease-out; position: relative;}
-        .skill-bar-fill::after {content: ''; position: absolute; top: 50%; right: 0; transform: translateY(-50%); width: 12px; height: 12px; background: #fff; border-radius: 50%; box-shadow: 0 0 8px #78b494; opacity: 0; transition: opacity 0.3s ease;}
-        .skill-bar-fill.complete::after {opacity: 1; animation: pulse 1.5s infinite;}
-        @keyframes pulse {0%,100% {transform: translateY(-50%) scale(1);} 50% {transform: translateY(-50%) scale(1.2);}}
-        .future-box {
-            background: rgba(71,112,91,0.04); padding: 25px; border-radius: 12px;
-            border-left: 4px solid #47705b; margin-top: 10px; transition: all 0.3s ease;
-        }
-        .future-box:hover {border-left-width: 6px; padding-left: 20px;}
-        .future-box h3 {color: #2f503f; font-size: 17px; margin-bottom: 8px;}
-        .tagline {
-            text-align: center; font-style: italic; color: #5a856f;
-            margin-top: 40px; padding: 20px; font-size: 16px;
-            opacity: 0; animation: fadeIn 1.5s forwards; animation-delay: 2s;
-            transition: all 0.4s ease;
-        }
-        .tagline:hover {color: #2f503f; letter-spacing: 2px;}
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Information — Ma. Luisa Victoria S. Sanchez</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Georgia', 'Times New Roman', serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(90deg, #F6C9B8 0%, #F9E7DC 50%, #F6C9B8 100%);
+      background-size: 200% 200%;
+      animation: bgPulse 12s ease infinite;
+      color: #70422F;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    @keyframes bgPulse {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 12%;
+      background: #F2A68A;
+      z-index: 0;
+      opacity: 0;
+      animation: sideSlideIn 1.5s forwards ease-out;
+    }
+
+    body::before {
+      left: 0;
+      transform: translateX(-50px);
+      animation-delay: 0.1s;
+    }
+
+    body::after {
+      right: 0;
+      transform: translateX(50px);
+      animation-delay: 0.3s;
+    }
+
+    @keyframes sideSlideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(242, 166, 138, 0.08);
+      animation: floatAround 20s linear infinite;
+    }
+
+    .floating-circle:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 15%; animation-delay: 0s; }
+    .floating-circle:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: 4s; animation-duration: 25s; }
+    .floating-circle:nth-child(3) { width: 100px; height: 100px; top: 80%; left: 25%; animation-delay: 8s; animation-duration: 30s; }
+    .floating-circle:nth-child(4) { width: 50px; height: 50px; top: 30%; left: 70%; animation-delay: 12s; animation-duration: 18s; }
+
+    @keyframes floatAround {
+      0% { transform: translateY(0) translateX(0) rotate(0deg); }
+      25% { transform: translateY(-30px) translateX(20px) rotate(90deg); }
+      50% { transform: translateY(0) translateX(40px) rotate(180deg); }
+      75% { transform: translateY(30px) translateX(20px) rotate(270deg); }
+      100% { transform: translateY(0) translateX(0) rotate(360deg); }
+    }
+
+    .main-container {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px 30px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #F2A68A;
+      text-decoration: none;
+      font-size: 1rem;
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideInLeft 0.8s forwards ease-out;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      color: #E89878;
+      transform: translateX(-5px);
+    }
+
+    @keyframes slideInLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s forwards ease-out;
+      animation-delay: 0.2s;
+    }
+
+    .page-header h1 {
+      font-size: 2.3rem;
+      color: #70422F;
+      letter-spacing: 3px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .page-header h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #F2A68A, #F6C9B8, #F2A68A, transparent);
+      animation: lineExpand 1.2s forwards ease-out;
+      animation-delay: 0.6s;
+    }
+
+    @keyframes lineExpand {
+      to { transform: translateX(-50%) scaleX(1); }
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(242, 166, 138, 0.2);
+      box-shadow: 0 8px 40px rgba(242, 166, 138, 0.12);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(40px);
+      animation: cardReveal 1s forwards ease-out;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .info-card:nth-child(1) { animation-delay: 0.4s; }
+    .info-card:nth-child(2) { animation-delay: 0.6s; }
+    .info-card:nth-child(3) { animation-delay: 0.8s; }
+    .info-card:nth-child(4) { animation-delay: 1.0s; }
+
+    @keyframes cardReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(242, 166, 138, 0.2);
+    }
+
+    .info-card h2 {
+      font-size: 1.3rem;
+      color: #A06650;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .info-card h2::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #F2A68A, #F6C9B8);
+      border-radius: 2px;
+    }
+
+    .info-row {
+      display: flex;
+      padding: 12px 0;
+      border-bottom: 1px dashed rgba(242, 166, 138, 0.2);
+      transition: padding-left 0.3s ease, background 0.3s ease;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-row:hover {
+      padding-left: 10px;
+      background: rgba(242, 166, 138, 0.05);
+      border-radius: 8px;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: #70422F;
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .info-value {
+      color: #8B5A4B;
+      flex: 1;
+    }
+
+    .signature {
+      text-align: center;
+      margin-top: 50px;
+      font-style: italic;
+      color: #F2A68A;
+      opacity: 0;
+      animation: fadeIn 1s forwards ease-out;
+      animation-delay: 1.4s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .info-row {
+        flex-direction: column;
+        gap: 5px;
+      }
+      .info-label {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
+  <div class="floating-elements">
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
+  </div>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="personal.html" class="active">Personal Information</a>
-        <a href="achievements.html">Achievements</a>
-        <a href="parents.html">My Parents</a>
-    </nav>
+  <div class="main-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
 
     <div class="page-header">
-        <h1>PERSONAL INFORMATION</h1>
-        <p class="subtitle">Get to know the person behind the portfolio</p>
+      <h1>Personal Information</h1>
     </div>
 
-    <div class="container">
-        <div class="card">
-            <h2>About Me <span class="line"></span></h2>
-            <p>I am <strong>Ma. Luisa Victoria S. Sanchez</strong>, a BSIT Enterprise student at the University of the Cordilleras. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills. Through this portfolio, I will share my journey, skills, and goals in the field of Information Technology.</p>
-        </div>
-
-        <div class="card">
-            <h2>Education & Details <span class="line"></span></h2>
-            <div class="info-grid">
-                <div class="info-item"><strong>Full Name</strong>Ma. Luisa Victoria S. Sanchez</div>
-                <div class="info-item"><strong>Course</strong>Bachelor of Science in Information Technology</div>
-                <div class="info-item"><strong>Track</strong>Enterprise Resources and Planning</div>
-                <div class="info-item"><strong>School</strong>University of the Cordilleras</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>My Skills <span class="line"></span></h2>
-            <div class="skills-container">
-                <div class="skill-item">
-                    <div class="skill-name">Basic Coding</div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="65"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Computer Systems Knowledge</div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Time Management</div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Communication Skills</div>
-                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Future Goals <span class="line"></span></h2>
-            <div class="future-box">
-                <h3>My Vision</h3>
-                <p>In the future, I see myself growing as an IT professional, specializing in enterprise systems and business solutions. My goal is to bridge the gap between technology and business, helping organizations work smarter and more efficiently.</p>
-            </div>
-        </div>
-
-        <p class="tagline">"Building the future, one skill at a time."</p>
+    <div class="info-card">
+      <h2>Basic Details</h2>
+      <div class="info-row">
+        <span class="info-label">Full Name</span>
+        <span class="info-value">Ma. Luisa Victoria S. Sanchez</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Date of Birth</span>
+        <span class="info-value">February 24, 2008</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Religion</span>
+        <span class="info-value">Roman Catholic</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Nationality</span>
+        <span class="info-value">Filipino</span>
+      </div>
     </div>
 
-    <script>
-        // Floating particles
-        const pContainer = document.getElementById('particles');
-        for(let i=0; i<25; i++){
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random()*100 + '%';
-            p.style.animationDelay = Math.random()*10 + 's';
-            pContainer.appendChild(p);
-        }
+    <div class="info-card">
+      <h2>Contact Information</h2>
+      <div class="info-row">
+        <span class="info-label">Complete Address</span>
+        <span class="info-value">BGH Compound, Baguio City</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Email Address</span>
+        <span class="info-value">sanchezfourth@gmail.com</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Phone Number</span>
+        <span class="info-value">0950-692-0820</span>
+      </div>
+    </div>
 
-        // Animate everything on load
-        window.addEventListener('load', function(){
-            // Cards fade in
-            const cards = document.querySelectorAll('.card');
-            cards.forEach((card, i) => {
-                setTimeout(() => card.classList.add('visible'), i * 250);
-            });
+    <div class="info-card">
+      <h2>Educational Background</h2>
+      <div class="info-row">
+        <span class="info-label">Current School</span>
+        <span class="info-value">University of the Cordilleras</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Program / Course</span>
+        <span class="info-value">Bachelor of Science in Information Technology — Enterprise Resources and Planning Track</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">High School</span>
+        <span class="info-value">Baguio City High School</span>
+      </div>
+    </div>
 
-            // Info items slide in
-            const infoItems = document.querySelectorAll('.info-item');
-            infoItems.forEach((item, i) => {
-                setTimeout(() => item.classList.add('visible'), 600 + i * 150);
-            });
+    <div class="info-card">
+      <h2>About Me</h2>
+      <div class="info-row">
+        <span class="info-label">Introduction</span>
+        <span class="info-value">I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student at the University of the Cordilleras. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills. In this portfolio, I will share my achievements, skills, and experiences, as well as my goals for the future in the field of Information Technology.</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Future Goals</span>
+        <span class="info-value">In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Skills</span>
+        <span class="info-value">Basic Coding • Computer Systems Knowledge • Time Management • Communication Skills</span>
+      </div>
+    </div>
 
-            // Skills fade in + bars animate
-            const skills = document.querySelectorAll('.skill-item');
-            skills.forEach((skill, i) => {
-                setTimeout(() => skill.classList.add('visible'), 900 + i * 200);
-            });
-
-            setTimeout(() => {
-                document.querySelectorAll('.skill-bar-fill').forEach(bar => {
-                    bar.style.width = bar.getAttribute('data-width') + '%';
-                    setTimeout(() => bar.classList.add('complete'), 1500);
-                });
-            }, 1200);
-        });
-    </script>
+    <p class="signature">— Building IT solutions, one system at a time —</p>
+  </div>
 </body>
 </html>
