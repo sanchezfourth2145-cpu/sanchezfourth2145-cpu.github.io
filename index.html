@@ -105,7 +105,7 @@
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      object-position: center;
+      object-position: center 28%;
       border: 6px solid #F9E7DC;
     }
 
@@ -176,6 +176,16 @@
       animation-delay: 1.5s;
     }
 
+    .btn-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 1s forwards ease-out;
+      animation-delay: 1.8s;
+    }
+
     .btn {
       display: inline-block;
       padding: 16px 45px;
@@ -188,25 +198,11 @@
       text-decoration: none;
       box-shadow: 0 6px 20px rgba(242, 166, 138, 0.3);
       transition: all 0.4s ease;
-      opacity: 0;
-      transform: translateY(15px);
-      animation: fadeUp 1s forwards ease-out;
-      animation-delay: 1.8s;
     }
 
     .btn:hover {
       transform: translateY(-4px);
       box-shadow: 0 10px 30px rgba(242, 166, 138, 0.4);
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-      opacity: 0;
-      animation: fadeUp 1s forwards ease-out;
-      animation-delay: 1.8s;
     }
 
     .btn-secondary {
@@ -234,7 +230,7 @@
     <div class="divider"></div>
 
     <div class="welcome-text">
-      Welcome to my portfolio <br>
+      Welcome to my portfolio ✨<br>
       A showcase of my journey, achievements, and dreams.
     </div>
 
