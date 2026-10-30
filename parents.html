@@ -29,7 +29,7 @@
     }
 
     .main-container {
-      max-width: 800px;
+      max-width: 700px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
@@ -42,14 +42,16 @@
       color: #F2A68A;
       text-decoration: none;
       font-size: 1rem;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       opacity: 0;
       transform: translateX(-20px);
       animation: slideInLeft 0.8s forwards ease-out;
+      transition: all 0.3s ease;
     }
 
     .back-btn:hover {
       color: #E89878;
+      transform: translateX(-8px);
     }
 
     @keyframes slideInLeft {
@@ -63,18 +65,223 @@
       text-align: center;
       margin-bottom: 50px;
       opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 1s forwards ease-out;
+      transform: translateY(-20px);
+      animation: fadeDown 1s forwards ease-out;
+    }
+
+    @keyframes fadeDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .page-header h1 {
       font-size: 2.5rem;
-      color: #70422F;
       letter-spacing: 3px;
+      color: #70422F;
+      position: relative;
+      display: inline-block;
     }
 
     .page-header h1 span {
       color: #F2A68A;
+    }
+
+    .page-header h1::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 60%;
+      height: 2px;
+      background: #F2A68A;
+      animation: lineExpand 1.2s forwards ease-out;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes lineExpand {
+      to { transform: translateX(-50%) scaleX(1); }
+    }
+
+    .intro-heart {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #8B5A3C;
+      margin-bottom: 50px;
+      opacity: 0;
+      transform: scale(0.9);
+      animation: softAppear 1s forwards ease-out;
+      animation-delay: 0.8s;
+      font-style: italic;
+    }
+
+    @keyframes softAppear {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .parents-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .parent-card {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 24px;
+      padding: 35px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      opacity: 0;
+      transform: translateX(-40px);
+      animation: slideInFromSide 0.9s forwards ease-out;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      flex-wrap: wrap;
+    }
+
+    .parent-card:nth-child(1) { animation-delay: 1.2s; }
+    .parent-card:nth-child(2) { animation-delay: 1.6s; }
+
+    @keyframes slideInFromSide {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .parent-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #F2A68A, #E89878);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.4s ease;
+    }
+
+    .parent-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .parent-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(242, 166, 138, 0.18);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .parent-img-wrapper {
+      perspective: 1000px;
+    }
+
+    .parent-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #F2A68A;
+      box-shadow: 0 8px 25px rgba(112, 66, 47, 0.2);
+      transition: all 0.6s ease;
+    }
+
+    .parent-card:hover .parent-img {
+      transform: scale(1.08) rotateY(5deg);
+      box-shadow: 0 12px 35px rgba(242, 166, 138, 0.3);
+    }
+
+    .parent-text {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .parent-role {
+      font-size: 0.95rem;
+      color: #F2A68A;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .parent-name {
+      font-size: 1.5rem;
+      color: #70422F;
+      margin-bottom: 15px;
+    }
+
+    .parent-desc {
+      color: #8B5A3C;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .message-section {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s forwards ease-out;
+      animation-delay: 2.0s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .message-section::before,
+    .message-section::after {
+      content: '"';
+      font-size: 4rem;
+      color: rgba(242, 166, 138, 0.2);
+      position: absolute;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .message-section::before {
+      top: 10px;
+      left: 20px;
+    }
+
+    .message-section::after {
+      bottom: 10px;
+      right: 20px;
+    }
+
+    .message-title {
+      font-size: 1.4rem;
+      color: #70422F;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .message-text {
+      color: #8B5A3C;
+      line-height: 2;
+      font-size: 1.05rem;
+      position: relative;
+    }
+
+    .heart-icon {
+      display: inline-block;
+      color: #F2A68A;
+      animation: heartbeat 1.5s infinite;
+      margin: 0 5px;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
     }
 
     @keyframes fadeUp {
@@ -84,99 +291,30 @@
       }
     }
 
-    .parents-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin-bottom: 50px;
-    }
-
-    .photo-card {
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 20px;
-      padding: 15px;
+    .footer-quote {
       text-align: center;
+      margin-top: 40px;
+      font-style: italic;
+      color: #F2A68A;
+      font-size: 1.1rem;
       opacity: 0;
-      transform: translateY(30px);
-      animation: cardPop 0.9s forwards ease-out;
-      transition: all 0.4s ease;
+      transform: translateY(20px);
+      animation: quoteFadeIn 1s forwards ease-out;
+      animation-delay: 2.6s;
     }
 
-    .photo-card:nth-child(1) { animation-delay: 0.3s; }
-    .photo-card:nth-child(2) { animation-delay: 0.5s; }
-
-    @keyframes cardPop {
+    @keyframes quoteFadeIn {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    .photo-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 30px rgba(242, 166, 138, 0.2);
-    }
-
-    .photo-card img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 14px;
-      margin-bottom: 15px;
-    }
-
-    .photo-card h3 {
-      color: #70422F;
-      font-size: 1.2rem;
-      margin-bottom: 5px;
-    }
-
-    .photo-card p {
-      color: #A06650;
-      font-style: italic;
-    }
-
-    .message-box {
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-      border-left: 4px solid #F2A68A;
-      border-right: 4px solid #F2A68A;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s forwards ease-out;
-      animation-delay: 0.8s;
-    }
-
-    .message-box h2 {
-      font-size: 1.5rem;
-      color: #70422F;
-      margin-bottom: 25px;
-    }
-
-    .message-box h2 span {
-      color: #F2A68A;
-    }
-
-    .message-box p {
-      color: #7A4B3C;
-      line-height: 2;
-      font-size: 1.1rem;
-    }
-
-    .signature {
-      text-align: center;
-      margin-top: 40px;
-      font-style: italic;
-      color: #F2A68A;
-      opacity: 0;
-      animation: fadeIn 1s forwards ease-out;
-      animation-delay: 1.2s;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    @media (max-width: 580px) {
+      .parent-card {
+        justify-content: center;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -188,27 +326,51 @@
       <h1>My <span>Parents</span></h1>
     </div>
 
-    <div class="parents-gallery">
-      <div class="photo-card">
-        <img src="hugging.jpg" alt="With my Mom" />
-        <h3>My Greatest Comfort</h3>
-        <p>Your hugs always make everything better</p>
+    <p class="intro-heart">
+      "Behind every dream I chase, are their hands that held me up and their hearts that believed in me."
+    </p>
+
+    <div class="parents-grid">
+      <!-- FATHER -->
+      <div class="parent-card">
+        <div class="parent-img-wrapper">
+          <img src="father.jpg" alt="My Father" class="parent-img" />
+        </div>
+        <div class="parent-text">
+          <span class="parent-role">My Father</span>
+          <h3 class="parent-name"></h3>
+          <p class="parent-desc">
+            He is my quiet strength and my first teacher of perseverance. Through his hard work and sacrifices, he taught me that nothing comes easy but everything is worth fighting for. His guidance shapes the person I am becoming, and his love gives me the courage to face any challenge.
+          </p>
+        </div>
       </div>
-      <div class="photo-card">
-        <img src="shakehands.jpg" alt="With my Dad" />
-        <h3>My Greatest Inspiration</h3>
-        <p>Thank you for believing in my dreams</p>
+
+      <!-- MOTHER -->
+      <div class="parent-card">
+        <div class="parent-img-wrapper">
+          <img src="mother.jpg" alt="My Mother" class="parent-img" />
+        </div>
+        <div class="parent-text">
+          <span class="parent-role">My Mother</span>
+          <h3 class="parent-name"></h3>
+          <p class="parent-desc">
+            She is my gentle heart and my constant inspiration. Her unconditional love and endless encouragement remind me that I am never alone in this journey. She celebrates every small victory of mine as if it were her own, and her belief in me is the greatest gift I have ever received.
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="message-box">
-      <h2>To my <span>dearest Mom and Dad</span></h2>
-      <p>
-        You are my first teachers and my forever heroes. Thank you for your endless sacrifices, your patience, and your unconditional love. Every dream I chase, every goal I reach, it is all because of you. You are my strength and my inspiration. I hope to make you proud, not just today, but every single day. I love you both more than words can say.
+    <!-- LOVE LETTER SECTION -->
+    <div class="message-section">
+      <h3 class="message-title">To the two people who matter most</h3>
+      <p class="message-text">
+        Everything I am and everything I hope to be, I owe to you. You are my roots and my wings — roots that keep me grounded, and wings that teach me to fly. Thank you for every sacrifice made in silence, every worry carried without complaint, and every dream you nurtured alongside your own. This portfolio is not just a collection of my achievements; it is also a tribute to your love, your patience, and your endless belief in me. <span class="heart-icon">♥</span>
       </p>
     </div>
 
-    <p class="signature">— Your love is my greatest treasure —</p>
+    <p class="footer-quote">
+      — My first home, my forever heart —
+    </p>
   </div>
 </body>
 </html>
