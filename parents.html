@@ -29,7 +29,7 @@
     }
 
     .main-container {
-      max-width: 700px;
+      max-width: 750px;
       margin: 0 auto;
       position: relative;
       z-index: 1;
@@ -105,29 +105,29 @@
       to { transform: translateX(-50%) scaleX(1); }
     }
 
-    .intro-heart {
+    .intro-quote {
       text-align: center;
       font-size: 1.1rem;
       color: #8B5A3C;
       margin-bottom: 50px;
       opacity: 0;
-      transform: scale(0.9);
-      animation: softAppear 1s forwards ease-out;
+      transform: translateY(15px);
+      animation: fadeUp 0.8s forwards ease-out;
       animation-delay: 0.8s;
       font-style: italic;
     }
 
-    @keyframes softAppear {
+    @keyframes fadeUp {
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(0);
       }
     }
 
     .parents-grid {
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 35px;
       margin-bottom: 50px;
     }
 
@@ -137,23 +137,24 @@
       padding: 35px;
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 35px;
       opacity: 0;
-      transform: translateX(-40px);
-      animation: slideInFromSide 0.9s forwards ease-out;
+      transform: translateY(40px) scale(0.96);
+      animation: cardEnter 0.9s forwards ease-out;
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
       flex-wrap: wrap;
+      border-left: 3px solid transparent;
     }
 
     .parent-card:nth-child(1) { animation-delay: 1.2s; }
     .parent-card:nth-child(2) { animation-delay: 1.6s; }
 
-    @keyframes slideInFromSide {
+    @keyframes cardEnter {
       to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0) scale(1);
       }
     }
 
@@ -161,50 +162,57 @@
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
-      width: 4px;
+      left: -100%;
+      width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, #F2A68A, #E89878);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.4s ease;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.7s ease;
+      z-index: 1;
     }
 
     .parent-card:hover::before {
-      transform: scaleY(1);
+      left: 100%;
     }
 
     .parent-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(242, 166, 138, 0.18);
+      transform: translateY(-6px);
+      box-shadow: 0 18px 45px rgba(242, 166, 138, 0.18);
+      border-left: 3px solid #F2A68A;
       background: rgba(255, 255, 255, 0.7);
     }
 
-    .parent-img-wrapper {
+    .img-container {
       perspective: 1000px;
+      z-index: 2;
     }
 
     .parent-img {
-      width: 150px;
-      height: 150px;
+      width: 170px;
+      height: 170px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #F2A68A;
-      box-shadow: 0 8px 25px rgba(112, 66, 47, 0.2);
-      transition: all 0.6s ease;
+      border: 5px solid #F2A68A;
+      box-shadow: 
+        0 12px 30px rgba(112, 66, 47, 0.2),
+        inset 0 0 0 2px rgba(255,255,255,0.6);
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
     }
 
     .parent-card:hover .parent-img {
-      transform: scale(1.08) rotateY(5deg);
-      box-shadow: 0 12px 35px rgba(242, 166, 138, 0.3);
+      transform: translateZ(15px) rotateY(-8deg);
+      box-shadow: 
+        15px 15px 35px rgba(112, 66, 47, 0.15),
+        0 0 0 3px rgba(255,255,255,0.8);
     }
 
-    .parent-text {
+    .parent-content {
       flex: 1;
-      min-width: 250px;
+      min-width: 260px;
+      z-index: 2;
     }
 
-    .parent-role {
+    .parent-label {
       font-size: 0.95rem;
       color: #F2A68A;
       text-transform: uppercase;
@@ -225,10 +233,22 @@
       text-align: justify;
     }
 
-    .message-section {
+    .divider-line {
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, #F2A68A, #E89878);
+      margin: 12px 0;
+      transition: width 0.4s ease;
+    }
+
+    .parent-card:hover .divider-line {
+      width: 80px;
+    }
+
+    .gratitude-section {
       background: rgba(255, 255, 255, 0.5);
       border-radius: 24px;
-      padding: 40px;
+      padding: 45px 35px;
       text-align: center;
       opacity: 0;
       transform: translateY(30px);
@@ -238,82 +258,55 @@
       overflow: hidden;
     }
 
-    .message-section::before,
-    .message-section::after {
-      content: '"';
-      font-size: 4rem;
-      color: rgba(242, 166, 138, 0.2);
-      position: absolute;
-      font-family: Georgia, serif;
-      line-height: 1;
-    }
-
-    .message-section::before {
-      top: 10px;
-      left: 20px;
-    }
-
-    .message-section::after {
-      bottom: 10px;
-      right: 20px;
-    }
-
-    .message-title {
+    .gratitude-title {
       font-size: 1.4rem;
       color: #70422F;
       margin-bottom: 25px;
-      position: relative;
     }
 
-    .message-text {
+    .gratitude-text {
       color: #8B5A3C;
       line-height: 2;
       font-size: 1.05rem;
-      position: relative;
     }
 
-    .heart-icon {
+    .heart-symbol {
       display: inline-block;
       color: #F2A68A;
-      animation: heartbeat 1.5s infinite;
-      margin: 0 5px;
+      animation: heartbeat 1.8s infinite;
+      margin: 0 4px;
     }
 
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
+      50% { transform: scale(1.15); }
     }
 
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .footer-quote {
+    .footer-tagline {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 45px;
       font-style: italic;
       color: #F2A68A;
       font-size: 1.1rem;
       opacity: 0;
-      transform: translateY(20px);
-      animation: quoteFadeIn 1s forwards ease-out;
+      transform: translateY(15px);
+      animation: fadeUp 1s forwards ease-out;
       animation-delay: 2.6s;
+      transition: all 0.3s ease;
     }
 
-    @keyframes quoteFadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .footer-tagline:hover {
+      color: #E89878;
+      transform: translateY(-3px);
     }
 
-    @media (max-width: 580px) {
+    @media (max-width: 600px) {
       .parent-card {
         justify-content: center;
         text-align: center;
+      }
+      .divider-line {
+        margin: 12px auto;
       }
     }
   </style>
@@ -326,50 +319,52 @@
       <h1>My <span>Parents</span></h1>
     </div>
 
-    <p class="intro-heart">
-      "Behind every dream I chase, are their hands that held me up and their hearts that believed in me."
+    <p class="intro-quote">
+      "Everything I am today is because of the two people who never stopped believing in me."
     </p>
 
     <div class="parents-grid">
-      <!-- FATHER -->
+      <!-- FIRST PARENT -->
       <div class="parent-card">
-        <div class="parent-img-wrapper">
-          <img src="father.jpg" alt="My Father" class="parent-img" />
+        <div class="img-container">
+          <img src="shakehands.jpg" alt="My Parent" class="parent-img" />
         </div>
-        <div class="parent-text">
-          <span class="parent-role">My Father</span>
+        <div class="parent-content">
+          <span class="parent-label">My Guide & Mentor</span>
           <h3 class="parent-name"></h3>
+          <div class="divider-line"></div>
           <p class="parent-desc">
-            He is my quiet strength and my first teacher of perseverance. Through his hard work and sacrifices, he taught me that nothing comes easy but everything is worth fighting for. His guidance shapes the person I am becoming, and his love gives me the courage to face any challenge.
+            Thank you for teaching me the value of hard work, integrity, and perseverance. Your guidance has shaped not just my career path, but the person I strive to become. Every piece of advice you've shared has become a foundation I stand on, and every challenge you've overcome has become my greatest inspiration.
           </p>
         </div>
       </div>
 
-      <!-- MOTHER -->
+      <!-- SECOND PARENT -->
       <div class="parent-card">
-        <div class="parent-img-wrapper">
-          <img src="mother.jpg" alt="My Mother" class="parent-img" />
+        <div class="img-container">
+          <img src="hugging.jpg" alt="My Parent" class="parent-img" />
         </div>
-        <div class="parent-text">
-          <span class="parent-role">My Mother</span>
+        <div class="parent-content">
+          <span class="parent-label">My Strength & Inspiration</span>
           <h3 class="parent-name"></h3>
+          <div class="divider-line"></div>
           <p class="parent-desc">
-            She is my gentle heart and my constant inspiration. Her unconditional love and endless encouragement remind me that I am never alone in this journey. She celebrates every small victory of mine as if it were her own, and her belief in me is the greatest gift I have ever received.
+            Thank you for your endless patience, your unconditional love, and your belief in my potential even when I doubted myself. You are my quiet strength and my constant motivation. Your sacrifices are the foundation of my dreams, and your support is the reason I dare to reach for them.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- LOVE LETTER SECTION -->
-    <div class="message-section">
-      <h3 class="message-title">To the two people who matter most</h3>
-      <p class="message-text">
-        Everything I am and everything I hope to be, I owe to you. You are my roots and my wings — roots that keep me grounded, and wings that teach me to fly. Thank you for every sacrifice made in silence, every worry carried without complaint, and every dream you nurtured alongside your own. This portfolio is not just a collection of my achievements; it is also a tribute to your love, your patience, and your endless belief in me. <span class="heart-icon">♥</span>
+    <!-- GRATITUDE MESSAGE -->
+    <div class="gratitude-section">
+      <h3 class="gratitude-title">With Gratitude and Love</h3>
+      <p class="gratitude-text">
+        To my parents — you are my first teachers and my forever supporters. You have taught me that success means nothing without kindness, that ambition means nothing without gratitude, and that every achievement I reach is as much yours as it is mine. Wherever this career takes me, know that I carry your love with me in every step I take. <span class="heart-symbol">♥</span>
       </p>
     </div>
 
-    <p class="footer-quote">
-      — My first home, my forever heart —
+    <p class="footer-tagline">
+      — My roots, my foundation, my greatest blessing —
     </p>
   </div>
 </body>
