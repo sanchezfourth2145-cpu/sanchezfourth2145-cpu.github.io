@@ -14,141 +14,52 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(90deg, #F6C9B8 0%, #F9E7DC 50%, #F6C9B8 100%);
-      background-size: 200% 200%;
-      animation: bgPulse 12s ease infinite;
+      background-color: #F9E7D8;
+      background-image: radial-gradient(#E8C9B0 1px, transparent 1px);
+      background-size: 30px 30px;
       color: #70422F;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 40px 20px;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    @keyframes bgPulse {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    body::before,
-    body::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      width: 12%;
-      background: #F2A68A;
-      z-index: 0;
-      opacity: 0;
-      animation: sideSlideIn 1.5s forwards ease-out;
-    }
-
-    body::before {
-      left: 0;
-      transform: translateX(-50px);
-    }
-
-    body::after {
-      right: 0;
-      transform: translateX(50px);
-      animation-delay: 0.3s;
-    }
-
-    @keyframes sideSlideIn {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .floating-elements {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .star {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: #F2A68A;
-      border-radius: 50%;
-      animation: twinkle 3s ease-in-out infinite;
-    }
-
-    .star:nth-child(1) { top: 15%; left: 20%; animation-delay: 0s; }
-    .star:nth-child(2) { top: 40%; left: 85%; animation-delay: 0.5s; width: 6px; height: 6px; }
-    .star:nth-child(3) { top: 70%; left: 12%; animation-delay: 1s; width: 8px; height: 8px; }
-    .star:nth-child(4) { top: 85%; left: 75%; animation-delay: 1.5s; }
-    .star:nth-child(5) { top: 25%; left: 60%; animation-delay: 2s; width: 5px; height: 5px; }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.3); }
-    }
-
-    .content-wrapper {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-
-    .profile-container {
-      opacity: 0;
-      transform: translateY(-30px) scale(0.8);
-      animation: profilePop 1.2s forwards ease-out;
-      margin-bottom: 30px;
-    }
-
-    @keyframes profilePop {
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
     }
 
     .profile-img {
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      border: 5px solid #E8B996;
+      border: 4px solid #E8B996;
       object-fit: cover;
-      box-shadow: 0 8px 30px rgba(242, 166, 138, 0.3);
-      transition: transform 0.5s ease;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeIn 1.5s forwards ease-out;
     }
 
-    .profile-img:hover {
-      transform: scale(1.08);
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     h1 {
-      font-size: 2.3rem;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s forwards ease-out;
-      animation-delay: 0.3s;
+      font-size: 2.2rem;
+      text-align: center;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      border-right: 3px solid #70422F;
+      padding-right: 8px;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .subtitle {
       font-size: 1rem;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: #A06650;
       margin-bottom: 40px;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp 1s forwards ease-out;
-      animation-delay: 0.5s;
+      animation-delay: 3.5s;
     }
 
     @keyframes fadeUp {
@@ -159,14 +70,15 @@
     }
 
     .welcome-text {
-      font-size: 1.15rem;
+      text-align: center;
+      font-size: 1.1rem;
       line-height: 1.8;
-      color: #8B5A3C;
       margin-bottom: 50px;
+      color: #8B5A3C;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp 1s forwards ease-out;
-      animation-delay: 0.7s;
+      animation-delay: 4s;
     }
 
     .button-container {
@@ -174,29 +86,28 @@
       flex-direction: column;
       gap: 20px;
       width: 100%;
-      max-width: 380px;
-      margin: 0 auto;
+      max-width: 400px;
     }
 
     .btn {
-      padding: 16px 32px;
-      border-radius: 50px;
+      padding: 15px 30px;
+      border-radius: 30px;
       font-size: 1.1rem;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       text-decoration: none;
       text-align: center;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.3s ease;
       border: none;
       cursor: pointer;
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
 
-    .btn:nth-child(1) { animation: btnPop 0.8s forwards ease-out; animation-delay: 0.9s; }
-    .btn:nth-child(2) { animation: btnPop 0.8s forwards ease-out; animation-delay: 1.1s; }
-    .btn:nth-child(3) { animation: btnPop 0.8s forwards ease-out; animation-delay: 1.3s; }
+    .btn:nth-child(1) { animation: btnFade 0.8s forwards ease-out; animation-delay: 4.5s; }
+    .btn:nth-child(2) { animation: btnFade 0.8s forwards ease-out; animation-delay: 5s; }
+    .btn:nth-child(3) { animation: btnFade 0.8s forwards ease-out; animation-delay: 5.5s; }
 
-    @keyframes btnPop {
+    @keyframes btnFade {
       to {
         opacity: 1;
         transform: translateY(0);
@@ -204,49 +115,65 @@
     }
 
     .btn-primary {
-      background: #E89F65;
+      background-color: #E89F65;
       color: white;
     }
 
+    .btn-primary:hover {
+      background-color: #D88F55;
+      transform: translateY(-2px);
+    }
+
     .btn-outline {
-      background: transparent;
+      background-color: transparent;
       color: #70422F;
       border: 2px solid #D4A784;
     }
 
     .btn-outline:hover {
-      background: #F2D4BC;
+      background-color: #F2D4BC;
       transform: translateY(-2px);
     }
   </style>
 </head>
 <body>
-  <div class="floating-elements">
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
+  <img src="picture.jpg" alt="Ma. Luisa Victoria S. Sanchez" class="profile-img" />
+
+  <h1 id="typewriter"></h1>
+
+  <p class="subtitle">Aspiring IT Professional</p>
+
+  <div class="welcome-text">
+    Welcome to my portfolio<br>
+    A showcase of my journey, achievements, and dreams.
   </div>
 
-  <div class="content-wrapper">
-    <div class="profile-container">
-      <img src="picture.jpg" alt="Ma. Luisa Victoria S. Sanchez" class="profile-img" />
-    </div>
-
-    <h1>Ma. Luisa Victoria S. Sanchez</h1>
-    <p class="subtitle">Aspiring IT Professional</p>
-
-    <div class="welcome-text">
-      Welcome to my portfolio<br>
-      A showcase of my journey, achievements, and dreams.
-    </div>
-
-    <div class="button-container">
-      <a href="personal.html" class="btn btn-primary">Personal Information</a>
-      <a href="achievements.html" class="btn btn-outline">Achievements</a>
-      <button class="btn btn-outline">My Parents</button>
-    </div>
+  <div class="button-container">
+    <a href="personal.html" class="btn btn-primary">Personal Information</a>
+    <a href="achievements.html" class="btn btn-outline">Achievements</a>
+    <a href="parents.html" class="btn btn-outline">My Parents</a>
   </div>
+
+  <script>
+    const text = "Ma. Luisa Victoria S. Sanchez";
+    const speed = 120; // milliseconds per letter
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typewriter").textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      } else {
+        // Remove cursor when done typing
+        document.getElementById("typewriter").style.borderRight = "none";
+      }
+    }
+
+    // Start typing when page loads
+    window.onload = function() {
+      setTimeout(typeWriter, 800);
+    };
+  </script>
 </body>
 </html>
