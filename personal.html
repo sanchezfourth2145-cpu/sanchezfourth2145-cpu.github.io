@@ -3,421 +3,481 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Personal Information — Ma. Luisa Victoria S. Sanchez</title>
+  <title>Personal Information | Ma. Luisa Victoria S. Sanchez</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Georgia', 'Times New Roman', serif;
+      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background: linear-gradient(90deg, #F6C9B8 0%, #F9E7DC 50%, #F6C9B8 100%);
-      background-size: 200% 200%;
-      animation: bgPulse 12s ease infinite;
-      color: #70422F;
-      padding: 50px 30px;
+      background: #0a0f1f;
+      color: #e6efff;
+      padding: 40px 20px;
       position: relative;
+      overflow-x: hidden;
+    }
+
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.04) 0%, transparent 60%);
+      z-index: 0;
+      animation: bgPulse 8s ease-in-out infinite alternate;
+      pointer-events: none;
     }
 
     @keyframes bgPulse {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    .floating-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(56, 189, 248, 0.12);
+      top: -200px;
+      right: -150px;
+      animation: floatOrb1 15s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(99, 102, 241, 0.1);
+      bottom: -100px;
+      left: -100px;
+      animation: floatOrb2 18s ease-in-out infinite;
+    }
+
+    @keyframes floatOrb1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-80px, 60px) scale(1.1); }
+      66% { transform: translate(40px, -40px) scale(0.95); }
+    }
+
+    @keyframes floatOrb2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(60px, -50px) scale(1.05); }
+      75% { transform: translate(-60px, 30px) scale(0.9); }
+    }
+
+    .grid-lines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(125, 211, 252, 0.8);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+      animation: particleFloat 20s infinite linear;
+    }
+
+    @keyframes particleFloat {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
     }
 
     .main-container {
-      max-width: 750px;
+      max-width: 700px;
       margin: 0 auto;
+      text-align: center;
       position: relative;
       z-index: 1;
     }
 
     .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #F2A68A;
-      text-decoration: none;
-      font-size: 1rem;
-      margin-bottom: 40px;
-      opacity: 0;
-      transform: translateX(-20px);
-      animation: slideInLeft 0.8s forwards ease-out;
-      transition: all 0.3s ease;
-    }
-
-    .back-btn:hover {
-      color: #E89878;
-      transform: translateX(-8px);
-    }
-
-    @keyframes slideInLeft {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .page-header {
-      text-align: center;
-      margin-bottom: 50px;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeDown 1s forwards ease-out;
-    }
-
-    @keyframes fadeDown {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .page-header h1 {
-      font-size: 2.5rem;
-      letter-spacing: 3px;
-      color: #70422F;
-      position: relative;
       display: inline-block;
-    }
-
-    .page-header h1::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%) scaleX(0);
-      width: 60%;
-      height: 2px;
-      background: #F2A68A;
-      animation: lineExpand 1.2s forwards ease-out;
+      margin-bottom: 25px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: #7dd3fc;
+      text-decoration: none;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 0.8s forwards ease-out;
       animation-delay: 0.5s;
     }
 
-    @keyframes lineExpand {
-      to { transform: translateX(-50%) scaleX(1); }
+    .back-btn:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: #38bdf8;
+      transform: translateX(-5px);
+      box-shadow: 0 5px 20px rgba(56, 189, 248, 0.15);
     }
 
-    .typewriter-box {
-      text-align: center;
-      margin-bottom: 50px;
-      min-height: 80px;
-      padding: 0 20px;
-    }
-
-    #typewriter-intro {
-      font-size: 1.1rem;
-      color: #8B5A3C;
-      border-right: 2px solid #F2A68A;
-      padding-right: 8px;
-      display: inline-block;
-    }
-
-    .info-section {
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 20px;
-      padding: 35px;
-      margin-bottom: 25px;
-      opacity: 0;
-      transform: translateY(40px) scale(0.95);
-      animation: cardAppear 0.8s forwards ease-out;
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .info-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      transition: left 0.6s ease;
-    }
-
-    .info-section:hover::before {
-      left: 100%;
-    }
-
-    .info-section:nth-child(3) { animation-delay: 1.2s; }
-    .info-section:nth-child(4) { animation-delay: 1.6s; }
-    .info-section:nth-child(5) { animation-delay: 2.0s; }
-    .info-section:nth-child(6) { animation-delay: 2.4s; }
-
-    @keyframes cardAppear {
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .info-section:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 15px 40px rgba(242, 166, 138, 0.2);
-      border-left: 4px solid #F2A68A;
-    }
-
-    .section-title {
-      font-size: 1.4rem;
-      color: #70422F;
-      text-transform: uppercase;
+    .page-title {
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 10px;
       letter-spacing: 2px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s forwards ease-out;
+      animation-delay: 0.7s;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #7dd3fc;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 0.8s forwards ease-out;
+      animation-delay: 0.9s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .typewriter-container {
+      min-height: 50px;
+      margin-bottom: 35px;
+      opacity: 0;
+      animation: fadeIn 0.8s forwards ease-out;
+      animation-delay: 1.1s;
+    }
+
+    #typewriter-text {
+      font-size: 1rem;
+      color: #bae6fd;
+      border-right: 2px solid #38bdf8;
+      padding-right: 6px;
+      animation: blink 0.8s infinite;
+      line-height: 1.6;
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: #38bdf8; }
+      50% { border-color: transparent; }
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 18px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
       margin-bottom: 25px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #F2A68A;
-      display: inline-block;
-      position: relative;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: cardFadeIn 0.8s forwards ease-out;
+    }
+
+    .info-card:nth-child(1) { animation-delay: 1.3s; }
+    .info-card:nth-child(2) { animation-delay: 1.5s; }
+    .info-card:nth-child(3) { animation-delay: 1.7s; }
+    .info-card:nth-child(4) { animation-delay: 1.9s; }
+    .info-card:nth-child(5) { animation-delay: 2.1s; }
+    .info-card:nth-child(6) { animation-delay: 2.3s; }
+
+    @keyframes cardFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      color: #7dd3fc;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .info-row {
       display: flex;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(242, 166, 138, 0.15);
-      opacity: 0;
-      transform: translateX(-15px);
-      animation: rowSlideIn 0.6s forwards ease-out;
-      transition: all 0.3s ease;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
     }
 
     .info-row:last-child {
       border-bottom: none;
     }
 
-    .info-row:hover {
-      background: rgba(242, 166, 138, 0.08);
-      padding-left: 10px;
-      padding-right: 10px;
-      border-radius: 8px;
-    }
-
-    .info-section:nth-child(3) .info-row:nth-child(2) { animation-delay: 1.4s; }
-    .info-section:nth-child(3) .info-row:nth-child(3) { animation-delay: 1.55s; }
-    .info-section:nth-child(3) .info-row:nth-child(4) { animation-delay: 1.7s; }
-    .info-section:nth-child(3) .info-row:nth-child(5) { animation-delay: 1.85s; }
-
-    .info-section:nth-child(4) .info-row:nth-child(2) { animation-delay: 1.8s; }
-    .info-section:nth-child(4) .info-row:nth-child(3) { animation-delay: 1.95s; }
-    .info-section:nth-child(4) .info-row:nth-child(4) { animation-delay: 2.1s; }
-
-    .info-section:nth-child(5) .info-row:nth-child(2) { animation-delay: 2.2s; }
-    .info-section:nth-child(5) .info-row:nth-child(3) { animation-delay: 2.35s; }
-    .info-section:nth-child(5) .info-row:nth-child(4) { animation-delay: 2.5s; }
-
-    @keyframes rowSlideIn {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
     .info-label {
-      width: 35%;
-      font-weight: bold;
-      color: #70422F;
-      transition: color 0.3s ease;
-    }
-
-    .info-row:hover .info-label {
-      color: #E89878;
+      font-weight: 600;
+      color: #bae6fd;
     }
 
     .info-value {
-      width: 65%;
-      color: #8B5A3C;
-      transition: color 0.3s ease;
+      color: #e0f2fe;
+      text-align: right;
     }
 
-    .info-row:hover .info-value {
-      color: #70422F;
-    }
-
-    .about-row {
-      margin-bottom: 25px;
-      opacity: 0;
-      transform: translateY(15px);
-      animation: aboutFadeIn 0.7s forwards ease-out;
-      transition: all 0.3s ease;
-      padding: 15px;
-      border-radius: 10px;
-    }
-
-    .about-row:hover {
-      background: rgba(242, 166, 138, 0.05);
-    }
-
-    .about-row:nth-child(2) { animation-delay: 2.5s; }
-    .about-row:nth-child(3) { animation-delay: 2.7s; }
-    .about-row:nth-child(4) { animation-delay: 2.9s; }
-
-    @keyframes aboutFadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .about-label {
-      font-weight: bold;
-      color: #70422F;
-      margin-bottom: 8px;
-      font-size: 1.05rem;
-      transition: color 0.3s ease;
-    }
-
-    .about-row:hover .about-label {
-      color: #E89878;
-    }
-
-    .about-value {
-      color: #8B5A3C;
+    .about-text, .goals-text {
+      color: #e0f2fe;
       line-height: 1.8;
-      text-align: justify;
-      transition: color 0.3s ease;
     }
 
-    .footer-quote {
-      text-align: center;
-      margin-top: 50px;
-      font-style: italic;
-      color: #F2A68A;
-      font-size: 1.1rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: quoteFadeIn 1s forwards ease-out;
-      animation-delay: 3.4s;
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .skill-tag {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: #7dd3fc;
       transition: all 0.3s ease;
     }
 
-    .footer-quote:hover {
-      color: #E89878;
-      transform: translateY(-3px);
+    .skill-tag:hover {
+      background: rgba(56, 189, 248, 0.2);
+      transform: translateY(-2px);
     }
 
-    @keyframes quoteFadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .next-btn-container {
+      margin-top: 30px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeIn 0.8s forwards ease-out;
+      animation-delay: 2.6s;
+    }
+
+    .next-btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: linear-gradient(135deg, #0c4a6e, #0369a1);
+      color: white;
+      text-decoration: none;
+      font-size: 1.05rem;
+      border-radius: 14px;
+      letter-spacing: 1px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+    }
+
+    .next-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(14, 165, 233, 0.35);
+    }
+
+    .footer-note {
+      font-size: 0.9rem;
+      color: #64748b;
+      opacity: 0;
+      animation: fadeIn 1s forwards ease-out;
+      animation-delay: 2.9s;
+    }
+
+    .footer-note span {
+      color: #38bdf8;
     }
   </style>
 </head>
 <body>
+  <div class="bg-gradient"></div>
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="grid-lines"></div>
+  <div class="particles" id="particles"></div>
+
   <div class="main-container">
     <a href="index.html" class="back-btn">← Back to Home</a>
+    
+    <h1 class="page-title">Personal Information</h1>
+    <p class="subtitle">Get to know me better</p>
 
-    <div class="page-header">
-      <h1>Personal Information</h1>
-    </div>
-
-    <!-- TYPEWRITER INTRO -->
-    <div class="typewriter-box">
-      <p id="typewriter-intro"></p>
+    <div class="typewriter-container">
+      <span id="typewriter-text"></span>
     </div>
 
     <!-- BASIC DETAILS -->
-    <div class="info-section">
-      <h2 class="section-title">Basic Details</h2>
+    <div class="info-card">
+      <h2 class="card-title">Basic Details</h2>
       <div class="info-row">
-        <div class="info-label">Full Name</div>
-        <div class="info-value">Ma. Luisa Victoria S. Sanchez</div>
+        <span class="info-label">Full Name</span>
+        <span class="info-value">Ma. Luisa Victoria S. Sanchez</span>
       </div>
       <div class="info-row">
-        <div class="info-label">Date of Birth</div>
-        <div class="info-value">February 24, 2008</div>
+        <span class="info-label">Date of Birth</span>
+        <span class="info-value">February 24, 2008</span>
       </div>
       <div class="info-row">
-        <div class="info-label">Religion</div>
-        <div class="info-value">Roman Catholic</div>
+        <span class="info-label">Religion</span>
+        <span class="info-value">Roman Catholic</span>
       </div>
       <div class="info-row">
-        <div class="info-label">Nationality</div>
-        <div class="info-value">Filipino</div>
+        <span class="info-label">Nationality</span>
+        <span class="info-value">Filipino</span>
       </div>
     </div>
 
     <!-- CONTACT INFORMATION -->
-    <div class="info-section">
-      <h2 class="section-title">Contact Information</h2>
+    <div class="info-card">
+      <h2 class="card-title">Contact Information</h2>
       <div class="info-row">
-        <div class="info-label">Complete Address</div>
-        <div class="info-value">BGH Compound, Baguio City</div>
+        <span class="info-label">Complete Address</span>
+        <span class="info-value">BGH Compound, Baguio City</span>
       </div>
       <div class="info-row">
-        <div class="info-label">Email Address</div>
-        <div class="info-value">sanchezfourth@gmail.com</div>
+        <span class="info-label">Email Address</span>
+        <span class="info-value">sanchezfourth@gmail.com</span>
       </div>
       <div class="info-row">
-        <div class="info-label">Phone Number</div>
-        <div class="info-value">0950-692-0820</div>
+        <span class="info-label">Phone Number</span>
+        <span class="info-value">0950-692-0820</span>
       </div>
     </div>
 
     <!-- EDUCATIONAL BACKGROUND -->
-    <div class="info-section">
-      <h2 class="section-title">Educational Background</h2>
+    <div class="info-card">
+      <h2 class="card-title">Educational Background</h2>
       <div class="info-row">
-        <div class="info-label">Current School</div>
-        <div class="info-value">University of the Cordilleras</div>
+        <span class="info-label">Current School</span>
+        <span class="info-value">University of the Cordilleras</span>
       </div>
       <div class="info-row">
-        <div class="info-label">Program / Course</div>
-        <div class="info-value">Bachelor of Science in Information Technology — Enterprise Resources and Planning Track</div>
+        <span class="info-label">Program / Course</span>
+        <span class="info-value">BSIT — Enterprise Resources and Planning Track</span>
       </div>
       <div class="info-row">
-        <div class="info-label">High School</div>
-        <div class="info-value">Baguio City High School</div>
+        <span class="info-label">High School</span>
+        <span class="info-value">Baguio City High School</span>
       </div>
     </div>
 
     <!-- ABOUT ME -->
-    <div class="info-section">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-row">
-        <div class="about-label">Introduction</div>
-        <div class="about-value">
-          I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student at the University of the Cordilleras. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills. In this portfolio, I will share my achievements, skills, and experiences, as well as my goals for the future in the field of Information Technology.
-        </div>
-      </div>
-      <div class="about-row">
-        <div class="about-label">Future Goals</div>
-        <div class="about-value">
-          In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.
-        </div>
-      </div>
-      <div class="about-row">
-        <div class="about-label">Skills</div>
-        <div class="about-value">
-          Basic Coding • Computer Systems Knowledge • Time Management • Communication Skills
-        </div>
+    <div class="info-card">
+      <h2 class="card-title">About Me</h2>
+      <p class="about-text">
+        I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student at the University of the Cordilleras. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills.
+      </p>
+    </div>
+
+    <!-- FUTURE GOALS -->
+    <div class="info-card">
+      <h2 class="card-title">Future Goals</h2>
+      <p class="goals-text">
+        In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.
+      </p>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="info-card">
+      <h2 class="card-title">Skills</h2>
+      <div class="skills-tags">
+        <span class="skill-tag">Basic Coding</span>
+        <span class="skill-tag">Computer Systems Knowledge</span>
+        <span class="skill-tag">Time Management</span>
+        <span class="skill-tag">Communication Skills</span>
       </div>
     </div>
 
-    <p class="footer-quote">— Building IT solutions, one system at a time —</p>
+    <!-- NEXT BUTTON -->
+    <div class="next-btn-container">
+      <a href="achievements.html" class="next-btn">Next → Achievements</a>
+    </div>
+
+    <p class="footer-note">
+      — <span>Building IT solutions, one system at a time</span> —
+    </p>
   </div>
 
   <script>
-    const introText = "Here is a little about who I am — my background, my journey, and what I hope to achieve.";
+    const textLines = "Here's a little more about who I am, where I come from, and what I hope to achieve.";
     const speed = 60;
-    let i = 0;
+    let charIndex = 0;
+    const typewriterElement = document.getElementById("typewriter-text");
 
-    function typeIntro() {
-      if (i < introText.length) {
-        document.getElementById("typewriter-intro").textContent += introText.charAt(i);
-        i++;
-        setTimeout(typeIntro, speed);
-      } else {
-        document.getElementById("typewriter-intro").style.borderRight = "none";
+    function typeWriter() {
+      if (charIndex < textLines.length) {
+        if (textLines.charAt(charIndex) === "\n") {
+          typewriterElement.innerHTML += "<br>";
+        } else {
+          typewriterElement.textContent += textLines.charAt(charIndex);
+        }
+        charIndex++;
+        setTimeout(typeWriter, speed);
       }
     }
 
     window.onload = function() {
-      setTimeout(typeIntro, 700);
+      setTimeout(typeWriter, 800);
+      createParticles();
     };
+
+    function createParticles() {
+      const container = document.getElementById("particles");
+      const count = 60;
+      
+      for (let i = 0; i < count; i++) {
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+        
+        const size = Math.random() * 3 + 1;
+        const posX = Math.random() * 100;
+        const delay = Math.random() * 20;
+        const duration = Math.random() * 15 + 15;
+        
+        particle.style.left = posX + "%";
+        particle.style.width = size + "px";
+        particle.style.height = size + "px";
+        particle.style.animationDelay = delay + "s";
+        particle.style.animationDuration = duration + "s";
+        
+        container.appendChild(particle);
+      }
+    }
   </script>
 </body>
 </html>
