@@ -3,159 +3,236 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Parents — Ma. Luisa Victoria S. Sanchez</title>
+  <title>My Parents | Ma. Luisa Victoria S. Sanchez</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Georgia', 'Times New Roman', serif;
+      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background: linear-gradient(90deg, #F6C9B8 0%, #F9E7DC 50%, #F6C9B8 100%);
-      background-size: 200% 200%;
-      animation: bgPulse 12s ease infinite;
-      color: #70422F;
-      padding: 50px 30px;
+      background: #0a0f1f;
+      color: #e6efff;
+      padding: 40px 20px;
       position: relative;
+      overflow-x: hidden;
+    }
+
+    /* === BACKGROUND EFFECTS === */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(248, 113, 113, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.05) 0%, transparent 60%);
+      z-index: 0;
+      animation: bgPulse 6s ease-in-out infinite alternate;
+      pointer-events: none;
     }
 
     @keyframes bgPulse {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
     }
 
+    .floating-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(70px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(248, 113, 113, 0.12);
+      top: -200px;
+      right: -150px;
+      animation: floatOrb1 12s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 450px;
+      height: 450px;
+      background: rgba(56, 189, 248, 0.1);
+      bottom: -100px;
+      left: -100px;
+      animation: floatOrb2 15s ease-in-out infinite;
+    }
+
+    @keyframes floatOrb1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-100px, 80px) scale(1.15); }
+      66% { transform: translate(50px, -60px) scale(0.9); }
+    }
+
+    @keyframes floatOrb2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(80px, -70px) scale(1.1); }
+      75% { transform: translate(-80px, 50px) scale(0.85); }
+    }
+
+    .grid-lines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(248, 113, 113, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+      background-size: 70px 70px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(253, 186, 116, 0.8);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(248, 113, 113, 0.5);
+      animation: particleFloat 20s infinite linear;
+    }
+
+    @keyframes particleFloat {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(80px); opacity: 0; }
+    }
+
+    /* === MAIN CONTAINER === */
     .main-container {
       max-width: 750px;
       margin: 0 auto;
+      text-align: center;
       position: relative;
       z-index: 1;
     }
 
     .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #F2A68A;
+      display: inline-block;
+      margin-bottom: 25px;
+      padding: 10px 25px;
+      border-radius: 12px;
+      color: #fca5a5;
       text-decoration: none;
-      font-size: 1rem;
-      margin-bottom: 40px;
+      border: 1px solid rgba(248, 113, 113, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       opacity: 0;
-      transform: translateX(-20px);
-      animation: slideInLeft 0.8s forwards ease-out;
-      transition: all 0.3s ease;
+      animation: fadeInLeft 0.9s forwards ease-out;
+      animation-delay: 0.4s;
     }
 
     .back-btn:hover {
-      color: #E89878;
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
       transform: translateX(-8px);
+      box-shadow: 0 8px 25px rgba(248, 113, 113, 0.15);
     }
 
-    @keyframes slideInLeft {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .page-header {
-      text-align: center;
-      margin-bottom: 50px;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeDown 1s forwards ease-out;
-    }
-
-    @keyframes fadeDown {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .page-header h1 {
-      font-size: 2.5rem;
+    .page-title {
+      font-size: 2.3rem;
+      color: #ffffff;
+      margin-bottom: 10px;
       letter-spacing: 3px;
-      color: #70422F;
-      position: relative;
-      display: inline-block;
-    }
-
-    .page-header h1 span {
-      color: #F2A68A;
-    }
-
-    .page-header h1::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%) scaleX(0);
-      width: 60%;
-      height: 2px;
-      background: #F2A68A;
-      animation: lineExpand 1.2s forwards ease-out;
-      animation-delay: 0.5s;
-    }
-
-    @keyframes lineExpand {
-      to { transform: translateX(-50%) scaleX(1); }
-    }
-
-    .intro-quote {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #8B5A3C;
-      margin-bottom: 50px;
       opacity: 0;
-      transform: translateY(15px);
-      animation: fadeUp 0.8s forwards ease-out;
-      animation-delay: 0.8s;
-      font-style: italic;
+      transform: translateY(30px) scale(0.9);
+      animation: fadeUpScale 1s forwards ease-out;
+      animation-delay: 0.6s;
+      text-shadow: 0 0 30px rgba(248, 113, 113, 0.2);
     }
 
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeUpScale {
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .parents-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 35px;
-      margin-bottom: 50px;
+    .subtitle {
+      font-size: 1rem;
+      color: #fda4af;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeInGlow 1s forwards ease-out;
+      animation-delay: 0.85s;
     }
 
+    @keyframes fadeInGlow {
+      from { opacity: 0; filter: blur(4px); }
+      to { opacity: 1; filter: blur(0); }
+    }
+
+    .typewriter-container {
+      min-height: 60px;
+      margin-bottom: 45px;
+      opacity: 0;
+      animation: fadeIn 1s forwards ease-out;
+      animation-delay: 1.05s;
+    }
+
+    #typewriter-text {
+      font-size: 1.05rem;
+      color: #fecaca;
+      border-right: 3px solid #f87171;
+      padding-right: 8px;
+      animation: blink 0.7s infinite;
+      line-height: 1.8;
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: #f87171; box-shadow: 0 0 8px #f87171; }
+      50% { border-color: transparent; box-shadow: none; }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* === PARENT CARDS === */
     .parent-card {
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 24px;
-      padding: 35px;
-      display: flex;
-      align-items: center;
-      gap: 35px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(248, 113, 113, 0.15);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      margin-bottom: 30px;
+      text-align: center;
       opacity: 0;
-      transform: translateY(40px) scale(0.96);
-      animation: cardEnter 0.9s forwards ease-out;
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: translateY(50px);
+      animation: cardSlideUp 1s forwards ease-out;
       position: relative;
       overflow: hidden;
-      flex-wrap: wrap;
-      border-left: 3px solid transparent;
-    }
-
-    .parent-card:nth-child(1) { animation-delay: 1.2s; }
-    .parent-card:nth-child(2) { animation-delay: 1.6s; }
-
-    @keyframes cardEnter {
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      transition: all 0.5s ease;
     }
 
     .parent-card::before {
@@ -165,9 +242,8 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      transition: left 0.7s ease;
-      z-index: 1;
+      background: linear-gradient(90deg, transparent, rgba(248, 113, 113, 0.05), transparent);
+      transition: left 0.8s ease;
     }
 
     .parent-card:hover::before {
@@ -175,197 +251,288 @@
     }
 
     .parent-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 45px rgba(242, 166, 138, 0.18);
-      border-left: 3px solid #F2A68A;
-      background: rgba(255, 255, 255, 0.7);
+      border-color: rgba(248, 113, 113, 0.4);
+      box-shadow: 
+        0 15px 50px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(248, 113, 113, 0.08);
+      transform: translateY(-5px);
     }
 
-    .img-container {
-      perspective: 1000px;
-      z-index: 2;
+    .parent-card:nth-child(1) { animation-delay: 1.25s; }
+    .parent-card:nth-child(2) { animation-delay: 1.55s; }
+
+    @keyframes cardSlideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-title {
+      font-size: 1.35rem;
+      color: #fda4af;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(248, 113, 113, 0.15);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: textFadeUp 0.8s forwards ease-out;
+      animation-delay: 1.4s;
+    }
+
+    @keyframes textFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === IMAGE WITH ENHANCED EFFECTS === */
+    .img-wrapper {
+      position: relative;
+      display: inline-block;
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .img-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.4));
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .img-wrapper:hover::after {
+      opacity: 1;
+    }
+
+    .img-border-glow {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #f87171, #38bdf8, #fbbf24, #f87171);
+      background-size: 400% 400%;
+      border-radius: 16px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      animation: gradientBorder 3s ease infinite;
+    }
+
+    .img-wrapper:hover .img-border-glow {
+      opacity: 1;
+    }
+
+    @keyframes gradientBorder {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .parent-img {
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid #F2A68A;
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      border: 3px solid rgba(248, 113, 113, 0.2);
       box-shadow: 
-        0 12px 30px rgba(112, 66, 47, 0.2),
-        inset 0 0 0 2px rgba(255,255,255,0.6);
-      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform-style: preserve-3d;
+        0 8px 30px rgba(0, 0, 0, 0.35),
+        0 0 0 rgba(248, 113, 113, 0);
+      transition: 
+        transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        box-shadow 0.6s ease,
+        filter 0.4s ease;
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+      animation: imageReveal 1s forwards ease-out;
     }
 
-    .parent-card:hover .parent-img {
-      transform: translateZ(15px) rotateY(-8deg);
+    .parent-card:nth-child(1) .parent-img { animation-delay: 1.45s; }
+    .parent-card:nth-child(2) .parent-img { animation-delay: 1.75s; }
+
+    @keyframes imageReveal {
+      to { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+      }
+    }
+
+    .parent-img:hover {
+      transform: scale(1.05) translateY(-8px);
       box-shadow: 
-        15px 15px 35px rgba(112, 66, 47, 0.15),
-        0 0 0 3px rgba(255,255,255,0.8);
-    }
-
-    .parent-content {
-      flex: 1;
-      min-width: 260px;
-      z-index: 2;
-    }
-
-    .parent-label {
-      font-size: 0.95rem;
-      color: #F2A68A;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-
-    .parent-name {
-      font-size: 1.5rem;
-      color: #70422F;
-      margin-bottom: 15px;
+        0 20px 50px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(248, 113, 113, 0.2);
+      filter: brightness(1.08) contrast(1.05);
     }
 
     .parent-desc {
-      color: #8B5A3C;
-      line-height: 1.8;
-      text-align: justify;
-    }
-
-    .divider-line {
-      width: 50px;
-      height: 2px;
-      background: linear-gradient(90deg, #F2A68A, #E89878);
-      margin: 12px 0;
-      transition: width 0.4s ease;
-    }
-
-    .parent-card:hover .divider-line {
-      width: 80px;
-    }
-
-    .gratitude-section {
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 24px;
-      padding: 45px 35px;
-      text-align: center;
+      color: #fef2f2;
+      line-height: 1.9;
+      margin-top: 15px;
       opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 1s forwards ease-out;
-      animation-delay: 2.0s;
-      position: relative;
-      overflow: hidden;
+      transform: translateY(20px);
+      animation: textFadeUp 0.9s forwards ease-out;
     }
 
-    .gratitude-title {
-      font-size: 1.4rem;
-      color: #70422F;
-      margin-bottom: 25px;
-    }
+    .parent-card:nth-child(1) .parent-desc { animation-delay: 1.65s; }
+    .parent-card:nth-child(2) .parent-desc { animation-delay: 1.95s; }
 
-    .gratitude-text {
-      color: #8B5A3C;
-      line-height: 2;
-      font-size: 1.05rem;
-    }
-
-    .heart-symbol {
+    .heart-icon {
       display: inline-block;
-      color: #F2A68A;
-      animation: heartbeat 1.8s infinite;
-      margin: 0 4px;
+      animation: heartbeat 1.5s ease-in-out infinite;
+      margin: 0 5px;
     }
 
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
+      50% { transform: scale(1.2); }
     }
 
-    .footer-tagline {
-      text-align: center;
-      margin-top: 45px;
-      font-style: italic;
-      color: #F2A68A;
-      font-size: 1.1rem;
+    /* === NAVIGATION BUTTONS === */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 50px;
+      margin-bottom: 30px;
       opacity: 0;
-      transform: translateY(15px);
-      animation: fadeUp 1s forwards ease-out;
-      animation-delay: 2.6s;
-      transition: all 0.3s ease;
+      animation: fadeIn 1s forwards ease-out;
+      animation-delay: 2.2s;
     }
 
-    .footer-tagline:hover {
-      color: #E89878;
-      transform: translateY(-3px);
+    .prev-btn, .home-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #7f1d1d, #dc2626, #f87171);
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease infinite;
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 14px;
+      letter-spacing: 1px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 20px rgba(248, 113, 113, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .prev-btn:hover, .home-btn:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 12px 35px rgba(248, 113, 113, 0.35);
+    }
+
+    .footer-note {
+      font-size: 0.9rem;
+      color: #78716c;
+      opacity: 0;
+      animation: fadeIn 1.2s forwards ease-out;
+      animation-delay: 2.5s;
+      margin-top: 20px;
+    }
+
+    .footer-note span {
+      color: #fca5a5;
+      font-style: italic;
     }
 
     @media (max-width: 600px) {
-      .parent-card {
-        justify-content: center;
-        text-align: center;
+      .nav-buttons {
+        flex-direction: column;
+        gap: 15px;
       }
-      .divider-line {
-        margin: 12px auto;
+      .page-title {
+        font-size: 1.8rem;
       }
     }
   </style>
 </head>
 <body>
+  <div class="bg-gradient"></div>
+  <div class="floating-orb orb-1"></div>
+  <div class="floating-orb orb-2"></div>
+  <div class="grid-lines"></div>
+  <div class="particles" id="particles"></div>
+
   <div class="main-container">
-    <a href="index.html" class="back-btn">← Back to Home</a>
+    <a href="achievements.html" class="back-btn">← Back to Achievements</a>
+    
+    <h1 class="page-title">My Parents</h1>
+    <p class="subtitle">My greatest inspiration and blessing</p>
 
-    <div class="page-header">
-      <h1>My <span>Parents</span></h1>
+    <div class="typewriter-container">
+      <span id="typewriter-text"></span>
     </div>
 
-    <p class="intro-quote">
-      "Everything I am today is because of the two people who never stopped believing in me."
-    </p>
-
-    <div class="parents-grid">
-      <!-- FIRST PARENT -->
-      <div class="parent-card">
-        <div class="img-container">
-          <img src="shakehands.jpg" alt="My Parent" class="parent-img" />
-        </div>
-        <div class="parent-content">
-          <span class="parent-label">My Guide & Mentor</span>
-          <h3 class="parent-name"></h3>
-          <div class="divider-line"></div>
-          <p class="parent-desc">
-            Thank you for teaching me the value of hard work, integrity, and perseverance. Your guidance has shaped not just my career path, but the person I strive to become. Every piece of advice you've shared has become a foundation I stand on, and every challenge you've overcome has become my greatest inspiration.
-          </p>
-        </div>
+    <!-- LOVE & SUPPORT — HUGGING PHOTO -->
+    <div class="parent-card">
+      <h2 class="card-title">❤️ A Mother's & Father's Love</h2>
+      <div class="img-wrapper">
+        <div class="img-border-glow"></div>
+        <img src="hugging.jpg" alt="My Parents and I" class="parent-img" />
       </div>
-
-      <!-- SECOND PARENT -->
-      <div class="parent-card">
-        <div class="img-container">
-          <img src="hugging.jpg" alt="My Parent" class="parent-img" />
-        </div>
-        <div class="parent-content">
-          <span class="parent-label">My Strength & Inspiration</span>
-          <h3 class="parent-name"></h3>
-          <div class="divider-line"></div>
-          <p class="parent-desc">
-            Thank you for your endless patience, your unconditional love, and your belief in my potential even when I doubted myself. You are my quiet strength and my constant motivation. Your sacrifices are the foundation of my dreams, and your support is the reason I dare to reach for them.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- GRATITUDE MESSAGE -->
-    <div class="gratitude-section">
-      <h3 class="gratitude-title">With Gratitude and Love</h3>
-      <p class="gratitude-text">
-        To my parents — you are my first teachers and my forever supporters. You have taught me that success means nothing without kindness, that ambition means nothing without gratitude, and that every achievement I reach is as much yours as it is mine. Wherever this career takes me, know that I carry your love with me in every step I take. <span class="heart-symbol">♥</span>
+      <p class="parent-desc">
+        My parents are my greatest blessing. Their unconditional love, endless sacrifices, and unwavering support have shaped who I am today. Every hug, every word of encouragement, and every moment they've sacrificed for me means more than words can say. <span class="heart-icon">💗</span>
       </p>
     </div>
 
-    <p class="footer-tagline">
-      — My roots, my foundation, my greatest blessing —
+    <!-- GUIDANCE & PARTNERSHIP — HANDSHAKE PHOTO -->
+    <div class="parent-card">
+      <h2 class="card-title">🤝 Partnership & Guidance</h2>
+      <div class="img-wrapper">
+        <div class="img-border-glow"></div>
+        <img src="shakehands.jpg" alt="Building a Future Together" class="parent-img" />
+      </div>
+      <p class="parent-desc">
+        Together, they have built a home filled with love, respect, and understanding. They have taught me the value of hard work, integrity, and partnership. They are my role models — showing me that with love and teamwork, we can overcome any challenge and build a beautiful future together.
+      </p>
+    </div>
+
+    <!-- NAVIGATION BUTTONS -->
+    <div class="nav-buttons">
+      <a href="achievements.html" class="prev-btn">← Previous</a>
+      <a href="index.html" class="home-btn">🏠 Back to Home</a>
+    </div>
+
+    <p class="footer-note">
+      — <span>Everything I am, I owe to you. Thank you, Mama & Papa.</span> —
     </p>
   </div>
-</body>
-</html>
+
+  <script>
+    const textLines = "Behind every dream I chase, you are there cheering me on. This portfolio is dedicated to you — my parents, my heroes, my heart.";
+    const speed = 50;
+    let charIndex = 0;
+    const typewriterElement = document.getElementById("typewriter-text");
+
+    function typeWriter() {
+      if (charIndex < textLines.length) {
+        if (textLines.charAt(charIndex) === "\n") {
+          typewriterElement.innerHTML += "<br>";
+        } else {
+          typewriterElement.textContent += textLines.charAt(charIndex);
+        }
+        charIndex++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    window.onload = function() {
+      setTimeout(typeWriter, 700);
+      createParticles();
+    };
+
+    function createParticles() {
+      const container = document.getElementById("particles");
