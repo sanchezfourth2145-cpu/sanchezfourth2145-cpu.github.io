@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal Information | Ma. Luisa Victoria S. Sanchez</title>
   <style>
     * {
@@ -12,512 +12,380 @@
       font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
 
-    body {
-      min-height: 100vh;
+    html, body {
+      height: 100vh;
+      overflow: hidden;
       background: #0a0f1f;
-      color: #e6efff;
-      padding: 40px 20px;
+      color: #e6f0ff;
       position: relative;
-      overflow-x: hidden;
     }
 
-    /* === BACKGROUND EFFECTS === */
-    .bg-gradient {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.06) 0%, transparent 60%);
-      z-index: 0;
-      animation: bgPulse 6s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-
-    @keyframes bgPulse {
-      0% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
-
-    .floating-orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(70px);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .orb-1 {
-      width: 500px;
-      height: 500px;
-      background: rgba(56, 189, 248, 0.15);
-      top: -200px;
-      right: -150px;
-      animation: floatOrb1 12s ease-in-out infinite;
-    }
-
-    .orb-2 {
-      width: 400px;
-      height: 400px;
-      background: rgba(99, 102, 241, 0.12);
-      bottom: -100px;
-      left: -100px;
-      animation: floatOrb2 15s ease-in-out infinite;
-    }
-
-    @keyframes floatOrb1 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(-100px, 80px) scale(1.15); }
-      66% { transform: translate(50px, -60px) scale(0.9); }
-    }
-
-    @keyframes floatOrb2 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(80px, -70px) scale(1.1); }
-      75% { transform: translate(-80px, 50px) scale(0.85); }
-    }
-
-    .grid-lines {
-      position: fixed;
+    /* Grid Background */
+    .grid-bg {
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background-image: 
-        linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
-      background-size: 70px 70px;
+        linear-gradient(rgba(147, 197, 253, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(147, 197, 253, 0.06) 1px, transparent 1px);
+      background-size: 50px 50px;
       z-index: 0;
-      pointer-events: none;
     }
 
-    .particles {
-      position: fixed;
+    /* Floating Dots */
+    .dots {
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
       pointer-events: none;
-      overflow: hidden;
-    }
-
-    .particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: rgba(125, 211, 252, 0.9);
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
-      animation: particleFloat 18s infinite linear;
-    }
-
-    @keyframes particleFloat {
-      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-      15% { opacity: 1; }
-      85% { opacity: 1; }
-      100% { transform: translateY(-100vh) translateX(80px); opacity: 0; }
-    }
-
-    /* === MAIN CONTAINER === */
-    .main-container {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
       z-index: 1;
     }
 
+    .dot {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(147, 197, 253, 0.6);
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     .back-btn {
-      display: inline-block;
-      margin-bottom: 25px;
-      padding: 10px 25px;
-      border-radius: 12px;
-      color: #7dd3fc;
-      text-decoration: none;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      opacity: 0;
-      animation: fadeInLeft 0.9s forwards ease-out;
-      animation-delay: 0.4s;
-    }
-
-    .back-btn:hover {
-      background: rgba(56, 189, 248, 0.12);
-      border-color: #38bdf8;
-      transform: translateX(-8px);
-      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2);
-    }
-
-    .page-title {
-      font-size: 2.3rem;
-      color: #ffffff;
+      text-align: center;
       margin-bottom: 10px;
-      letter-spacing: 3px;
-      opacity: 0;
-      transform: translateY(30px) scale(0.9);
-      animation: fadeUpScale 1s forwards ease-out;
-      animation-delay: 0.6s;
-      text-shadow: 0 0 30px rgba(56, 189, 248, 0.25);
+      animation: fadeIn 0.8s ease-out;
     }
 
-    @keyframes fadeUpScale {
-      to { opacity: 1; transform: translateY(0) scale(1); }
+    .back-btn a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 6px 18px;
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn a:hover {
+      background: rgba(147, 197, 253, 0.15);
+      border-color: #93c5fd;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.9rem;
+      background: linear-gradient(90deg, #93c5fd, #fcd34d, #93c5fd);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s linear infinite;
+      margin-bottom: 5px;
+    }
+
+    @keyframes shine {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
 
     .subtitle {
-      font-size: 1rem;
-      color: #7dd3fc;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeInGlow 1s forwards ease-out;
-      animation-delay: 0.85s;
-    }
-
-    @keyframes fadeInGlow {
-      from { opacity: 0; filter: blur(4px); }
-      to { opacity: 1; filter: blur(0); }
-    }
-
-    .typewriter-container {
-      min-height: 60px;
-      margin-bottom: 45px;
-      opacity: 0;
-      animation: fadeIn 1s forwards ease-out;
-      animation-delay: 1.05s;
-    }
-
-    #typewriter-text {
-      font-size: 1.05rem;
-      color: #bae6fd;
-      border-right: 3px solid #38bdf8;
-      padding-right: 8px;
-      animation: blink 0.7s infinite;
-      line-height: 1.8;
-    }
-
-    @keyframes blink {
-      0%, 100% { border-color: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
-      50% { border-color: transparent; box-shadow: none; }
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    /* === GLOWING CARD === */
-    .info-card {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.😎, rgba(30, 58, 138, 0.4));
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      border-radius: 24px;
-      padding: 35px;
-      backdrop-filter: blur(12px);
-      box-shadow: 
-        0 10px 40px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05),
-        0 0 0 rgba(56, 189, 248, 0);
-      margin-bottom: 30px;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: cardSlideUp 1s forwards ease-out;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.5s ease;
-    }
-
-    .info-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.08), transparent);
-      transition: left 1s ease;
-    }
-
-    .info-card:hover::before {
-      left: 100%;
-    }
-
-    .info-card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      box-shadow: 
-        0 20px 50px rgba(0, 0, 0, 0.4),
-        0 0 40px rgba(56, 189, 248, 0.1);
-      transform: translateY(-8px);
-    }
-
-    .info-card:nth-child(1) { animation-delay: 1.25s; }
-    .info-card:nth-child(2) { animation-delay: 1.5s; }
-    .info-card:nth-child(3) { animation-delay: 1.75s; }
-    .info-card:nth-child(4) { animation-delay: 2.0s; }
-    .info-card:nth-child(5) { animation-delay: 2.25s; }
-
-    @keyframes cardSlideUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card-title {
-      font-size: 1.25rem;
-      color: #7dd3fc;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.9rem;
       margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
-      text-transform: uppercase;
       letter-spacing: 2px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    /* Accordion Styles */
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .accordion-item {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(147, 197, 253, 0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: slideIn 0.6s ease-out forwards;
+      transition: all 0.35s ease;
+    }
+
+    .accordion-item:nth-child(1) { animation-delay: 0.15s; }
+    .accordion-item:nth-child(2) { animation-delay: 0.25s; }
+    .accordion-item:nth-child(3) { animation-delay: 0.35s; }
+    .accordion-item:nth-child(4) { animation-delay: 0.45s; }
+    .accordion-item:nth-child(5) { animation-delay: 0.55s; }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .accordion-item:hover {
+      border-color: rgba(147, 197, 253, 0.35);
+      background: rgba(30, 41, 59, 0.65);
+    }
+
+    .accordion-header {
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .accordion-header h2 {
+      font-size: 1.05rem;
+      color: #fcd34d;
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .card-title span {
-      animation: pulse 2s ease-in-out infinite;
+    .accordion-header h2::before {
+      content: '';
+      width: 4px;
+      height: 18px;
+      background: linear-gradient(180deg, #93c5fd, #fcd34d);
+      border-radius: 2px;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(1.1); }
+    .icon {
+      font-size: 1.3rem;
+      color: #93c5fd;
+      transition: transform 0.4s ease;
     }
 
-    /* === DETAIL ROWS === */
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 15px 12px;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.06);
-      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative;
-      opacity: 0;
-      transform: translateX(-15px);
-      animation: rowSlideIn 0.6s forwards ease-out;
+    .accordion-item.active .icon {
+      transform: rotate(45deg);
     }
 
-    .info-row:nth-child(1) { animation-delay: 1.4s; }
-    .info-row:nth-child(2) { animation-delay: 1.55s; }
-    .info-row:nth-child(3) { animation-delay: 1.7s; }
-    .info-row:nth-child(4) { animation-delay: 1.85s; }
-
-    @keyframes rowSlideIn {
-      to { opacity: 1; transform: translateX(0); }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.4s ease;
+      background: rgba(15, 23, 42, 0.4);
     }
 
-    .info-row:hover {
-      background: rgba(56, 189, 248, 0.05);
-      padding-left: 18px;
-      padding-right: 18px;
-      border-radius: 8px;
-      transform: translateX(5px);
+    .accordion-item.active .accordion-content {
+      max-height: 300px;
+      padding: 0 20px 18px;
     }
 
-    .info-label {
-      font-weight: 600;
-      color: #7dd3fc;
-      letter-spacing: 0.5px;
+    .accordion-content p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      animation: fadeIn 0.5s ease-out;
     }
 
-    .info-value {
-      color: #e0f2fe;
-      text-align: right;
-      font-weight: 500;
-    }
-
-    /* === TEXT CONTENT === */
-    .about-text, .goals-text {
-      color: #e0f2fe;
-      line-height: 1.9;
-      opacity: 0;
-      transform: translateY(15px);
-      animation: textFadeUp 0.8s forwards ease-out;
-    }
-
-    .about-text { animation-delay: 2.1s; }
-    .goals-text { animation-delay: 2.35s; }
-
-    @keyframes textFadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* === SKILL TAGS === */
-    .skills-tags {
+    .skills-wrap {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 10px;
+      gap: 8px;
+      margin-top: 5px;
     }
 
-    .skill-tag {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(56, 189, 248, 0.08));
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-size: 0.9rem;
-      color: #7dd3fc;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      opacity: 0;
-      transform: scale(0.😎 translateY(10px);
-      animation: tagPop 0.5s forwards ease-out;
+    .skill {
+      background: rgba(147, 197, 253, 0.08);
+      border: 1px solid rgba(147, 197, 253, 0.2);
+      color: #e0f2fe;
+      font-size: 0.85rem;
+      padding: 5px 14px;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      animation: popIn 0.4s ease-out backwards;
     }
 
-    .skill-tag:nth-child(1) { animation-delay: 2.55s; }
-    .skill-tag:nth-child(2) { animation-delay: 2.65s; }
-    .skill-tag:nth-child(3) { animation-delay: 2.75s; }
-    .skill-tag:nth-child(4) { animation-delay: 2.85s; }
+    .accordion-item.active .skill:nth-child(1) { animation-delay: 0.1s; }
+    .accordion-item.active .skill:nth-child(2) { animation-delay: 0.2s; }
+    .accordion-item.active .skill:nth-child(3) { animation-delay: 0.3s; }
+    .accordion-item.active .skill:nth-child(4) { animation-delay: 0.4s; }
 
-    @keyframes tagPop {
-      to { opacity: 1; transform: scale(1) translateY(0); }
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
-    .skill-tag:hover {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(56, 189, 248, 0.15));
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
-      border-color: #38bdf8;
-      color: #ffffff;
+    .skill:hover {
+      background: rgba(147, 197, 253, 0.15);
+      border-color: #93c5fd;
     }
 
-    /* === NEXT BUTTON === */
-    .next-btn-container {
-      margin-top: 40px;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeIn 1s forwards ease-out;
-      animation-delay: 3.2s;
+    .nav-bottom {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      animation: fadeIn 1s ease-out 0.7s both;
     }
 
-    .next-btn {
-      display: inline-block;
-      padding: 15px 45px;
-      background: linear-gradient(135deg, #0c4a6e, #0369a1, #0284c7);
-      background-size: 200% 200%;
-      animation: gradientShift 4s ease infinite;
+    .nav-btn {
+      padding: 9px 26px;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
       color: white;
       text-decoration: none;
-      font-size: 1.05rem;
-      border-radius: 14px;
-      letter-spacing: 1px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 20px rgba(14, 165, 233, 0.25);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 20px;
+      transition: all 0.35s ease;
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(59, 130, 246, 0.25);
     }
 
-    .next-btn:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 12px 35px rgba(14, 165, 233, 0.4);
-    }
-
-    @media (max-width: 600px) {
-      .page-title { font-size: 1.8rem; }
-      .info-row { flex-direction: column; gap: 5px; }
-      .info-value { text-align: left; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-gradient"></div>
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
-  <div class="grid-lines"></div>
-  <div class="particles" id="particles"></div>
+  <div class="grid-bg"></div>
+  <div class="dots" id="dots"></div>
 
-  <div class="main-container">
-    <a href="index.html" class="back-btn">← Back to Home</a>
-    
-    <h1 class="page-title">Personal Information</h1>
-    <p class="subtitle">Get to know me better</p>
-
-    <div class="typewriter-container">
-      <span id="typewriter-text"></span>
+  <div class="container">
+    <div class="back-btn">
+      <a href="index.html">← Back to Home</a>
     </div>
 
-    <!-- BASIC DETAILS -->
-    <div class="info-card">
-      <h2 class="card-title"><span>📋</span> Basic Details</h2>
-      <div class="info-row">
-        <span class="info-label">Full Name</span>
-        <span class="info-value">Ma. Luisa Victoria S. Sanchez</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Date of Birth</span>
-        <span class="info-value">February 24, 2008</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Religion</span>
-        <span class="info-value">Roman Catholic</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Nationality</span>
-        <span class="info-value">Filipino</span>
-      </div>
-    </div>
+    <h1>Personal Information</h1>
+    <p class="subtitle">Click each section to view details</p>
 
-    <!-- EDUCATIONAL BACKGROUND -->
-    <div class="info-card">
-      <h2 class="card-title"><span>🎓</span> Educational Background</h2>
-      <div class="info-row">
-        <span class="info-label">Current School</span>
-        <span class="info-value">University of the Cordilleras</span>
+    <div class="accordion">
+      <!-- Basic Details -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleSection(this.parentElement)">
+          <h2>Basic Details</h2>
+          <span class="icon">+</span>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Full Name:</strong> Ma. Luisa Victoria S. Sanchez<br>
+          <strong>Date of Birth:</strong> February 24, 2008<br>
+          <strong>Religion:</strong> Roman Catholic<br>
+          <strong>Nationality:</strong> Filipino</p>
+        </div>
       </div>
-      <div class="info-row">
-        <span class="info-label">Program / Course</span>
-        <span class="info-value">BSIT — Enterprise Resources and Planning Track</span>
+
+      <!-- Educational Background -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleSection(this.parentElement)">
+          <h2>Educational Background</h2>
+          <span class="icon">+</span>
+        </div>
+        <div class="accordion-content">
+          <p><strong>Current School:</strong> University of the Cordilleras<br>
+          <strong>Program / Course:</strong> BSIT — Enterprise Resources and Planning Track<br>
+          <strong>High School:</strong> Baguio City High School</p>
+        </div>
       </div>
-      <div class="info-row">
-        <span class="info-label">High School</span>
-        <span class="info-value">Baguio City High School</span>
+
+      <!-- About Me -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleSection(this.parentElement)">
+          <h2>About Me</h2>
+          <span class="icon">+</span>
+        </div>
+        <div class="accordion-content">
+          <p>I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student at the University of the Cordilleras. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills.</p>
+        </div>
       </div>
-    </div>
 
-    <!-- ABOUT ME -->
-    <div class="info-card">
-      <h2 class="card-title"><span>👋</span> About Me</h2>
-      <p class="about-text">
-        I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student at the University of the Cordilleras. I like learning about technology, business, and computer systems. I enjoy learning new things and improving my skills.
-      </p>
-    </div>
+      <!-- Future Goals -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleSection(this.parentElement)">
+          <h2>Future Goals</h2>
+          <span class="icon">+</span>
+        </div>
+        <div class="accordion-content">
+          <p>In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.</p>
+        </div>
+      </div>
 
-    <!-- FUTURE GOALS -->
-    <div class="info-card">
-      <h2 class="card-title"><span>🚀</span> Future Goals</h2>
-      <p class="goals-text">
-        In the future, I see myself working as an Enterprise IT Specialist, Systems Administrator, or IT Business Solutions Professional. I want to help businesses organize, manage, and improve their operations using technology.
-      </p>
-    </div>
-
-    <!-- SKILLS -->
-    <div class="info-card">
-      <h2 class="card-title"><span>💡</span> Skills</h2>
-      <div class="skills-tags">
-        <span class="skill-tag">Basic Coding</span>
-        <span class="skill-tag">Computer Systems Knowledge</span>
-        <span class="skill-tag">Time Management</span>
-        <span class="skill-tag">Communication Skills</span>
+      <!-- Skills -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleSection(this.parentElement)">
+          <h2>Skills</h2>
+          <span class="icon">+</span>
+        </div>
+        <div class="accordion-content">
+          <div class="skills-wrap">
+            <span class="skill">Basic Coding</span>
+            <span class="skill">Computer Systems Knowledge</span>
+            <span class="skill">Time Management</span>
+            <span class="skill">Communication Skills</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- NEXT BUTTON -->
-    <div class="next-btn-container">
-      <a href="achievements.html" class="next-btn">Next → Achievements</a>
+    <div class="nav-bottom">
+      <a href="index.html" class="nav-btn">← Home</a>
+      <a href="achievements.html" class="nav-btn">Achievements →</a>
     </div>
-
   </div>
 
   <script>
-    // Typewriter effect
-    const text = "Here's a little more about who I am, where
+    // Generate twinkling dots
+    const dotsContainer = document.getElementById('dots');
+    for (let i = 0; i < 45; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      dot.style.width = (Math.random() * 3 + 2) + 'px';
+      dot.style.height = dot.style.width;
+      dot.style.left = Math.random() * 100 + '%';
+      dot.style.top = Math.random() * 100 + '%';
+      dot.style.animationDelay = Math.random() * 3 + 's';
+      dotsContainer.appendChild(dot);
+    }
+
+    // Toggle accordion
+    function toggleSection(item) {
+      // Close others if you want only one open at a time
+      const allItems = document.querySelectorAll('.accordion-item');
+      allItems.forEach(el => {
+        if (el !== item) el.classList.remove('active');
+      });
+      
+      // Toggle current
+      item.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
