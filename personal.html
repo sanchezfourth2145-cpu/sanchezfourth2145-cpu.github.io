@@ -20,7 +20,6 @@
       position: relative;
     }
 
-    /* 🚀 RISING TRAILS BACKGROUND */
     .rising-bg {
       position: absolute;
       bottom: 0;
@@ -119,14 +118,12 @@
       padding-right: 8px;
     }
 
-    /* 📦 SECTION BOX WITH GLOW EFFECT */
     .section-box {
       margin-bottom: 12px;
       border: 1px solid rgba(0, 180, 216, 0.35);
       border-radius: 6px;
       overflow: hidden;
       opacity: 1;
-      transform: translateX(0);
       transition: all 0.5s ease;
       box-shadow: 0 0 8px rgba(0, 180, 216, 0.1);
     }
@@ -136,7 +133,6 @@
       box-shadow: 0 0 15px rgba(0, 180, 216, 0.15);
     }
 
-    /* 📋 SECTION HEADER — GLOW ON HOVER */
     .section-header {
       padding: 15px 22px;
       background: rgba(0, 119, 182, 0.12);
@@ -174,7 +170,6 @@
       transform: scaleY(1);
     }
 
-    /* 📝 CONTENT — GLOW EFFECT ON TEXT */
     .section-content {
       max-height: 0;
       overflow: hidden;
@@ -205,7 +200,6 @@
       text-shadow: 0 0 10px rgba(0, 180, 216, 0.6);
     }
 
-    /* 💡 SKILL TAGS — GLOW EFFECTS */
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
@@ -232,14 +226,12 @@
       box-shadow: 0 0 12px rgba(0, 180, 216, 0.3), 0 0 20px rgba(0, 180, 216, 0.1) inset;
     }
 
-    /* 🔗 NAV BUTTONS — GLOW EFFECTS */
     .nav-area {
       display: flex;
       justify-content: center;
       gap: 25px;
       margin-top: 20px;
       opacity: 1;
-      transform: translateY(0);
       transition: all 0.7s ease;
     }
 
@@ -253,15 +245,13 @@
       letter-spacing: 1px;
       border-radius: 4px;
       transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
     }
 
     .nav-link:hover {
       background: rgba(0, 180, 216, 0.18);
       border-color: #00b4d8;
       color: #ffffff;
-      box-shadow: 0 0 15px rgba(0, 180, 216, 0.3), 0 0 30px rgba(0, 180, 216, 0.1) inset;
+      box-shadow: 0 0 15px rgba(0, 180, 216, 0.3);
       transform: translateY(-2px);
     }
   </style>
@@ -361,86 +351,83 @@
   </div>
 
   <script>
-    // ⌨️ TYPING EFFECT
-    const titleWord = "PERSONAL INFORMATION";
-    let charPos = 0;
-    const typeSpan = document.getElementById('typeText');
-    typeSpan.textContent = '';
-    
-    function typeName() {
-      if (charPos < titleWord.length) {
-        typeSpan.textContent += titleWord.charAt(charPos);
-        charPos++;
-        setTimeout(typeName, 110);
-      }
-    }
-    window.onload = function() {
-      setTimeout(typeName, 500);
-    };
-
-    // 📋 ONLY ONE OPEN AT A TIME
-    const allSections = document.querySelectorAll('.section-box');
-    
-    allSections.forEach((section) => {
-      const header = section.querySelector('.section-header');
-      const content = section.querySelector('.section-content');
+    document.addEventListener('DOMContentLoaded', function() {
+      const titleWord = "PERSONAL INFORMATION";
+      let charPos = 0;
+      const typeSpan = document.getElementById('typeText');
+      typeSpan.textContent = '';
       
-      header.addEventListener('click', () => {
-        const isAlreadyOpen = content.classList.contains('open-me');
+      function typeName() {
+        if (charPos < titleWord.length) {
+          typeSpan.textContent += titleWord.charAt(charPos);
+          charPos++;
+          setTimeout(typeName, 110);
+        }
+      }
+      setTimeout(typeName, 500);
+
+      const allSections = document.querySelectorAll('.section-box');
+      
+      allSections.forEach(function(section) {
+        const header = section.querySelector('.section-header');
+        const content = section.querySelector('.section-content');
         
-        allSections.forEach(s => {
-          s.querySelector('.section-content').classList.remove('open-me');
+        header.addEventListener('click', function() {
+          const isAlreadyOpen = content.classList.contains('open-me');
+          
+          allSections.forEach(function(s) {
+            s.querySelector('.section-content').classList.remove('open-me');
+          });
+          
+          if (!isAlreadyOpen) {
+            content.classList.add('open-me');
+          }
+        });
+      });
+
+      const layer = document.getElementById('risingLayer');
+      
+      function createTrail() {
+        const startX = Math.random() * window.innerWidth;
+        const colors = ['#00b4d8', '#90e0ef', '#48cae4', '#0077b6', '#caf0f8'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const width = 1.5 + Math.random() * 1.5;
+        const duration = 5000 + Math.random() * 3000;
+        
+        const trail = document.createElement('div');
+        trail.style.position = 'absolute';
+        trail.style.left = startX + 'px';
+        trail.style.bottom = '0px';
+        trail.style.width = width + 'px';
+        trail.style.height = '50px';
+        trail.style.background = 'linear-gradient(to top, transparent, ' + color + ', ' + color + ')';
+        trail.style.borderRadius = '2px';
+        trail.style.opacity = '0';
+        trail.style.boxShadow = '0 0 6px ' + color + ', 0 0 12px ' + color + '40';
+        trail.style.zIndex = '1';
+        layer.appendChild(trail);
+        
+        trail.animate([
+          { transform: 'translateY(0)', opacity: 0 },
+          { transform: 'translateY(0)', opacity: 0.35, offset: 0.1 },
+          { transform: 'translateY(-' + (window.innerHeight + 50) + 'px)', opacity: 0.2, offset: 0.9 },
+          { transform: 'translateY(-' + (window.innerHeight + 50) + 'px)', opacity: 0 }
+        ], {
+          duration: duration,
+          easing: 'linear',
+          fill: 'forwards'
         });
         
-        if (!isAlreadyOpen) {
-          content.classList.add('open-me');
-        }
-      });
-    });
-
-    // 🚀 GENTLE RISING TRAILS — SKY BLUE GLOW
-    const layer = document.getElementById('risingLayer');
-    
-    function createTrail() {
-      const startX = Math.random() * window.innerWidth;
-      const colors = ['#00b4d8', '#90e0ef', '#48cae4', '#0077b6', '#caf0f8'];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      const width = 1.5 + Math.random() * 1.5;
-      const duration = 5000 + Math.random() * 3000;
-      
-      const trail = document.createElement('div');
-      trail.style.position = 'absolute';
-      trail.style.left = startX + 'px';
-      trail.style.bottom = '0px';
-      trail.style.width = width + 'px';
-      trail.style.height = '50px';
-      trail.style.background = linear-gradient(to top, transparent, ${color}, ${color});
-      trail.style.borderRadius = '2px';
-      trail.style.opacity = '0';
-      trail.style.boxShadow = 0 0 6px ${color}, 0 0 12px ${color}40;
-      trail.style.zIndex = '1';
-      layer.appendChild(trail);
-      
-      trail.animate([
-        { transform: 'translateY(0)', opacity: 0 },
-        { transform: 'translateY(0)', opacity: 0.35, offset: 0.1 },
-        { transform: translateY(-${window.innerHeight + 50}px), opacity: 0.2, offset: 0.9 },
-        { transform: translateY(-${window.innerHeight + 50}px), opacity: 0 }
-      ], {
-        duration: duration,
-        easing: 'linear',
-        fill: 'forwards'
-      });
-      
-      setTimeout(() => trail.remove(), duration);
-    }
-    
-    setTimeout(() => {
-      for (let i = 0; i < 4; i++) {
-        setTimeout(createTrail, i * 500);
+        setTimeout(function() { trail.remove(); }, duration);
       }
-      setInterval(createTrail, 800);
-    }, 600);
+      
+      setTimeout(function() {
+        for (let i = 0; i < 4; i++) {
+          setTimeout(createTrail, i * 500);
+        }
+        setInterval(createTrail, 800);
+      }, 600);
+    });
   </script>
 </body>
 </html>
