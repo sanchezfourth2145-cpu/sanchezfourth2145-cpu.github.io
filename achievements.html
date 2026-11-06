@@ -1,82 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Achievements | Ma. Luisa Victoria S. Sanchez</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Achievements</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    html, body {
+      height: 100vh;
+      overflow: hidden;
     }
 
     body {
-      min-height: 100vh;
-      background: #0a0f1f;
-      color: #e6efff;
-      padding: 40px 20px;
+      background: linear-gradient(135deg, #051026 0%, #0a2454 50%, #051026 100%);
+      color: #ffffff;
       position: relative;
-      overflow-x: hidden;
     }
 
-    .bg-gradient {
+    /* ===== BACKGROUND EFFECTS ===== */
+    .dots-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: 
-        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.06) 0%, transparent 60%);
       z-index: 0;
-      animation: bgPulse 6s ease-in-out infinite alternate;
       pointer-events: none;
     }
 
-    @keyframes bgPulse {
-      0% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
-
-    .floating-orb {
-      position: fixed;
+    .dot {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(0, 204, 255, 0.4);
       border-radius: 50%;
-      filter: blur(70px);
-      z-index: 0;
-      pointer-events: none;
+      animation: riseDot linear infinite;
     }
 
-    .orb-1 {
-      width: 500px;
-      height: 500px;
-      background: rgba(56, 189, 248, 0.15);
-      top: -200px;
-      right: -150px;
-      animation: floatOrb1 12s ease-in-out infinite;
-    }
-
-    .orb-2 {
-      width: 400px;
-      height: 400px;
-      background: rgba(99, 102, 241, 0.12);
-      bottom: -100px;
-      left: -100px;
-      animation: floatOrb2 15s ease-in-out infinite;
-    }
-
-    @keyframes floatOrb1 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(-100px, 80px) scale(1.15); }
-      66% { transform: translate(50px, -60px) scale(0.9); }
-    }
-
-    @keyframes floatOrb2 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(80px, -70px) scale(1.1); }
-      75% { transform: translate(-80px, 50px) scale(0.85); }
+    @keyframes riseDot {
+      0% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
     }
 
     .grid-lines {
@@ -86,445 +63,356 @@
       width: 100%;
       height: 100%;
       background-image: 
-        linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
-      background-size: 70px 70px;
+        linear-gradient(rgba(0, 153, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 153, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
       z-index: 0;
       pointer-events: none;
     }
 
-    .particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: rgba(125, 211, 252, 0.9);
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
-      animation: particleFloat 18s infinite linear;
-    }
-
-    @keyframes particleFloat {
-      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-      15% { opacity: 1; }
-      85% { opacity: 1; }
-      100% { transform: translateY(-100vh) translateX(80px); opacity: 0; }
-    }
-
-    .main-container {
-      max-width: 750px;
+    .container {
+      max-width: 900px;
+      height: 100vh;
       margin: 0 auto;
-      text-align: center;
+      padding: 30px 25px;
       position: relative;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
     }
 
-    .back-btn {
+    /* ===== TITLE WITH TYPEWRITER ===== */
+    .title-wrap {
+      margin-bottom: 5px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      letter-spacing: 8px;
+      color: #00ccff;
       display: inline-block;
-      margin-bottom: 25px;
-      padding: 10px 25px;
-      border-radius: 12px;
-      color: #7dd3fc;
-      text-decoration: none;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      opacity: 0;
-      animation: fadeInLeft 0.9s forwards ease-out;
-      animation-delay: 0.4s;
+      border-right: 3px solid #00ccff;
+      animation: blink 0.8s step-end infinite;
+      text-shadow: 0 0 25px rgba(0, 204, 255, 0.4);
     }
 
-    .back-btn:hover {
-      background: rgba(56, 189, 248, 0.12);
-      border-color: #38bdf8;
-      transform: translateX(-8px);
-      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2);
-    }
-
-    .page-title {
-      font-size: 2.3rem;
-      color: #ffffff;
-      margin-bottom: 10px;
-      letter-spacing: 3px;
-      opacity: 0;
-      transform: translateY(30px) scale(0.9);
-      animation: fadeUpScale 1s forwards ease-out;
-      animation-delay: 0.6s;
-      text-shadow: 0 0 30px rgba(56, 189, 248, 0.25);
-    }
-
-    @keyframes fadeUpScale {
-      to { opacity: 1; transform: translateY(0) scale(1); }
+    @keyframes blink {
+      0%, 100% { border-color: #00ccff; }
+      50% { border-color: transparent; }
     }
 
     .subtitle {
       font-size: 1rem;
-      color: #7dd3fc;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
+      color: #99ccff;
+      margin-bottom: 25px;
+      letter-spacing: 3px;
       opacity: 0;
-      animation: fadeInGlow 1s forwards ease-out;
-      animation-delay: 0.85s;
+      transform: translateY(50px);
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.4s;
     }
 
-    @keyframes fadeInGlow {
-      from { opacity: 0; filter: blur(4px); }
-      to { opacity: 1; filter: blur(0); }
-    }
-
-    .typewriter-container {
-      min-height: 60px;
-      margin-bottom: 45px;
+    .intro-line {
+      font-size: 0.95rem;
+      color: #ccebff;
+      margin-bottom: 25px;
+      font-style: italic;
       opacity: 0;
-      animation: fadeIn 1s forwards ease-out;
-      animation-delay: 1.05s;
+      transform: translateY(50px);
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.7s;
     }
 
-    #typewriter-text {
-      font-size: 1.05rem;
-      color: #bae6fd;
-      border-right: 3px solid #38bdf8;
-      padding-right: 8px;
-      animation: blink 0.7s infinite;
-      line-height: 1.8;
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    @keyframes blink {
-      0%, 100% { border-color: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
-      50% { border-color: transparent; box-shadow: none; }
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
+    /* ===== CARDS LAYOUT ===== */
+    .cards-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 1s;
     }
 
     .achievement-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(56, 189, 248, 0.15);
-      border-radius: 20px;
-      padding: 30px;
-      backdrop-filter: blur(12px);
-      box-shadow: 
-        0 10px 40px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      margin-bottom: 30px;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: cardSlideUp 1s forwards ease-out;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.5s ease;
+      width: 360px;
+      perspective: 1000px;
     }
 
-    .achievement-card::before {
-      content: '';
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      transform-style: preserve-3d;
+      transition: transform 0.7s ease;
+    }
+
+    .achievement-card.active .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
       position: absolute;
-      top: 0;
-      left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.05), transparent);
-      transition: left 0.8s ease;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
-    .achievement-card:hover::before {
-      left: 100%;
+    .card-front {
+      background: rgba(0, 51, 102, 0.25);
+      border: 2px solid rgba(0, 153, 255, 0.35);
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
-    .achievement-card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      box-shadow: 
-        0 15px 50px rgba(0, 0, 0, 0.4),
-        0 0 30px rgba(56, 189, 248, 0.08);
+    .card-front:hover {
+      border-color: #00ccff;
       transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 204, 255, 0.12);
     }
 
-    .achievement-card:nth-child(1) { animation-delay: 1.25s; }
-    .achievement-card:nth-child(2) { animation-delay: 1.55s; }
-
-    @keyframes cardSlideUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card-title {
-      font-size: 1.35rem;
-      color: #7dd3fc;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+    .card-front h2 {
+      font-size: 1.1rem;
+      color: #00ccff;
+      padding: 14px;
       text-transform: uppercase;
       letter-spacing: 2px;
-      opacity: 0;
-      transform: translateY(15px);
-      animation: textFadeUp 0.8s forwards ease-out;
-      animation-delay: 1.4s;
+      border-bottom: 1px solid rgba(0, 204, 255, 0.15);
     }
 
-    @keyframes textFadeUp {
-      to { opacity: 1; transform: translateY(0); }
+    .card-front img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
     }
 
-    .img-wrapper {
-      position: relative;
-      display: inline-block;
-      border-radius: 14px;
+    .click-hint {
+      padding: 8px;
+      font-size: 0.85rem;
+      color: #66ccff;
+      background: rgba(0, 26, 51, 0.6);
+    }
+
+    .card-back {
+      background: linear-gradient(135deg, #00264d, #001a33);
+      border: 2px solid #00ccff;
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      color: #e6f7ff;
+      line-height: 1.7;
+      font-size: 0.92rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 25px rgba(0, 204, 255, 0.15);
+    }
+
+    .type-text {
       overflow: hidden;
-      margin: 20px 0;
+      white-space: pre-wrap;
+      border-right: 2px solid transparent;
     }
 
-    .img-wrapper::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, rgba(56, 189, 248, 0.15), transparent, rgba(99, 102, 241, 0.1));
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .img-wrapper:hover::before {
-      opacity: 1;
-    }
-
-    .achievement-img {
-      width: 100%;
-      max-width: 420px;
-      height: auto;
-      display: block;
-      border-radius: 12px;
-      border: 2px solid rgba(56, 189, 248, 0.18);
-      box-shadow: 
-        0 8px 30px rgba(0, 0, 0, 0.35),
-        0 0 0 rgba(56, 189, 248, 0);
-      transition: 
-        transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        box-shadow 0.6s ease,
-        filter 0.4s ease;
-      opacity: 0;
-      transform: scale(0.9) translateY(20px);
-      animation: imageReveal 1s forwards ease-out;
-    }
-
-    .achievement-card:nth-child(1) .achievement-img { animation-delay: 1.45s; }
-    .achievement-card:nth-child(2) .achievement-img { animation-delay: 1.75s; }
-
-    @keyframes imageReveal {
-      to { 
-        opacity: 1; 
-        transform: scale(1) translateY(0); 
-      }
-    }
-
-    .achievement-img:hover {
-      transform: scale(1.06) translateY(-5px);
-      box-shadow: 
-        0 15px 45px rgba(0, 0, 0, 0.45),
-        0 0 25px rgba(56, 189, 248, 0.15);
-      filter: brightness(1.05) saturate(1.08);
-    }
-
-    .achievement-desc {
-      color: #e0f2fe;
-      line-height: 1.8;
-      margin-top: 15px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: textFadeUp 0.9s forwards ease-out;
-    }
-
-    .achievement-card:nth-child(1) .achievement-desc { animation-delay: 1.65s; }
-    .achievement-card:nth-child(2) .achievement-desc { animation-delay: 1.95s; }
-
+    /* ===== NAV BUTTONS ===== */
     .nav-buttons {
       display: flex;
       justify-content: space-between;
-      margin-top: 50px;
-      margin-bottom: 30px;
+      max-width: 760px;
+      margin: 0 auto;
       opacity: 0;
-      animation: fadeIn 1s forwards ease-out;
-      animation-delay: 2.2s;
+      transform: translateY(50px);
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 1.5s;
     }
 
-    .prev-btn, .next-btn, .next-page-btn {
-      display: inline-block;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, #0c4a6e, #0369a1, #0284c7);
-      background-size: 200% 200%;
-      animation: gradientShift 4s ease infinite;
-      color: white;
+    .nav-btn {
+      padding: 11px 28px;
+      background: transparent;
+      border: 1px solid #00ccff;
+      color: #00ccff;
       text-decoration: none;
-      font-size: 1rem;
-      border-radius: 14px;
-      letter-spacing: 1px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 20px rgba(14, 165, 233, 0.25);
-      position: relative;
-      overflow: hidden;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .prev-btn:hover, .next-btn:hover, .next-page-btn:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 12px 35px rgba(14, 165, 233, 0.4);
-    }
-
-    .next-page-container {
-      margin-top: 20px;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeIn 1s forwards ease-out;
-      animation-delay: 2.45s;
-    }
-
-    .footer-note {
       font-size: 0.9rem;
-      color: #64748b;
-      opacity: 0;
-      animation: fadeIn 1.2s forwards ease-out;
-      animation-delay: 2.7s;
-      margin-top: 20px;
+      letter-spacing: 2px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      cursor: pointer;
     }
 
-    .footer-note span {
-      color: #38bdf8;
+    .nav-btn:hover {
+      background: rgba(0, 204, 255, 0.15);
+      border-color: #00ffff;
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(0, 204, 255, 0.2);
+    }
+
+    .footer-quote {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #6699cc;
       font-style: italic;
-    }
-
-    @media (max-width: 600px) {
-      .nav-buttons {
-        flex-direction: column;
-        gap: 15px;
-      }
-      .page-title {
-        font-size: 1.8rem;
-      }
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 1.8s;
     }
   </style>
 </head>
 <body>
-  <div class="bg-gradient"></div>
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
   <div class="grid-lines"></div>
-  <div class="particles" id="particles"></div>
+  <div class="dots-container" id="dotsContainer"></div>
 
-  <div class="main-container">
-    <a href="personal.html" class="back-btn">← Back to Personal Info</a>
-    
-    <h1 class="page-title">My Achievements</h1>
-    <p class="subtitle">Milestones I am proud of</p>
-
-    <div class="typewriter-container">
-      <span id="typewriter-text"></span>
+  <div class="container">
+    <div class="title-wrap">
+      <h1 id="typewriter"></h1>
     </div>
+    <p class="subtitle">MILESTONES I AM PROUD OF</p>
+    <p class="intro-line">Hard work, dedication, and passion — these are the milestones I've reached so far.</p>
 
-    <!-- HONORS & ACADEMIC AWARDS -->
-    <div class="achievement-card">
-      <h2 class="card-title"> Honors & Academic Awards</h2>
-      <div class="img-wrapper">
-        <img src="honors.jpg" alt="Honors and Academic Awards" class="achievement-img" />
+    <div class="cards-wrapper">
+      <!-- HONORS CARD -->
+      <div class="achievement-card" id="card-honors" onclick="flipCard('card-honors')">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>HONORS & ACADEMIC AWARDS</h2>
+            <img src="honors.jpg" alt="Academic Awards">
+            <div class="click-hint">Click to view message</div>
+          </div>
+          <div class="card-back">
+            <div class="type-text" id="text-honors"></div>
+          </div>
+        </div>
       </div>
-      <p class="achievement-desc">
-        I take pride in my academic journey. Through hard work, dedication, and perseverance, I have consistently maintained good standing and received recognition for my efforts in school. These achievements motivate me to keep striving for excellence in everything I do.
-      </p>
-    </div>
 
-    <!-- SPORTS & EXTRACURRICULAR -->
-    <div class="achievement-card">
-      <h2 class="card-title"> Sports & Extracurricular</h2>
-      <div class="img-wrapper">
-        <img src="sports.jpg" alt="Sports Achievements" class="achievement-img" />
+      <!-- SPORTS CARD -->
+      <div class="achievement-card" id="card-sports" onclick="flipCard('card-sports')">
+        <div class="card-inner">
+          <div class="card-front">
+            <h2>SPORTS & EXTRACURRICULAR</h2>
+            <img src="sports.jpg" alt="Sports Achievements">
+            <div class="click-hint">Click to view message</div>
+          </div>
+          <div class="card-back">
+            <div class="type-text" id="text-sports"></div>
+          </div>
+        </div>
       </div>
-      <p class="achievement-desc">
-        Beyond the classroom, I believe in staying active and building discipline through sports. Participating in sports has taught me the value of teamwork, resilience, and healthy competition. It is an important part of who I am and helps me stay balanced in my personal and academic life.
-      </p>
     </div>
 
-    <!-- NAVIGATION BUTTONS -->
     <div class="nav-buttons">
-      <a href="personal.html" class="prev-btn">← Previous</a>
-      <a href="index.html" class="next-btn">Back to Home</a>
+      <a href="personal.html" class="nav-btn">← Previous</a>
+      <a href="index.html" class="nav-btn">Back to Home</a>
+      <a href="parents.html" class="nav-btn">Next → My Parents</a>
     </div>
 
-    <!-- NEXT PAGE BUTTON -->
-    <div class="next-page-container">
-      <a href="parents.html" class="next-page-btn">Next → My Parents</a>
-    </div>
-
-    <p class="footer-note">
-      — <span>Every achievement is a step forward</span> —
-    </p>
+    <p class="footer-quote">"Every achievement is a step forward."</p>
   </div>
 
   <script>
-    const textLines = "Hard work, dedication, and passion — these are the milestones I've reached so far.";
-    const speed = 55;
-    let charIndex = 0;
-    const typewriterElement = document.getElementById("typewriter-text");
-
-    function typeWriter() {
-      if (charIndex < textLines.length) {
-        if (textLines.charAt(charIndex) === "\n") {
-          typewriterElement.innerHTML += "<br>";
-        } else {
-          typewriterElement.textContent += textLines.charAt(charIndex);
-        }
-        charIndex++;
-        setTimeout(typeWriter, speed);
-      }
+    // ===== FLOATING DOTS — BOTTOM TO TOP =====
+    const dotsContainer = document.getElementById('dotsContainer');
+    const totalDots = 70;
+    for (let i = 0; i < totalDots; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      const posX = Math.random() * 100;
+      const delay = Math.random() * 10;
+      const duration = 8 + Math.random() * 6;
+      const size = Math.random() * 2 + 1;
+      dot.style.left = posX + '%';
+      dot.style.width = size + 'px';
+      dot.style.height = size + 'px';
+      dot.style.opacity = 0.2 + Math.random() * 0.3;
+      dot.style.animationDelay = delay + 's';
+      dot.style.animationDuration = duration + 's';
+      dotsContainer.appendChild(dot);
     }
 
-    window.onload = function() {
-      setTimeout(typeWriter, 700);
-      createParticles();
+    // ===== MAIN TITLE TYPEWRITER =====
+    const mainTitle = "MY ACHIEVEMENTS";
+    const mainSpeed = 100;
+    let mainIndex = 0;
+    function typeMainTitle() {
+      if (mainIndex < mainTitle.length) {
+        document.getElementById('typewriter').textContent += mainTitle[mainIndex];
+        mainIndex++;
+        setTimeout(typeMainTitle, mainSpeed);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', typeMainTitle);
+
+    // ===== CARD CONTENT =====
+    const content = {
+      honors: "I take pride in my academic journey. Through hard work, dedication, and perseverance, I have consistently maintained good standing and received recognition for my efforts in school. These achievements motivate me to keep striving for excellence in everything I do.",
+      sports: "Beyond the classroom, I believe in staying active and building discipline through sports. Participating in sports has taught me the value of teamwork, resilience, and healthy competition. It is an important part of who I am and helps me stay balanced in my personal and academic life."
     };
 
-    function createParticles() {
-      const container = document.getElementById("particles");
-      const count = 80;
-      
-      for (let i = 0; i < count; i++) {
-        const particle = document.createElement("div");
-        particle.classList.add("particle");
-        
-        const size = Math.random() * 3 + 1;
-        const posX = Math.random() * 100;
-        const delay = Math.random() * 20;
-        const duration = Math.random() * 15 + 15;
-        
-        particle.style.left = posX + "%";
-        particle.style.width = size + "px";
-        particle.style.height = size + "px";
-        particle.style.animationDelay = delay + "s";
-        particle.style.animationDuration = duration + "s";
-        
-        container.appendChild(particle);
+    let activeCard = null;
+    let typingActive = false;
+
+    function flipCard(cardId) {
+      const card = document.getElementById(cardId);
+      const textId = cardId === 'card-honors' ? 'text-honors' : 'text-sports';
+      const contentType = cardId === 'card-honors' ? 'honors' : 'sports';
+
+      // If clicking the same card — close it
+      if (activeCard === cardId) {
+        card.classList.remove('active');
+        activeCard = null;
+        typingActive = false;
+        document.getElementById(textId).textContent = '';
+        return;
       }
+
+      // Close previous card if any
+      if (activeCard) {
+        const prevTextId = activeCard === 'card-honors' ? 'text-honors' : 'text-sports';
+        document.getElementById(activeCard).classList.remove('active');
+        document.getElementById(prevTextId).textContent = '';
+      }
+
+      // Open new card
+      card.classList.add('active');
+      activeCard = cardId;
+      typingActive = true;
+
+      // Typewriter effect on flipped content
+      const textToType = content[contentType];
+      const textElement = document.getElementById(textId);
+      textElement.textContent = '';
+      let charIndex = 0;
+      const typeSpeed = 35;
+
+      function typeContent() {
+        if (!typingActive) return;
+        if (charIndex < textToType.length) {
+          textElement.textContent += textToType.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeContent, typeSpeed);
+        }
+      }
+      setTimeout(typeContent, 400);
     }
   </script>
 </body>
