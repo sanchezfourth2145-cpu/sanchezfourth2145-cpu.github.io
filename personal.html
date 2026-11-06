@@ -57,7 +57,7 @@ body {
 
 /* ===== TYPING EFFECT ===== */
 .title-wrapper {
-  margin-bottom: 35px;
+  margin-bottom: 25px;
 }
 
 h1 {
@@ -84,76 +84,17 @@ h1 {
   50% { border-color: transparent; }
 }
 
-/* ===== CONTENT BOX ===== */
-.content-box {
-  border: 1px solid rgba(0, 204, 255, 0.4);
-  background: rgba(0, 30, 60, 0.4);
-  padding: 25px 35px;
-  margin-bottom: 30px;
-  min-height: 170px;
-  display: none;
-  line-height: 2.1;
-  text-align: left;
-}
-
-.content-box.show {
-  display: block;
-  animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.content-box h2 {
-  color: #00ccff;
-  font-size: 1.15rem;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  margin-bottom: 18px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(0, 204, 255, 0.15);
-}
-
-.content-box p {
-  color: #99ddff;
-  font-size: 1rem;
-}
-
-.content-box strong {
-  color: #66ccff;
-  display: inline-block;
-  width: 160px;
-}
-
-/* ===== BUTTONS — LEFT & RIGHT TO CENTER ===== */
-.btn-container {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.section-btn {
-  width: 100%;
-  padding: 18px 30px;
-  background: transparent;
-  border: 1px solid rgba(0, 204, 255, 0.3);
-  color: #66ccff;
-  font-size: 1rem;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* ===== EACH SECTION ===== */
+.section-wrapper {
+  margin-bottom: 15px;
   opacity: 0;
 }
 
-.section-btn:nth-child(1) { animation: slideLeft 0.6s ease-out 2.6s forwards; }
-.section-btn:nth-child(2) { animation: slideRight 0.6s ease-out 2.9s forwards; }
-.section-btn:nth-child(3) { animation: slideLeft 0.6s ease-out 3.2s forwards; }
-.section-btn:nth-child(4) { animation: slideRight 0.6s ease-out 3.5s forwards; }
-.section-btn:nth-child(5) { animation: slideLeft 0.6s ease-out 3.8s forwards; }
+.section-wrapper:nth-child(1) { animation: slideLeft 0.6s ease-out 2.6s forwards; }
+.section-wrapper:nth-child(2) { animation: slideRight 0.6s ease-out 2.9s forwards; }
+.section-wrapper:nth-child(3) { animation: slideLeft 0.6s ease-out 3.2s forwards; }
+.section-wrapper:nth-child(4) { animation: slideRight 0.6s ease-out 3.5s forwards; }
+.section-wrapper:nth-child(5) { animation: slideLeft 0.6s ease-out 3.8s forwards; }
 
 @keyframes slideLeft {
   from { opacity: 0; transform: translateX(-80px); }
@@ -163,6 +104,20 @@ h1 {
 @keyframes slideRight {
   from { opacity: 0; transform: translateX(80px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+.section-btn {
+  width: 100%;
+  padding: 15px 25px;
+  background: transparent;
+  border: 1px solid rgba(0, 204, 255, 0.3);
+  color: #66ccff;
+  font-size: 1rem;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .section-btn:hover {
@@ -177,23 +132,64 @@ h1 {
   color: #ffffff;
 }
 
+/* ===== CONTENT BOX — SA ILALIM NG BUTTON LANG ===== */
+.content-box {
+  border: 1px solid rgba(0, 204, 255, 0.4);
+  background: rgba(0, 30, 60, 0.4);
+  padding: 18px 25px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  display: none;
+  line-height: 2;
+  text-align: left;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.content-box.show {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.content-box h2 {
+  color: #00ccff;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+.content-box p {
+  color: #99ddff;
+  font-size: 0.95rem;
+}
+
+.content-box strong {
+  color: #66ccff;
+  display: inline-block;
+  width: 140px;
+}
+
 /* ===== NAV BUTTONS ===== */
 .nav-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  margin-top: 20px;
   opacity: 0;
   animation: fadeIn 0.7s ease-out 4.3s forwards;
 }
 
 .nav-btn {
-  padding: 14px 35px;
+  padding: 12px 30px;
   border: 1px solid rgba(0, 204, 255, 0.4);
   color: #66ccff;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 3px;
-  font-size: 0.95rem;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
@@ -214,60 +210,72 @@ h1 {
     <h1 id="main-title">Personal Information</h1>
   </div>
 
-  <div class="content-box" id="basic">
-    <h2>Basic Details</h2>
-    <p>
-      <strong>Full Name:</strong> Ma. Luisa Victoria S. Sanchez<br>
-      <strong>Birthdate:</strong> February 24, 2008<br>
-      <strong>Religion:</strong> Roman Catholic<br>
-      <strong>Address:</strong> BGH Compound, Baguio City<br>
-      <strong>Email:</strong> sanchezfourth@gmail.com<br>
-      <strong>Phone Number:</strong> 09506920820
-    </p>
+  <!-- 1. BASIC DETAILS -->
+  <div class="section-wrapper">
+    <button class="section-btn" onclick="toggleInfo('basic')" id="btn-basic">Basic Details</button>
+    <div class="content-box" id="basic">
+      <h2>Basic Details</h2>
+      <p>
+        <strong>Full Name:</strong> Ma. Luisa Victoria S. Sanchez<br>
+        <strong>Birthdate:</strong> February 24, 2008<br>
+        <strong>Religion:</strong> Roman Catholic<br>
+        <strong>Address:</strong> BGH Compound, Baguio City<br>
+        <strong>Email:</strong> sanchezfourth@gmail.com<br>
+        <strong>Phone Number:</strong> 09506920820
+      </p>
+    </div>
   </div>
 
-  <div class="content-box" id="education">
-    <h2>Educational Background</h2>
-    <p>
-      <strong>Current:</strong> Bachelor of Science in Information Technology<br>
-      <strong>Track:</strong> Enterprise Resource Planning<br>
-      <strong>School:</strong> University of the Cordilleras<br><br>
-      <strong>Previous:</strong><br>
-      Baguio City High School
-    </p>
+  <!-- 2. EDUCATIONAL BACKGROUND -->
+  <div class="section-wrapper">
+    <button class="section-btn" onclick="toggleInfo('education')" id="btn-education">Educational Background</button>
+    <div class="content-box" id="education">
+      <h2>Educational Background</h2>
+      <p>
+        <strong>Current:</strong> Bachelor of Science in Information Technology<br>
+        <strong>Track:</strong> Enterprise Resource Planning<br>
+        <strong>School:</strong> University of the Cordilleras<br><br>
+        <strong>Previous:</strong><br>
+        Baguio City High School
+      </p>
+    </div>
   </div>
 
-  <div class="content-box" id="about">
-    <h2>About Me</h2>
-    <p>
-      I am Ma. Luisa Victoria S. Sanchez, a dedicated BSIT student at the University of the Cordilleras. I have a strong passion for technology and continuous learning. I believe that dedication and curiosity are the keys to turning dreams into reality.
-    </p>
+  <!-- 3. ABOUT ME -->
+  <div class="section-wrapper">
+    <button class="section-btn" onclick="toggleInfo('about')" id="btn-about">About Me</button>
+    <div class="content-box" id="about">
+      <h2>About Me</h2>
+      <p>
+        I am Ma. Luisa Victoria S. Sanchez, a dedicated BSIT student at the University of the Cordilleras. I have a strong passion for technology and continuous learning. I believe that dedication and curiosity are the keys to turning dreams into reality.
+      </p>
+    </div>
   </div>
 
-  <div class="content-box" id="future">
-    <h2>Future Goals</h2>
-    <p>
-      My goal is to become a successful IT professional. I want to specialize in enterprise systems and business solutions that can help organizations work more efficiently. I also want to build a career that allows me to give back to my family and contribute to my community.
-    </p>
+  <!-- 4. FUTURE GOALS -->
+  <div class="section-wrapper">
+    <button class="section-btn" onclick="toggleInfo('future')" id="btn-future">Future Goals</button>
+    <div class="content-box" id="future">
+      <h2>Future Goals</h2>
+      <p>
+        My goal is to become a successful IT professional. I want to specialize in enterprise systems and business solutions that can help organizations work more efficiently. I also want to build a career that allows me to give back to my family and contribute to my community.
+      </p>
+    </div>
   </div>
 
-  <div class="content-box" id="skills">
-    <h2>My Skills</h2>
-    <p>
-      <strong>Web Development:</strong> Basic HTML & CSS<br>
-      <strong>Computer Skills:</strong> MS Office, Basic Troubleshooting<br>
-      <strong>Communication:</strong> Written & Verbal Communication<br>
-      <strong>Soft Skills:</strong> Teamwork, Time Management, Organization<br>
-      <strong>Personal Traits:</strong> Adaptability, Willingness to Learn, Resilience
-    </p>
-  </div>
-
-  <div class="btn-container">
-    <button class="section-btn" onclick="showInfo('basic')" id="btn-basic">Basic Details</button>
-    <button class="section-btn" onclick="showInfo('education')" id="btn-education">Educational Background</button>
-    <button class="section-btn" onclick="showInfo('about')" id="btn-about">About Me</button>
-    <button class="section-btn" onclick="showInfo('future')" id="btn-future">Future Goals</button>
-    <button class="section-btn" onclick="showInfo('skills')" id="btn-skills">Skills</button>
+  <!-- 5. SKILLS -->
+  <div class="section-wrapper">
+    <button class="section-btn" onclick="toggleInfo('skills')" id="btn-skills">Skills</button>
+    <div class="content-box" id="skills">
+      <h2>My Skills</h2>
+      <p>
+        <strong>Web Development:</strong> Basic HTML & CSS<br>
+        <strong>Computer Skills:</strong> MS Office, Basic Troubleshooting<br>
+        <strong>Communication:</strong> Written & Verbal Communication<br>
+        <strong>Soft Skills:</strong> Teamwork, Time Management, Organization<br>
+        <strong>Personal Traits:</strong> Adaptability, Willingness to Learn, Resilience
+      </p>
+    </div>
   </div>
 
   <div class="nav-container">
@@ -277,7 +285,7 @@ h1 {
 </div>
 
 <script>
-// Create background floating dots
+// Background floating dots
 const bgDots = document.getElementById('bg-dots');
 for (let i = 0; i < 40; i++) {
   const dot = document.createElement('span');
@@ -287,11 +295,23 @@ for (let i = 0; i < 40; i++) {
   bgDots.appendChild(dot);
 }
 
-function showInfo(id) {
-  document.querySelectorAll('.content-box').forEach(b => b.classList.remove('show'));
-  document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('show');
-  document.getElementById('btn-' + id).classList.add('active');
+// Toggle — lalabas lang sa ilalim ng button na pinindot
+function toggleInfo(id) {
+  const box = document.getElementById(id);
+  const btn = document.getElementById('btn-' + id);
+  
+  // Kung nakabukas na, isara
+  if (box.classList.contains('show')) {
+    box.classList.remove('show');
+    btn.classList.remove('active');
+  } else {
+    // Isara lahat ng iba
+    document.querySelectorAll('.content-box').forEach(b => b.classList.remove('show'));
+    document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+    // Buksan ang pinindot
+    box.classList.add('show');
+    btn.classList.add('active');
+  }
 }
 </script>
 
