@@ -1,388 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Information</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Information</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
 
-    html, body {
-      height: 100vh;
-      overflow: hidden;
-    }
+body {
+  background: #0f1730;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 40px;
+  position: relative;
+}
 
-    body {
-      background: linear-gradient(135deg, #051026 0%, #0a2454 50%, #051026 100%);
-      color: #ffffff;
-      position: relative;
-    }
+/* ===== BACKGROUND EFFECTS ===== */
+.bg-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
 
-    /* ===== FLOATING DOT GRID — starts from bottom, rises up ===== */
-    .dots-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
+.bg-effect span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(0, 204, 255, 0.4);
+  border-radius: 50%;
+  animation: float 8s infinite ease-in-out;
+}
 
-    .dot {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgba(0, 204, 255, 0.4);
-      border-radius: 50%;
-      animation: riseDot linear infinite;
-    }
+@keyframes float {
+  0%, 100% { transform: translateY(100vh); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
 
-    @keyframes riseDot {
-      0% {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh);
-        opacity: 0;
-      }
-    }
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
 
-    .grid-lines {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(0, 153, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 153, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      z-index: 0;
-      pointer-events: none;
-    }
+/* ===== TYPING EFFECT ===== */
+.title-wrapper {
+  margin-bottom: 35px;
+}
 
-    .glow-ring {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 204, 255, 0.08);
-      transform: translate(-50%, -50%);
-      z-index: 0;
-      pointer-events: none;
-    }
+h1 {
+  display: inline-block;
+  color: #00ccff;
+  font-size: 2.5rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px #00ccff, 0 0 25px #0099cc;
+  border-right: 3px solid #00ccff;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 2.5s steps(20, end) forwards, blink 0.7s infinite;
+}
 
-    .container {
-      max-width: 900px;
-      height: 100vh;
-      margin: 0 auto;
-      padding: 20px;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
 
-    /* ===== TYPEWRITER TITLE ===== */
-    .title-wrap {
-      text-align: center;
-      margin-bottom: 30px;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 0.8s ease forwards;
-    }
+@keyframes blink {
+  0%, 100% { border-color: #00ccff; }
+  50% { border-color: transparent; }
+}
 
-    h1 {
-      font-size: 2.5rem;
-      letter-spacing: 8px;
-      color: #00ccff;
-      display: inline-block;
-      border-right: 3px solid #00ccff;
-      animation: blink 0.8s step-end infinite;
-      text-shadow: 0 0 25px rgba(0, 204, 255, 0.4);
-    }
+/* ===== CONTENT BOX ===== */
+.content-box {
+  border: 1px solid rgba(0, 204, 255, 0.4);
+  background: rgba(0, 30, 60, 0.4);
+  padding: 25px 35px;
+  margin-bottom: 30px;
+  min-height: 170px;
+  display: none;
+  line-height: 2.1;
+  text-align: left;
+}
 
-    @keyframes blink {
-      0%, 100% { border-color: #00ccff; }
-      50% { border-color: transparent; }
-    }
+.content-box.show {
+  display: block;
+  animation: fadeIn 0.4s ease-out;
+}
 
-    /* ===== SECTION BUTTONS — rise from bottom ===== */
-    .section-btn {
-      width: 100%;
-      padding: 16px 25px;
-      margin-bottom: 10px;
-      background: rgba(0, 51, 102, 0.2);
-      border: 1px solid rgba(0, 153, 255, 0.4);
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 1rem;
-      letter-spacing: 2px;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 0.7s ease forwards;
-      backdrop-filter: blur(4px);
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .section-btn:nth-child(2) { animation-delay: 0.15s; }
-    .section-btn:nth-child(3) { animation-delay: 0.30s; }
-    .section-btn:nth-child(4) { animation-delay: 0.45s; }
-    .section-btn:nth-child(5) { animation-delay: 0.60s; }
-    .section-btn:nth-child(6) { animation-delay: 0.75s; }
+.content-box h2 {
+  color: #00ccff;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 204, 255, 0.15);
+}
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.content-box p {
+  color: #99ddff;
+  font-size: 1rem;
+}
 
-    .section-btn:hover {
-      background: rgba(0, 102, 204, 0.3);
-      border-color: #00ccff;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3),
-                  0 0 15px rgba(0, 204, 255, 0.15);
-    }
+.content-box strong {
+  color: #66ccff;
+  display: inline-block;
+  width: 160px;
+}
 
-    .section-btn.active {
-      background: rgba(0, 102, 204, 0.35);
-      border-color: #00ccff;
-    }
+/* ===== BUTTONS — LEFT & RIGHT TO CENTER ===== */
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 
-    /* ===== CONTENT BOXES ===== */
-    .content-box {
-      background: rgba(0, 26, 51, 0.35);
-      border: 1px solid rgba(0, 153, 255, 0.35);
-      border-radius: 8px;
-      padding: 22px 28px;
-      margin-bottom: 15px;
-      display: none;
-      animation: contentFade 0.5s ease;
-      line-height: 1.7;
-      backdrop-filter: blur(5px);
-    }
+.section-btn {
+  width: 100%;
+  padding: 18px 30px;
+  background: transparent;
+  border: 1px solid rgba(0, 204, 255, 0.3);
+  color: #66ccff;
+  font-size: 1rem;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
 
-    .content-box.show {
-      display: block;
-    }
+.section-btn:nth-child(1) { animation: slideLeft 0.6s ease-out 2.6s forwards; }
+.section-btn:nth-child(2) { animation: slideRight 0.6s ease-out 2.9s forwards; }
+.section-btn:nth-child(3) { animation: slideLeft 0.6s ease-out 3.2s forwards; }
+.section-btn:nth-child(4) { animation: slideRight 0.6s ease-out 3.5s forwards; }
+.section-btn:nth-child(5) { animation: slideLeft 0.6s ease-out 3.8s forwards; }
 
-    @keyframes contentFade {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-80px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
-    .content-box h2 {
-      color: #00ccff;
-      font-size: 1rem;
-      margin-bottom: 12px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid rgba(0, 204, 255, 0.2);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(80px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 
-    .content-box p {
-      color: #ccebff;
-      font-size: 0.95rem;
-    }
+.section-btn:hover {
+  border-color: #00ccff;
+  color: #ffffff;
+  background: rgba(0, 80, 160, 0.2);
+}
 
-    .content-box strong {
-      color: #00ffff;
-    }
+.section-btn.active {
+  background: rgba(0, 80, 160, 0.35);
+  border-color: #00ccff;
+  color: #ffffff;
+}
 
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 8px;
-    }
+/* ===== NAV BUTTONS ===== */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  opacity: 0;
+  animation: fadeIn 0.7s ease-out 4.3s forwards;
+}
 
-    .skill-tag {
-      padding: 6px 16px;
-      background: rgba(0, 102, 204, 0.15);
-      border: 1px solid rgba(0, 204, 255, 0.4);
-      border-radius: 20px;
-      color: #99e6ff;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-    }
+.nav-btn {
+  padding: 14px 35px;
+  border: 1px solid rgba(0, 204, 255, 0.4);
+  color: #66ccff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
 
-    .skill-tag:hover {
-      background: rgba(0, 204, 255, 0.25);
-      border-color: #00ccff;
-      color: #ffffff;
-    }
-
-    /* ===== NAV BUTTONS ===== */
-    .nav-area {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 15px;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 0.7s ease forwards;
-      animation-delay: 0.9s;
-    }
-
-    .nav-btn {
-      padding: 10px 25px;
-      background: transparent;
-      border: 1px solid #00ccff;
-      color: #00ccff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-    }
-
-    .nav-btn:hover {
-      background: rgba(0, 204, 255, 0.15);
-      border-color: #00ffff;
-      color: #ffffff;
-      box-shadow: 0 0 15px rgba(0, 204, 255, 0.2);
-    }
-  </style>
+.nav-btn:hover {
+  border-color: #00ccff;
+  color: #ffffff;
+  background: rgba(0, 80, 160, 0.15);
+}
+</style>
 </head>
 <body>
-  <div class="grid-lines"></div>
-  <div class="glow-ring"></div>
-  <div class="dots-container" id="dotsContainer"></div>
 
-  <div class="container">
-    <div class="title-wrap">
-      <h1 id="typewriter"></h1>
-    </div>
+<!-- BACKGROUND EFFECTS -->
+<div class="bg-effect" id="bg-dots"></div>
 
-    <button class="section-btn" onclick="showSection('basic')" id="btn-basic">Basic Details</button>
-    <div class="content-box" id="basic">
-      <h2>Basic Details</h2>
-      <p><strong>Full Name:</strong> Ma. Luisa Victoria S. Sanchez<br><br>
-      <strong>Birthdate:</strong> February 24, 2008<br><br>
-      <strong>Religion:</strong> Roman Catholic<br><br>
-      <strong>Address:</strong> BGH Compound, Baguio City<br><br>
-      <strong>Email:</strong> sanchezfourth@gmail.com<br><br>
-      <strong>Phone Number:</strong> 09506920820</p>
-    </div>
-
-    <button class="section-btn" onclick="showSection('education')" id="btn-education">Educational Background</button>
-    <div class="content-box" id="education">
-      <h2>Educational Background</h2>
-      <p><strong>Current:</strong><br>
-      Bachelor of Science in Information Technology<br>
-      Enterprise Resource Planning Track<br>
-      <strong>University of the Cordilleras</strong><br><br>
-      <strong>Previous:</strong><br>
-      Baguio City High School</p>
-    </div>
-
-    <button class="section-btn" onclick="showSection('about')" id="btn-about">About Me</button>
-    <div class="content-box" id="about">
-      <h2>About Me</h2>
-      <p>I am Ma. Luisa Victoria S. Sanchez, a BSIT Enterprise student at the University of the Cordilleras. I enjoy learning about technology, business systems, and continuous self-improvement. Through this portfolio, I want to share my journey, achievements, skills, and future goals.</p>
-    </div>
-
-    <button class="section-btn" onclick="showSection('future')" id="btn-future">Future Goals</button>
-    <div class="content-box" id="future">
-      <h2>Future Goals</h2>
-      <p>My goal is to become a successful IT professional. I want to specialize in enterprise systems and business solutions. I will use my skills to help others, contribute to my community, and make my family proud.</p>
-    </div>
-
-    <button class="section-btn" onclick="showSection('skills')" id="btn-skills">Skills</button>
-    <div class="content-box" id="skills">
-      <h2>My Skills</h2>
-      <div class="skills-list">
-        <span class="skill-tag">Basic Coding</span>
-        <span class="skill-tag">Computer Systems</span>
-        <span class="skill-tag">Time Management</span>
-        <span class="skill-tag">Communication</span>
-        <span class="skill-tag">Organization</span>
-        <span class="skill-tag">Teamwork</span>
-      </div>
-    </div>
-
-    <div class="nav-area">
-      <a href="index.html" class="nav-btn">Home</a>
-      <a href="achievements.html" class="nav-btn">Achievements</a>
-    </div>
+<div class="container">
+  <div class="title-wrapper">
+    <h1 id="main-title">Personal Information</h1>
   </div>
 
-  <script>
-    // ===== FLOATING DOTS — rise from bottom to top =====
-    const dotsContainer = document.getElementById('dotsContainer');
-    const totalDots = 80;
+  <div class="content-box" id="basic">
+    <h2>Basic Details</h2>
+    <p>
+      <strong>Full Name:</strong> Ma. Luisa Victoria S. Sanchez<br>
+      <strong>Birthdate:</strong> February 24, 2008<br>
+      <strong>Religion:</strong> Roman Catholic<br>
+      <strong>Address:</strong> BGH Compound, Baguio City<br>
+      <strong>Email:</strong> sanchezfourth@gmail.com<br>
+      <strong>Phone Number:</strong> 09506920820
+    </p>
+  </div>
 
-    for (let i = 0; i < totalDots; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'dot';
-      
-      const posX = Math.random() * 100;
-      const delay = Math.random() * 12;
-      const duration = 10 + Math.random() * 8;
-      const size = Math.random() * 2 + 1;
-      
-      dot.style.left = posX + '%';
-      dot.style.width = size + 'px';
-      dot.style.height = size + 'px';
-      dot.style.opacity = 0.2 + Math.random() * 0.3;
-      dot.style.animationDelay = delay + 's';
-      dot.style.animationDuration = duration + 's';
-      
-      dotsContainer.appendChild(dot);
-    }
+  <div class="content-box" id="education">
+    <h2>Educational Background</h2>
+    <p>
+      <strong>Current:</strong> Bachelor of Science in Information Technology<br>
+      <strong>Track:</strong> Enterprise Resource Planning<br>
+      <strong>School:</strong> University of the Cordilleras<br><br>
+      <strong>Previous:</strong><br>
+      Baguio City High School
+    </p>
+  </div>
 
-    // Typewriter effect
-    const text = "PERSONAL INFORMATION";
-    const speed = 100;
-    let charIndex = 0;
-    function typeWriter() {
-      if (charIndex < text.length) {
-        document.getElementById('typewriter').textContent += text.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeWriter, speed);
-      }
-    }
-    document.addEventListener('DOMContentLoaded', typeWriter);
+  <div class="content-box" id="about">
+    <h2>About Me</h2>
+    <p>
+      I am Ma. Luisa Victoria S. Sanchez, a dedicated BSIT student at the University of the Cordilleras. I have a strong passion for technology and continuous learning. I believe that dedication and curiosity are the keys to turning dreams into reality.
+    </p>
+  </div>
 
-    // Show one section at a time
-    function showSection(id) {
-      document.querySelectorAll('.content-box').forEach(box => box.classList.remove('show'));
-      document.querySelectorAll('.section-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(id).classList.add('show');
-      document.getElementById('btn-' + id).classList.add('active');
-    }
-  </script>
+  <div class="content-box" id="future">
+    <h2>Future Goals</h2>
+    <p>
+      My goal is to become a successful IT professional. I want to specialize in enterprise systems and business solutions that can help organizations work more efficiently. I also want to build a career that allows me to give back to my family and contribute to my community.
+    </p>
+  </div>
+
+  <div class="content-box" id="skills">
+    <h2>My Skills</h2>
+    <p>
+      <strong>Web Development:</strong> Basic HTML & CSS<br>
+      <strong>Computer Skills:</strong> MS Office, Basic Troubleshooting<br>
+      <strong>Communication:</strong> Written & Verbal Communication<br>
+      <strong>Soft Skills:</strong> Teamwork, Time Management, Organization<br>
+      <strong>Personal Traits:</strong> Adaptability, Willingness to Learn, Resilience
+    </p>
+  </div>
+
+  <div class="btn-container">
+    <button class="section-btn" onclick="showInfo('basic')" id="btn-basic">Basic Details</button>
+    <button class="section-btn" onclick="showInfo('education')" id="btn-education">Educational Background</button>
+    <button class="section-btn" onclick="showInfo('about')" id="btn-about">About Me</button>
+    <button class="section-btn" onclick="showInfo('future')" id="btn-future">Future Goals</button>
+    <button class="section-btn" onclick="showInfo('skills')" id="btn-skills">Skills</button>
+  </div>
+
+  <div class="nav-container">
+    <a href="index.html" class="nav-btn">Home</a>
+    <a href="achievements.html" class="nav-btn">Achievements</a>
+  </div>
+</div>
+
+<script>
+// Create background floating dots
+const bgDots = document.getElementById('bg-dots');
+for (let i = 0; i < 40; i++) {
+  const dot = document.createElement('span');
+  dot.style.left = Math.random() * 100 + '%';
+  dot.style.animationDelay = Math.random() * 8 + 's';
+  dot.style.animationDuration = (6 + Math.random() * 6) + 's';
+  bgDots.appendChild(dot);
+}
+
+function showInfo(id) {
+  document.querySelectorAll('.content-box').forEach(b => b.classList.remove('show'));
+  document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('show');
+  document.getElementById('btn-' + id).classList.add('active');
+}
+</script>
+
 </body>
 </html>
