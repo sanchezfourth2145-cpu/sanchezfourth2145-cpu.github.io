@@ -1,419 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Achievements</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Arial, sans-serif;
-    }
-
-    html, body {
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    body {
-      background: linear-gradient(135deg, #051026 0%, #0a2454 50%, #051026 100%);
-      color: #ffffff;
-      position: relative;
-    }
-
-    /* ===== BACKGROUND EFFECTS ===== */
-    .dots-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .dot {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgba(0, 204, 255, 0.4);
-      border-radius: 50%;
-      animation: riseDot linear infinite;
-    }
-
-    @keyframes riseDot {
-      0% {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% {
-        transform: translateY(-10vh);
-        opacity: 0;
-      }
-    }
-
-    .grid-lines {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(0, 153, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 153, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .container {
-      max-width: 900px;
-      height: 100vh;
-      margin: 0 auto;
-      padding: 30px 25px;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-    }
-
-    /* ===== TITLE WITH TYPEWRITER ===== */
-    .title-wrap {
-      margin-bottom: 5px;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeUp 0.8s ease forwards;
-    }
-
-    h1 {
-      font-size: 2.4rem;
-      letter-spacing: 8px;
-      color: #00ccff;
-      display: inline-block;
-      border-right: 3px solid #00ccff;
-      animation: blink 0.8s step-end infinite;
-      text-shadow: 0 0 25px rgba(0, 204, 255, 0.4);
-    }
-
-    @keyframes blink {
-      0%, 100% { border-color: #00ccff; }
-      50% { border-color: transparent; }
-    }
-
-    .subtitle {
-      font-size: 1rem;
-      color: #99ccff;
-      margin-bottom: 25px;
-      letter-spacing: 3px;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 0.4s;
-    }
-
-    .intro-line {
-      font-size: 0.95rem;
-      color: #ccebff;
-      margin-bottom: 25px;
-      font-style: italic;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 0.7s;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ===== CARDS LAYOUT ===== */
-    .cards-wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      margin-bottom: 25px;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 1s;
-    }
-
-    .achievement-card {
-      width: 360px;
-      perspective: 1000px;
-    }
-
-    .card-inner {
-      position: relative;
-      width: 100%;
-      height: 300px;
-      transform-style: preserve-3d;
-      transition: transform 0.7s ease;
-    }
-
-    .achievement-card.active .card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .card-front, .card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .card-front {
-      background: rgba(0, 51, 102, 0.25);
-      border: 2px solid rgba(0, 153, 255, 0.35);
-      cursor: pointer;
-      transition: all 0.4s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .card-front:hover {
-      border-color: #00ccff;
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(0, 204, 255, 0.12);
-    }
-
-    .card-front h2 {
-      font-size: 1.1rem;
-      color: #00ccff;
-      padding: 14px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      border-bottom: 1px solid rgba(0, 204, 255, 0.15);
-    }
-
-    .card-front img {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-    }
-
-    .click-hint {
-      padding: 8px;
-      font-size: 0.85rem;
-      color: #66ccff;
-      background: rgba(0, 26, 51, 0.6);
-    }
-
-    .card-back {
-      background: linear-gradient(135deg, #00264d, #001a33);
-      border: 2px solid #00ccff;
-      transform: rotateY(180deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
-      color: #e6f7ff;
-      line-height: 1.7;
-      font-size: 0.92rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 25px rgba(0, 204, 255, 0.15);
-    }
-
-    .type-text {
-      overflow: hidden;
-      white-space: pre-wrap;
-      border-right: 2px solid transparent;
-    }
-
-    /* ===== NAV BUTTONS ===== */
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      max-width: 760px;
-      margin: 0 auto;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 1.5s;
-    }
-
-    .nav-btn {
-      padding: 11px 28px;
-      background: transparent;
-      border: 1px solid #00ccff;
-      color: #00ccff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .nav-btn:hover {
-      background: rgba(0, 204, 255, 0.15);
-      border-color: #00ffff;
-      color: #ffffff;
-      box-shadow: 0 0 15px rgba(0, 204, 255, 0.2);
-    }
-
-    .footer-quote {
-      margin-top: 12px;
-      font-size: 0.85rem;
-      color: #6699cc;
-      font-style: italic;
-      opacity: 0;
-      transform: translateY(50px);
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 1.8s;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>My Achievements</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+        html, body{
+            height:100vh;
+            overflow:hidden;
+        }
+        body{
+            position:relative;
+            color:white;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+        }
+        .bg-anim{
+            position:absolute;
+            width:100%;
+            height:100%;
+            background: linear-gradient(to top, #061545, #0f2b80, #153ca8);
+            animation: rise 3s ease forwards;
+            z-index:-1;
+        }
+        @keyframes rise{
+            from{
+                transform: translateY(100%);
+                opacity:0;
+            }
+            to{
+                transform: translateY(0%);
+                opacity:1;
+            }
+        }
+        h1{
+            font-size:48px;
+            color:#48e8ff;
+            margin-bottom:12px;
+            text-shadow: 0 0 8px #48e8ff;
+            animation: fadeUp 1.5s ease 0.4s forwards;
+            opacity:0;
+        }
+        .subhead{
+            font-size:22px;
+            margin-bottom:20px;
+            letter-spacing:1px;
+            animation: fadeUp 1.5s ease 0.6s forwards;
+            opacity:0;
+        }
+        .desc{
+            font-size:18px;
+            margin-bottom:30px;
+            animation: fadeUp 1.5s ease 0.8s forwards;
+            opacity:0;
+        }
+        .container{
+            display:flex;
+            justify-content:center;
+            gap:22px;
+            flex-wrap:wrap;
+            margin-bottom:30px;
+            animation: fadeUp 1.5s ease 1s forwards;
+            opacity:0;
+        }
+        .card{
+            width:310px;
+            border:2px solid #48e8ff;
+            border-radius:12px;
+            overflow:hidden;
+            background:#0b2060;
+            cursor:pointer;
+        }
+        .card h3{
+            background:#104b8c;
+            padding:11px;
+            font-size:19px;
+            color:#48e8ff;
+        }
+        .card img{
+            width:100%;
+            height:190px;
+            object-fit:cover;
+        }
+        .card p{
+            padding:11px;
+            font-size:14px;
+            color:#cccccc;
+        }
+        .buttons{
+            display:flex;
+            justify-content:center;
+            gap:14px;
+            flex-wrap:wrap;
+            margin-bottom:16px;
+            animation: fadeUp 1.5s ease 1.2s forwards;
+            opacity:0;
+        }
+        .btn{
+            border:1px solid #48e8ff;
+            color:#48e8ff;
+            background:transparent;
+            padding:11px 22px;
+            font-size:15px;
+            border-radius:6px;
+            cursor:pointer;
+        }
+        .quote{
+            font-style:italic;
+            font-size:16px;
+            color:#dddddd;
+            animation: fadeUp 1.5s ease 1.4s forwards;
+            opacity:0;
+        }
+        @keyframes fadeUp{
+            from{
+                transform: translateY(40px);
+                opacity:0;
+            }
+            to{
+                transform: translateY(0px);
+                opacity:1;
+            }
+        }
+        .popup{
+            display:none;
+            position:fixed;
+            top:50%;
+            left:50%;
+            transform:translate(-50%, -50%);
+            width:400px;
+            background:white;
+            color:#0f2b80;
+            padding:30px;
+            border-radius:12px;
+            z-index:99;
+        }
+        .popup h4{
+            margin-bottom:15px;
+            font-size:22px;
+        }
+        .popup p{
+            font-size:16px;
+            line-height:1.6;
+            margin-bottom:20px;
+        }
+        .closeBtn{
+            background:#0f2b80;
+            color:white;
+            border:none;
+            padding:10px 20px;
+            border-radius:6px;
+            cursor:pointer;
+        }
+        .overlay{
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.65);
+            z-index:98;
+        }
+    </style>
 </head>
 <body>
-  <div class="grid-lines"></div>
-  <div class="dots-container" id="dotsContainer"></div>
+    <div class="bg-anim"></div>
 
-  <div class="container">
-    <div class="title-wrap">
-      <h1 id="typewriter"></h1>
-    </div>
-    <p class="subtitle">MILESTONES I AM PROUD OF</p>
-    <p class="intro-line">Hard work, dedication, and passion — these are the milestones I've reached so far.</p>
+    <h1>MY ACHIEVEMENTS</h1>
+    <p class="subhead">MILESTONES I AM PROUD OF.</p>
+    <p class="desc">Hard work, dedication, and passion — these are the milestones I've reached so far.</p>
 
-    <div class="cards-wrapper">
-      <!-- HONORS CARD -->
-      <div class="achievement-card" id="card-honors" onclick="flipCard('card-honors')">
-        <div class="card-inner">
-          <div class="card-front">
-            <h2>HONORS & ACADEMIC AWARDS</h2>
-            <img src="honors.jpg" alt="Academic Awards">
-            <div class="click-hint">Click to view message</div>
-          </div>
-          <div class="card-back">
-            <div class="type-text" id="text-honors"></div>
-          </div>
+    <div class="container">
+        <div class="card" onclick="openPopup('popup1')">
+            <h3>HONORS & ACADEMIC AWARDS</h3>
+            <img src="academic.jpg" alt="Academic Awards">
+            <p>Click to view message</p>
         </div>
-      </div>
 
-      <!-- SPORTS CARD -->
-      <div class="achievement-card" id="card-sports" onclick="flipCard('card-sports')">
-        <div class="card-inner">
-          <div class="card-front">
-            <h2>SPORTS & EXTRACURRICULAR</h2>
-            <img src="sports.jpg" alt="Sports Achievements">
-            <div class="click-hint">Click to view message</div>
-          </div>
-          <div class="card-back">
-            <div class="type-text" id="text-sports"></div>
-          </div>
+        <div class="card" onclick="openPopup('popup2')">
+            <h3>SPORTS & EXTRACURRICULAR</h3>
+            <img src="sports.jpg" alt="Sports Medals">
+            <p>Click to view message</p>
         </div>
-      </div>
+
+        <div class="card" onclick="openPopup('popup3')">
+            <h3>BAGUIO – PALARONG PAMBANSA</h3>
+            <img src="baguio.jpg" alt="Baguio Palarong Pambansa">
+            <p>Click to view message</p>
+        </div>
     </div>
 
-    <div class="nav-buttons">
-      <a href="personal.html" class="nav-btn">← Previous</a>
-      <a href="index.html" class="nav-btn">Back to Home</a>
-      <a href="parents.html" class="nav-btn">Next → My Parents</a>
+    <div class="buttons">
+        <button class="btn">← PREVIOUS</button>
+        <button class="btn">BACK TO HOME</button>
+        <button class="btn">NEXT → MY PARENTS</button>
     </div>
 
-    <p class="footer-quote">"Every achievement is a step forward."</p>
-  </div>
+    <p class="quote">"Every achievement is a step forward."</p>
 
-  <script>
-    // ===== FLOATING DOTS — BOTTOM TO TOP =====
-    const dotsContainer = document.getElementById('dotsContainer');
-    const totalDots = 70;
-    for (let i = 0; i < totalDots; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'dot';
-      const posX = Math.random() * 100;
-      const delay = Math.random() * 10;
-      const duration = 8 + Math.random() * 6;
-      const size = Math.random() * 2 + 1;
-      dot.style.left = posX + '%';
-      dot.style.width = size + 'px';
-      dot.style.height = size + 'px';
-      dot.style.opacity = 0.2 + Math.random() * 0.3;
-      dot.style.animationDelay = delay + 's';
-      dot.style.animationDuration = duration + 's';
-      dotsContainer.appendChild(dot);
-    }
 
-    // ===== MAIN TITLE TYPEWRITER =====
-    const mainTitle = "MY ACHIEVEMENTS";
-    const mainSpeed = 100;
-    let mainIndex = 0;
-    function typeMainTitle() {
-      if (mainIndex < mainTitle.length) {
-        document.getElementById('typewriter').textContent += mainTitle[mainIndex];
-        mainIndex++;
-        setTimeout(typeMainTitle, mainSpeed);
-      }
-    }
-    document.addEventListener('DOMContentLoaded', typeMainTitle);
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup1">
+        <h4>Honors & Academic Awards</h4>
+        <p>These awards represent all the late nights, sacrifices, and hard work I poured into my studies. This is proof that consistency pays off.</p>
+        <button class="closeBtn" onclick="closePopup()">Close</button>
+    </div>
 
-    // ===== CARD CONTENT =====
-    const content = {
-      honors: "I take pride in my academic journey. Through hard work, dedication, and perseverance, I have consistently maintained good standing and received recognition for my efforts in school. These achievements motivate me to keep striving for excellence in everything I do.",
-      sports: "Beyond the classroom, I believe in staying active and building discipline through sports. Participating in sports has taught me the value of teamwork, resilience, and healthy competition. It is an important part of who I am and helps me stay balanced in my personal and academic life."
-    };
+    <div class="popup" id="popup2">
+        <h4>Sports & Extracurricular</h4>
+        <p>These medals are not just trophies. They taught me discipline, teamwork, and how to get back up every time I lose.</p>
+        <button class="closeBtn" onclick="closePopup()">Close</button>
+    </div>
 
-    let activeCard = null;
-    let typingActive = false;
+    <div class="popup" id="popup3">
+        <h4>Baguio – Palarong Pambansa</h4>
+        <p>It was such a big honor to represent our region in Palarong Pambansa held in Baguio. This experience taught me courage, sportsmanship, and how to carry our flag with pride.</p>
+        <button class="closeBtn" onclick="closePopup()">Close</button>
+    </div>
 
-    function flipCard(cardId) {
-      const card = document.getElementById(cardId);
-      const textId = cardId === 'card-honors' ? 'text-honors' : 'text-sports';
-      const contentType = cardId === 'card-honors' ? 'honors' : 'sports';
-
-      // If clicking the same card — close it
-      if (activeCard === cardId) {
-        card.classList.remove('active');
-        activeCard = null;
-        typingActive = false;
-        document.getElementById(textId).textContent = '';
-        return;
-      }
-
-      // Close previous card if any
-      if (activeCard) {
-        const prevTextId = activeCard === 'card-honors' ? 'text-honors' : 'text-sports';
-        document.getElementById(activeCard).classList.remove('active');
-        document.getElementById(prevTextId).textContent = '';
-      }
-
-      // Open new card
-      card.classList.add('active');
-      activeCard = cardId;
-      typingActive = true;
-
-      // Typewriter effect on flipped content
-      const textToType = content[contentType];
-      const textElement = document.getElementById(textId);
-      textElement.textContent = '';
-      let charIndex = 0;
-      const typeSpeed = 35;
-
-      function typeContent() {
-        if (!typingActive) return;
-        if (charIndex < textToType.length) {
-          textElement.textContent += textToType.charAt(charIndex);
-          charIndex++;
-          setTimeout(typeContent, typeSpeed);
+    <script>
+        function openPopup(id){
+            document.getElementById(id).style.display="block";
+            document.getElementById("overlay").style.display="block";
         }
-      }
-      setTimeout(typeContent, 400);
-    }
-  </script>
+        function closePopup(){
+            document.querySelectorAll('.popup').forEach(el=>el.style.display="none");
+            document.getElementById("overlay").style.display="none";
+        }
+    </script>
 </body>
 </html>
