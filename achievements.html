@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Achievements</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+        html, body{
+            height:100vh;
+            overflow:hidden;
+        }
+        body{
+            position:relative;
+            color:white;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+        }
+
+        .particles{
+            position:absolute;
+            width:100%;
+            height:100%;
+            overflow:hidden;
+            z-index:-1;
+        }
+        .dot{
+            position:absolute;
+            background:#48e8ff;
+            border-radius:50%;
+            opacity:0.35;
+            animation: riseDot 7s ease-out forwards;
+        }
+        @keyframes riseDot{
+            from{
+                bottom:-20px;
+                opacity:0;
+            }
+            to{
+                bottom:100%;
+                opacity:0.35;
+            }
+        }
+
+        .bg-main{
+            position:absolute;
+            width:100%;
+            height:100%;
+            background:#050f3a;
+            z-index:-2;
+        }
+
+        .glow{
+            position:absolute;
+            width:500px;
+            height:500px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(72,232,255,0.14), transparent 70%);
+            top:-100px;
+            right:-100px;
+            z-index:-1;
+        }
+
+        h1{
+            font-size:48px;
+            color:#48e8ff;
+            margin-bottom:12px;
+            text-shadow: 0 0 8px #48e8ff;
+        }
+        .subhead{
+            font-size:22px;
+            margin-bottom:10px;
+        }
+        .desc{
+            font-size:16px;
+            margin-bottom:30px;
+        }
+
+        .container{
+            display:flex;
+            justify-content:center;
+            gap:22px;
+            flex-wrap:wrap;
+            margin-bottom:30px;
+        }
+
+        .card{
+            width:310px;
+            border:2px solid #48e8ff;
+            border-radius:12px;
+            overflow:hidden;
+            background:#0b2060;
+            cursor:pointer;
+            transition: transform 0.3s ease;
+        }
+        .card:hover{
+            transform: scale(1.04);
+            box-shadow: 0 0 15px #48e8ff;
+        }
+        .card h3{
+            background:#104b8c;
+            padding:11px;
+            font-size:19px;
+            color:#48e8ff;
+        }
+        .card img{
+            width:100%;
+            height:190px;
+            object-fit:cover;
+        }
+        #shs-graduate-img{
+            object-position: center top;
+        }
+        .card p{
+            padding:11px;
+            font-size:14px;
+            color:#cccccc;
+        }
+
+        .buttons{
+            display:flex;
+            flex-direction:row;
+            justify-content:center;
+            gap:14px;
+            margin-bottom:16px;
+        }
+        .btn{
+            border:2px solid #48e8ff;
+            color:#48e8ff;
+            background:transparent;
+            padding:12px 24px;
+            font-size:16px;
+            border-radius:8px;
+            box-shadow: 0 0 8px rgba(72,232,255,0.35);
+            text-decoration:none;
+            display:inline-block;
+            cursor:pointer;
+            transition: all 0.3s ease;
+        }
+        .btn.home-btn{
+            background:#48e8ff;
+            color:#050f3a;
+            font-weight:bold;
+        }
+        .btn:hover{
+            background:#48e8ff;
+            color:#050f3a;
+        }
+
+        .quote{
+            font-style:italic;
+            font-size:20px;
+            color:#ffdd99;
+        }
+
+        .popup{
+            display:none;
+            position:fixed;
+            top:50%;
+            left:50%;
+            transform:translate(-50%, -50%) scale(0.85);
+            width:460px;
+            max-height:80vh;
+            overflow-y:auto;
+            background:rgba(10, 35, 90, 0.85);
+            border:2px solid rgba(72,232,255,0.6);
+            box-shadow: 0 0 25px rgba(72,232,255,0.35);
+            color:white;
+            padding:32px;
+            border-radius:14px;
+            z-index:99;
+            transition: transform 0.35s ease, opacity 0.35s ease;
+            opacity:0;
+        }
+        .popup.active{
+            display:block;
+            transform:translate(-50%, -50%) scale(1);
+            opacity:1;
+        }
+        .popup h4{
+            margin-bottom:18px;
+            font-size:24px;
+            color:#48e8ff;
+            text-align:center;
+        }
+        .popup .simple-text{
+            font-size:17px;
+            line-height:1.7;
+            margin-bottom:22px;
+            text-align:justify;
+            color:#eeeeee;
+        }
+        .closeBtn{
+            display:block;
+            margin:0 auto;
+            background:#48e8ff;
+            color:#050f3a;
+            border:none;
+            padding:11px 24px;
+            border-radius:7px;
+            cursor:pointer;
+            font-size:16px;
+            font-weight:bold;
+            transition: background 0.35s ease;
+        }
+        .closeBtn:hover{
+            background:#6ff9ff;
+        }
+
+        .overlay{
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.75);
+            z-index:98;
+            opacity:0;
+            transition: opacity 0.35s ease;
+        }
+        .overlay.active{
+            display:block;
+            opacity:1;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-main"></div>
+    <div class="glow"></div>
+    <div class="particles" id="particleContainer"></div>
+
+    <h1>MY ACHIEVEMENTS</h1>
+    <p class="subhead">MILESTONES I AM PROUD OF.</p>
+    <p class="desc">Hard work, dedication, and passion — these are the milestones I've reached so far.</p>
+
+    <div class="container">
+        <div class="card" onclick="openPopup('popup1')">
+            <h3>HONORS & ACADEMIC AWARDS</h3>
+            <img src="honors.jpg" alt="Academic Awards">
+            <p>Click to view message</p>
+        </div>
+
+        <div class="card" onclick="openPopup('popup2')">
+            <h3>SPORTS & EXTRACURRICULAR</h3>
+            <img src="sports.jpg" alt="Sports Medals">
+            <p>Click to view message</p>
+        </div>
+
+        <div class="card" onclick="openPopup('popup3')">
+            <h3>BAGUIO – PALARONG PAMBANSA</h3>
+            <img src="baguio.jpg" alt="Baguio Palarong Pambansa">
+            <p>Click to view message</p>
+        </div>
+
+        <div class="card" onclick="openPopup('popup4')">
+            <h3>SHS GRADUATE</h3>
+            <img id="shs-graduate-img" src="SHS-GRADUATE.jpg" alt="SHS Graduate">
+            <p>Click to view message</p>
+        </div>
+
+        <div class="card" onclick="openPopup('popup5')">
+            <h3>SCHOLARSHIP</h3>
+            <img src="SCHOLARSHIP.jpg" alt="UC Scholarship">
+            <p>Click to view message</p>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <a href="personal.html" class="btn">← PREVIOUS</a>
+        <a href="index.html" class="btn home-btn">BACK TO HOME</a>
+        <a href="parents.html" class="btn">NEXT → MY PARENTS</a>
+    </div>
+
+    <p class="quote">"Every achievement is a step forward."</p>
+
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup1">
+        <h4>Honors & Academic Awards</h4>
+        <p class="simple-text">These awards represent all the late nights, sacrifices, and hard work I poured into my studies. There were times when I felt tired and wanted to give up, but I kept pushing myself because I dreamed of reaching this moment. This is proof that consistency pays off, and every small effort I made was never wasted. I am grateful to everyone who supported me on this journey.</p>
+        <button class="closeBtn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="popup" id="popup2">
+        <h4>Sports & Extracurricular</h4>
+        <p class="simple-text">These medals are not just trophies to display. They taught me discipline, teamwork, and how to get back up every time I lose. I learned that winning is not everything; what matters most is the friendship, the sweat, and the courage to keep fighting until the end. These experiences made me stronger, braver, and more ready to face any challenge that comes my way.</p>
+        <button class="closeBtn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="popup" id="popup3">
+        <h4>Baguio – Palarong Pambansa</h4>
+        <p class="simple-text">It was such a big honor to represent our region in Palarong Pambansa held in Baguio. This experience taught me courage, sportsmanship, and how to carry our flag with pride. I met many new friends from different places, learned so many valuable lessons, and created memories that I will never forget for the rest of my life. This will always be one of my most unforgettable achievements.</p>
+        <button class="closeBtn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="popup" id="popup4">
+        <h4>SHS Graduate</h4>
+        <p class="simple-text">Graduating from Senior High School at the University of the Cordillera is one of the most important milestones of my life. It marked the end of a challenging chapter and the beginning of new opportunities. I am proud of how far I’ve come, and I thank all the people who helped me reach this point. This achievement inspires me to keep chasing my dreams and work even harder for college.</p>
+        <button class="closeBtn" onclick="closePopup()">Close</button>
+    </div>
+
+    <div class="popup" id="popup5">
+        <h4>Scholarship</h4>
+        <p class="simple-text">I am proud to share that I got a full scholarship at the University of the Cordillera because of playing basketball. All the hard work, early practices, and sacrifices finally paid off. This scholarship gave me the chance to continue my education while doing what I love. It taught me that dedication, talent, and perseverance can open great opportunities for the future.</p>
+        <button class="closeBtn" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        const particleContainer = document.getElementById("particleContainer");
+        for(let i = 0; i < 28; i++){
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+            const size = Math.random() * 5 + 2;
+            dot.style.width = size + "px";
+            dot.style.height = size + "px";
+            dot.style.left = Math.random() * 100 + "%";
+            dot.style.animationDelay = Math.random() * 7 + "s";
+            particleContainer.appendChild(dot);
+        }
+
+        function openPopup(id){
+            document.getElementById(id).classList.add("active");
+            document.getElementById("overlay").classList.add("active");
+        }
+
+        function closePopup(){
+            document.querySelectorAll('.popup').forEach(function(el){
+                el.classList.remove("active");
+            });
+            document.getElementById("overlay").classList.remove("active");
+        }
+    </script>
+</body>
+</html>
