@@ -18,7 +18,6 @@
             position: relative;
             overflow: hidden;
         }
-        /* Dots animation mula baba pataas */
         .dot-bg {
             position: fixed;
             top: 0;
@@ -58,25 +57,25 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 8px 20px;
+            padding: 10px 30px;
         }
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2.7rem;
             color: #38bdf8;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             text-align: center;
         }
         .image-row {
             display: flex;
-            gap: 26px;
+            gap: 28px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             perspective: 1200px;
         }
         .flip-card {
-            width: 300px;
-            height: 210px;
+            width: 310px;
+            height: 220px;
             cursor: pointer;
             position: relative;
         }
@@ -102,18 +101,17 @@
             align-items: center;
             justify-content: center;
         }
-        /* Inayos ang object-position para makita ang ulo, yakap, at shakehands */
         .flip-front img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 15%;
+            object-position: center top;
         }
         .flip-back {
             background: rgba(56, 189, 248, 0.18);
             color: #e0f2fe;
             transform: rotateY(180deg);
-            padding: 20px;
+            padding: 22px;
             text-align: center;
             font-size: 0.95rem;
             line-height: 1.5;
@@ -121,29 +119,38 @@
         .nav-buttons {
             display: flex;
             gap: 14px;
-            margin-top: 6px;
+            margin-top: 8px;
         }
         .nav-buttons button {
-            padding: 9px 20px;
+            padding: 10px 22px;
             background: transparent;
             border: 1px solid #38bdf8;
             color: #38bdf8;
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         .nav-buttons button:hover {
             background: rgba(56, 189, 248, 0.15);
         }
+        @media (max-width: 768px) {
+            .flip-card {
+                width: 90%;
+                height: 250px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="dot-bg" id="dotContainer"></div>
     <div class="container">
-        <!-- FAMILY SECTION -->
-        <h1 class="section-title" id="familyTitle"></h1>
+        <h class="section-title" id="familyTitle"></h>
         <div class="image-row">
+
             <div class="flip-card" data-message="My brother is one of my closest family members. We share laughs, support each other, and create many happy memories together. He is always there to cheer me on in my journey.">
                 <div class="flip-inner">
                     <div class="flip-front">
@@ -154,6 +161,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="flip-card" data-message="This moment shows the warm love of my family. Their hugs, care, and constant support give me strength to keep going and chase my dreams.">
                 <div class="flip-inner">
                     <div class="flip-front">
@@ -164,6 +172,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="flip-card" data-message="A simple handshake that represents trust, respect, and the strong bond I share with my family. We face challenges hand in hand.">
                 <div class="flip-inner">
                     <div class="flip-front">
@@ -174,11 +183,12 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
-        <!-- FRIENDS SECTION -->
         <h1 class="section-title" id="friendsTitle"></h1>
         <div class="image-row">
+
             <div class="flip-card" data-message="This photo from our Palarong Pambansa in Baguio represents pride, teamwork, and the fun moments we shared as friends while competing and supporting each other.">
                 <div class="flip-inner">
                     <div class="flip-front">
@@ -189,6 +199,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="flip-card" data-message="True friends make every moment memorable. We laugh, help each other, and create stories that I will treasure for a very long time.">
                 <div class="flip-inner">
                     <div class="flip-front">
@@ -199,6 +210,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="flip-card" data-message="Baguio will always be a special place for me and my friends. The cold weather, fun adventures, and happy moments we had there are unforgettable.">
                 <div class="flip-inner">
                     <div class="flip-front">
@@ -209,6 +221,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="nav-buttons">
@@ -218,7 +231,6 @@
     </div>
 
     <script>
-        // Dots
         const dotContainer = document.getElementById('dotContainer');
         for(let i=0; i<35; i++){
             const dot = document.createElement('div');
@@ -232,7 +244,6 @@
             dotContainer.appendChild(dot);
         }
 
-        // Typing effect MY FAMILY at MY FRIENDS
         function typeText(text, element, speed = 100){
             element.textContent = "";
             let index = 0;
@@ -245,36 +256,32 @@
                 }
             }, speed);
         }
+
         typeText("MY FAMILY", document.getElementById("familyTitle"));
         setTimeout(()=>{
             typeText("MY FRIENDS", document.getElementById("friendsTitle"));
         }, 1400);
 
-        // Flip logic — pag may naka-flip na, babalik muna bago mag-flip yung bago
         const allCards = document.querySelectorAll('.flip-card');
         allCards.forEach(card=>{
             const backP = card.querySelector('.flip-back p');
             backP.textContent = card.dataset.message;
 
             card.addEventListener('click', ()=>{
-                // Balik lahat ng naka-flip na card sa original
                 allCards.forEach(c=>{
-                    if(c !== card){
-                        c.classList.remove('flipped');
-                    }
-                })
-                // I-toggle yung pinindot
+                    if(c !== card) c.classList.remove('flipped');
+                });
                 card.classList.toggle('flipped');
-            })
-        })
+            });
+        });
 
-        // Navigation
         document.getElementById('prevBtn').addEventListener('click', ()=>{
             window.location.href = "achievements.html";
-        })
+        });
+
         document.getElementById('homeBtn').addEventListener('click', ()=>{
             window.location.href = "index.html";
-        })
+        });
     </script>
 </body>
 </html>
