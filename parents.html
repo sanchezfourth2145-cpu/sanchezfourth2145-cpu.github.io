@@ -1,416 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Parents</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Family and Friends</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
 
-    html, body {
-      height: 100vh;
-      overflow: hidden;
-    }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+            color: #e0f2fe;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            text-align: center;
+        }
 
-    body {
-      background: linear-gradient(135deg, #051026 0%, #0a2454 50%, #051026 100%);
-      color: #ffffff;
-      position: relative;
-    }
+        /* === GRID BACKGROUND === */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            animation: gridMove 25s linear infinite;
+        }
 
-    /* ===== FLOATING DOTS — same style ===== */
-    .dots-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(60px); }
+        }
 
-    .dot {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgba(0, 204, 255, 0.4);
-      border-radius: 50%;
-      animation: riseDot linear infinite;
-    }
+        /* === FLOATING DOTS / PARTICLES === */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-    @keyframes riseDot {
-      0% {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% {
-        transform: translateY(-10vh);
-        opacity: 0;
-      }
-    }
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #38bdf8;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #38bdf8;
+            animation: particleFloat linear infinite;
+        }
 
-    .grid-lines {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(0, 153, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 153, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      z-index: 0;
-      pointer-events: none;
-    }
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
 
-    .glow-ring {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 204, 255, 0.08);
-      transform: translate(-50%, -50%);
-      z-index: 0;
-      pointer-events: none;
-    }
+        .content {
+            position: relative;
+            z-index: 1;
+        }
 
-    .container {
-      max-width: 1000px;
-      height: 100vh;
-      margin: 0 auto;
-      padding: 25px 20px;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-    }
+        h1 {
+            font-size: 2.5rem;
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
 
-    /* ===== TYPEWRITER TITLE ===== */
-    .title-wrap {
-      margin-bottom: 8px;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 0.8s ease forwards;
-    }
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
 
-    h1 {
-      font-size: 3rem;
-      letter-spacing: 10px;
-      color: #00ccff;
-      display: inline-block;
-      border-right: 3px solid #00ccff;
-      animation: blink 0.8s step-end infinite;
-      text-shadow: 0 0 30px rgba(0, 204, 255, 0.4);
-    }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            max-width: 1100px;
+            margin-bottom: 30px;
+        }
 
-    @keyframes blink {
-      0%, 100% { border-color: #00ccff; }
-      50% { border-color: transparent; }
-    }
+        .img-card {
+            cursor: pointer;
+            border: 1px solid rgba(56,189,248,0.25);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: rgba(15,23,42,0.6);
+        }
 
-    .subtitle {
-      font-size: 1.05rem;
-      color: #99ccff;
-      margin-bottom: 40px;
-      font-style: italic;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 0.5s;
-    }
+        .img-card:hover {
+            border-color: #38bdf8;
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(56,189,248,0.18);
+        }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .img-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
 
-    /* ===== PHOTO CARDS — BIGGER + MORE EFFECTS ===== */
-    .photos-grid {
-      display: flex;
-      justify-content: center;
-      gap: 50px;
-      flex-wrap: wrap;
-      margin-bottom: 35px;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 1s;
-    }
+        .img-card p {
+            padding: 10px;
+            font-size: 0.9rem;
+            color: #7dd3fc;
+        }
 
-    .photo-card {
-      perspective: 1200px;
-    }
+        /* === POPUP MODAL === */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2,6,23,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            padding: 20px;
+        }
 
-    .photo-inner {
-      position: relative;
-      width: 380px;
-      height: 290px;
-      transform-style: preserve-3d;
-      transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
+        .modal-content {
+            background: rgba(15,23,42,0.9);
+            border: 1px solid #38bdf8;
+            border-radius: 14px;
+            max-width: 500px;
+            padding: 30px;
+            color: #e0f2fe;
+            line-height: 1.6;
+        }
 
-    .photo-card.active .photo-inner {
-      transform: rotateY(180deg);
-    }
+        .close-btn {
+            margin-top: 20px;
+            padding: 10px 24px;
+            border: 1px solid #38bdf8;
+            background: transparent;
+            color: #38bdf8;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-    .photo-front, .photo-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 12px;
-      overflow: hidden;
-    }
+        .close-btn:hover {
+            background: #38bdf8;
+            color: #020617;
+        }
 
-    .photo-front {
-      background: #001a33;
-      border: 2px solid rgba(0, 204, 255, 0.35);
-      cursor: pointer;
-      transition: all 0.4s ease;
-      box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.4),
-        0 0 25px rgba(0, 153, 255, 0.1),
-        inset 0 0 0 rgba(0, 204, 255, 0);
-    }
+        /* === NAVIGATION BUTTONS === */
+        .nav-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+        }
 
-    .photo-front:hover {
-      border-color: #00ccff;
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 
-        0 20px 45px rgba(0, 0, 0, 0.5),
-        0 0 40px rgba(0, 204, 255, 0.2),
-        inset 0 0 20px rgba(0, 204, 255, 0.05);
-    }
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 12px 24px;
+            border: 1px solid #38bdf8;
+            border-radius: 8px;
+            color: #38bdf8;
+            transition: all 0.3s ease;
+        }
 
-    .photo-front::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      transition: left 0.6s ease;
-      z-index: 2;
-    }
-
-    .photo-front:hover::before {
-      left: 100%;
-    }
-
-    .photo-front img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .photo-front:hover img {
-      transform: scale(1.08);
-    }
-
-    .click-hint {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(transparent, rgba(0, 26, 51, 0.92));
-      color: #66ccff;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      transition: all 0.3s ease;
-      z-index: 3;
-    }
-
-    .photo-front:hover .click-hint {
-      background: linear-gradient(transparent, rgba(0, 51, 102, 0.95));
-      color: #ffffff;
-      padding-bottom: 16px;
-    }
-
-    .photo-back {
-      background: linear-gradient(135deg, #00264d, #001a33);
-      border: 2px solid #00ccff;
-      transform: rotateY(180deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-      color: #e6f7ff;
-      line-height: 1.8;
-      font-size: 1rem;
-      box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.4),
-        0 0 30px rgba(0, 204, 255, 0.15);
-    }
-
-    /* ===== QUOTE BOX ===== */
-    .quote-box {
-      max-width: 750px;
-      margin: 0 auto 35px;
-      padding: 28px 40px;
-      background: rgba(0, 51, 102, 0.2);
-      border-left: 3px solid #00ccff;
-      border-right: 3px solid #00ccff;
-      border-radius: 6px;
-      color: #ccebff;
-      line-height: 1.8;
-      font-style: italic;
-      font-size: 1rem;
-      box-shadow: 0 0 25px rgba(0, 102, 204, 0.08);
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 2s;
-    }
-
-    /* ===== NAV BUTTONS ===== */
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      max-width: 750px;
-      margin: 0 auto;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 2.7s;
-    }
-
-    .nav-btn {
-      padding: 12px 32px;
-      background: transparent;
-      border: 1px solid #00ccff;
-      color: #00ccff;
-      text-decoration: none;
-      font-size: 0.95rem;
-      letter-spacing: 2px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-    }
-
-    .nav-btn:hover {
-      background: rgba(0, 204, 255, 0.15);
-      border-color: #00ffff;
-      color: #ffffff;
-      box-shadow: 0 0 20px rgba(0, 204, 255, 0.25);
-      transform: translateY(-2px);
-    }
-  </style>
+        .nav-buttons a:hover {
+            background: #38bdf8;
+            color: #020617;
+        }
+    </style>
 </head>
 <body>
-  <div class="grid-lines"></div>
-  <div class="glow-ring"></div>
-  <div class="dots-container" id="dotsContainer"></div>
+    <div class="grid-bg"></div>
+    <div class="particles" id="particles"></div>
 
-  <div class="container">
-    <div class="title-wrap">
-      <h1 id="typewriter"></h1>
-    </div>
-    <p class="subtitle">Two people who love me more than anything</p>
+    <div class="content">
+        <h1>MY FAMILY AND FRIENDS</h1>
+        <p class="subtitle">The people who make my journey meaningful and fun</p>
 
-    <div class="photos-grid">
-      <!-- Photo 1 -->
-      <div class="photo-card" id="card1" onclick="flipCard('card1')">
-        <div class="photo-inner">
-          <div class="photo-front">
-            <img src="hugging.jpg" alt="My Parents">
-            <div class="click-hint">Click here for the message</div>
-          </div>
-          <div class="photo-back">
-            To my dearest parents — Thank you for your endless hugs and comfort. No matter how hard life gets, your love is my safe place. You taught me that I am never alone. I love you more than words can say.
-          </div>
+        <div class="image-grid">
+            <!-- FAMILY -->
+            <div class="img-card" data-message="My brother is one of my closest family members. We share laughs, support each other, and grow together through every challenge.">
+                <img src="brother.jpg" alt="Brother">
+                <p>Click for the message</p>
+            </div>
+
+            <div class="img-card" data-message="This warm hug reminds me how much my family loves me. Their care and affection give me strength to keep chasing my dreams.">
+                <img src="hugging.jpg" alt="Hugging">
+                <p>Click for the message</p>
+            </div>
+
+            <div class="img-card" data-message="A simple handshake with my family shows trust, respect, and the promise to always be there for one another.">
+                <img src="shake hands.jpg" alt="Shake Hands">
+                <p>Click for the message</p>
+            </div>
+
+            <!-- FRIENDS -->
+            <div class="img-card" data-message="My friends are my second family. We laugh, study, and face difficulties side by side, making every moment memorable.">
+                <img src="friends.jpg" alt="Friends">
+                <p>Click for the message</p>
+            </div>
+
+            <div class="img-card" data-message="This photo from Baguio with my friends is a happy memory. We represented our school and created unforgettable experiences together.">
+                <img src="baguio.jpg" alt="Baguio">
+                <p>Click for the message</p>
+            </div>
         </div>
-      </div>
 
-      <!-- Photo 2 -->
-      <div class="photo-card" id="card2" onclick="flipCard('card2')">
-        <div class="photo-inner">
-          <div class="photo-front">
-            <img src="shakehands.jpg" alt="My Parents">
-            <div class="click-hint">Click here for the message</div>
-          </div>
-          <div class="photo-back">
-            Thank you for guiding me every step of the way. Your hard work inspires me to do better and reach my dreams. Everything I achieve is because of you. I promise to make you proud always.
-          </div>
+        <div class="nav-buttons">
+            <a href="achievements.html">PREVIOUS</a>
+            <a href="index.html">BACK TO HOME</a>
         </div>
-      </div>
     </div>
 
-    <div class="quote-box">
-      "My family has been my greatest support throughout my journey. Their guidance, encouragement, and love motivate me to pursue my BSIT degree and work hard for a better future."
+    <!-- POPUP MODAL -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <p id="modal-text"></p>
+            <button class="close-btn" id="closeModal">Close</button>
+        </div>
     </div>
 
-    <div class="nav-buttons">
-      <a href="achievements.html" class="nav-btn">Previous</a>
-      <a href="index.html" class="nav-btn">Back to Home</a>
-    </div>
-  </div>
+    <script>
+        // Generate floating particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 40;
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const size = Math.random() * 3 + 1;
+            const left = Math.random() * 100;
+            const duration = Math.random() * 15 + 10;
+            const delay = Math.random() * 20;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = left + '%';
+            particle.style.animationDuration = duration + 's';
+            particle.style.animationDelay = delay + 's';
+            particlesContainer.appendChild(particle);
+        }
 
-  <script>
-    // ===== FLOATING DOTS — same style =====
-    const dotsContainer = document.getElementById('dotsContainer');
-    const totalDots = 80;
-    for (let i = 0; i < totalDots; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'dot';
-      const posX = Math.random() * 100;
-      const delay = Math.random() * 12;
-      const duration = 10 + Math.random() * 8;
-      const size = Math.random() * 2 + 1;
-      dot.style.left = posX + '%';
-      dot.style.width = size + 'px';
-      dot.style.height = size + 'px';
-      dot.style.opacity = 0.2 + Math.random() * 0.3;
-      dot.style.animationDelay = delay + 's';
-      dot.style.animationDuration = duration + 's';
-      dotsContainer.appendChild(dot);
-    }
+        // Popup message when click image
+        const imgCards = document.querySelectorAll('.img-card');
+        const modal = document.getElementById('modal');
+        const modalText = document.getElementById('modal-text');
+        const closeModal = document.getElementById('closeModal');
 
-    // Typewriter effect
-    const text = "MY PARENTS";
-    const speed = 120;
-    let charIndex = 0;
-    function typeWriter() {
-      if (charIndex < text.length) {
-        document.getElementById('typewriter').textContent += text.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeWriter, speed);
-      }
-    }
-    document.addEventListener('DOMContentLoaded', typeWriter);
+        imgCards.forEach(card => {
+            card.addEventListener('click', () => {
+                modalText.textContent = card.dataset.message;
+                modal.style.display = 'flex';
+            })
+        })
 
-    // 3D Flip Card
-    let activeCard = null;
-    function flipCard(cardId) {
-      const card = document.getElementById(cardId);
-      if (activeCard === cardId) {
-        card.classList.remove('active');
-        activeCard = null;
-      } else {
-        if (activeCard) document.getElementById(activeCard).classList.remove('active');
-        card.classList.add('active');
-        activeCard = cardId;
-      }
-    }
-  </script>
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        })
+    </script>
 </body>
 </html>
