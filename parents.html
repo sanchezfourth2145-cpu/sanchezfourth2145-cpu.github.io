@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Family and Friends</title>
+    <title>Family and Friends</title>
     <style>
         * {
             margin: 0;
@@ -11,43 +11,15 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', sans-serif;
         }
-
         body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+            height: 100vh;
+            background: #030f40;
             color: #e0f2fe;
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px 20px;
-            text-align: center;
         }
-
-        /* === GRID BACKGROUND === */
-        .grid-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: 0;
-            animation: gridMove 25s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(60px); }
-        }
-
-        /* === FLOATING DOTS / PARTICLES === */
-        .particles {
+        /* Dots animation mula baba pataas */
+        .dot-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -56,224 +28,243 @@
             z-index: 0;
             pointer-events: none;
         }
-
-        .particle {
+        .dot {
             position: absolute;
             width: 3px;
             height: 3px;
             background: #38bdf8;
             border-radius: 50%;
-            box-shadow: 0 0 8px #38bdf8;
-            animation: particleFloat linear infinite;
+            box-shadow: 0 0 6px #38bdf8;
+            animation: dotRise linear infinite;
         }
-
-        @keyframes particleFloat {
-            0% { transform: translateY(100vh); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh); opacity: 0; }
+        @keyframes dotRise {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            15% { opacity: 0.7; }
+            85% { opacity: 0.7; }
+            100% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
         }
-
-        .content {
+        .container {
             position: relative;
             z-index: 1;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-
-        h1 {
-            font-size: 2.5rem;
+        .section-title {
+            font-size: 2.2rem;
             color: #38bdf8;
-            margin-bottom: 8px;
+            margin-bottom: 18px;
+            text-align: center;
         }
-
-        .subtitle {
-            color: #94a3b8;
-            margin-bottom: 30px;
+        .image-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
         }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-            max-width: 1100px;
-            margin-bottom: 30px;
-        }
-
-        .img-card {
-            cursor: pointer;
-            border: 1px solid rgba(56,189,248,0.25);
+        .image-card {
+            width: 210px;
+            height: 150px;
+            border: 1px solid rgba(56, 189, 248, 0.4);
             border-radius: 12px;
             overflow: hidden;
-            transition: all 0.4s ease;
-            background: rgba(15,23,42,0.6);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .img-card:hover {
-            border-color: #38bdf8;
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(56,189,248,0.18);
+        .image-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
         }
-
-        .img-card img {
+        .image-card img {
             width: 100%;
-            height: 180px;
+            height: 100%;
             object-fit: cover;
-            display: block;
         }
-
-        .img-card p {
-            padding: 10px;
-            font-size: 0.9rem;
-            color: #7dd3fc;
+        .nav-buttons {
+            display: flex;
+            gap: 14px;
+            margin-top: 10px;
         }
-
-        /* === POPUP MODAL === */
-        .modal {
+        .nav-buttons button {
+            padding: 9px 20px;
+            background: transparent;
+            border: 1px solid #38bdf8;
+            color: #38bdf8;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-buttons button:hover {
+            background: rgba(56, 189, 248, 0.15);
+        }
+        /* Smooth pop‑up */
+        .popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(2,6,23,0.85);
+            background: rgba(0,0,0,0.75);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            padding: 20px;
+            transition: opacity 0.4s ease;
         }
-
-        .modal-content {
-            background: rgba(15,23,42,0.9);
+        .popup-overlay.active {
+            display: flex;
+        }
+        .popup-box {
+            max-width: 480px;
+            padding: 24px;
+            background: rgba(3, 15, 64, 0.92);
             border: 1px solid #38bdf8;
             border-radius: 14px;
-            max-width: 500px;
-            padding: 30px;
+            text-align: center;
+            transform: scale(0.85);
+            transition: transform 0.4s ease;
+        }
+        .popup-overlay.active .popup-box {
+            transform: scale(1);
+        }
+        .popup-message {
+            font-size: 1rem;
             color: #e0f2fe;
-            line-height: 1.6;
+            min-height: 90px;
+            margin-bottom: 18px;
         }
-
         .close-btn {
-            margin-top: 20px;
-            padding: 10px 24px;
+            padding: 8px 18px;
             border: 1px solid #38bdf8;
+            color: #38bdf8;
             background: transparent;
-            color: #38bdf8;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: 0.3s;
         }
-
-        .close-btn:hover {
-            background: #38bdf8;
-            color: #020617;
+        /* Rotate animation kapag pinindot */
+        .image-card.rotate-active {
+            animation: rotatePic 0.6s ease forwards;
         }
-
-        /* === NAVIGATION BUTTONS === */
-        .nav-buttons {
-            display: flex;
-            gap: 14px;
-            justify-content: center;
-        }
-
-        .nav-buttons a {
-            text-decoration: none;
-            padding: 12px 24px;
-            border: 1px solid #38bdf8;
-            border-radius: 8px;
-            color: #38bdf8;
-            transition: all 0.3s ease;
-        }
-
-        .nav-buttons a:hover {
-            background: #38bdf8;
-            color: #020617;
+        @keyframes rotatePic {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="grid-bg"></div>
-    <div class="particles" id="particles"></div>
-
-    <div class="content">
-        <h1>MY FAMILY AND FRIENDS</h1>
-        <p class="subtitle">The people who make my journey meaningful and fun</p>
-
-        <div class="image-grid">
-            <!-- FAMILY -->
-            <div class="img-card" data-message="My brother is one of my closest family members. We share laughs, support each other, and grow together through every challenge.">
+    <div class="dot-bg" id="dotContainer"></div>
+    <div class="container">
+        <!-- FAMILY SECTION -->
+        <h1 class="section-title" id="familyTitle"></h1>
+        <div class="image-row">
+            <div class="image-card" data-message="My brother is one of my closest family members. We share laughs, support each other, and create many happy memories together. He is always there to cheer me on in my journey.">
                 <img src="brother.jpg" alt="Brother">
-                <p>Click for the message</p>
             </div>
-
-            <div class="img-card" data-message="This warm hug reminds me how much my family loves me. Their care and affection give me strength to keep chasing my dreams.">
+            <div class="image-card" data-message="This moment shows the warm love of my family. Their hugs, care, and constant support give me strength to keep going and chase my dreams.">
                 <img src="hugging.jpg" alt="Hugging">
-                <p>Click for the message</p>
             </div>
-
-            <div class="img-card" data-message="A simple handshake with my family shows trust, respect, and the promise to always be there for one another.">
-                <img src="shake hands.jpg" alt="Shake Hands">
-                <p>Click for the message</p>
+            <div class="image-card" data-message="A simple handshake that represents trust, respect, and the strong bond I share with my family. We face challenges hand in hand.">
+                <img src="shakehands.jpg" alt="Shakehands">
             </div>
+        </div>
 
-            <!-- FRIENDS -->
-            <div class="img-card" data-message="My friends are my second family. We laugh, study, and face difficulties side by side, making every moment memorable.">
+        <!-- FRIENDS SECTION -->
+        <h1 class="section-title" id="friendsTitle"></h1>
+        <div class="image-row">
+            <div class="image-card" data-message="This photo from our Palarong Pambansa in Baguio represents pride, teamwork, and the fun moments we shared as friends while competing and supporting each other.">
+                <img src="palaro.jpg" alt="Palaro">
+            </div>
+            <div class="image-card" data-message="True friends make every moment memorable. We laugh, help each other, and create stories that I will treasure for a very long time.">
                 <img src="friends.jpg" alt="Friends">
-                <p>Click for the message</p>
             </div>
-
-            <div class="img-card" data-message="This photo from Baguio with my friends is a happy memory. We represented our school and created unforgettable experiences together.">
+            <div class="image-card" data-message="Baguio will always be a special place for me and my friends. The cold weather, fun adventures, and happy moments we had there are unforgettable.">
                 <img src="baguio.jpg" alt="Baguio">
-                <p>Click for the message</p>
             </div>
         </div>
 
         <div class="nav-buttons">
-            <a href="achievements.html">PREVIOUS</a>
-            <a href="index.html">BACK TO HOME</a>
+            <button id="prevBtn">PREVIOUS</button>
+            <button id="homeBtn">BACK TO HOME</button>
         </div>
     </div>
 
-    <!-- POPUP MODAL -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <p id="modal-text"></p>
-            <button class="close-btn" id="closeModal">Close</button>
+    <!-- Popup -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-box">
+            <p class="popup-message" id="popupText"></p>
+            <button class="close-btn" id="closePopup">Close</button>
         </div>
     </div>
 
     <script>
-        // Generate floating particles
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 40;
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            const size = Math.random() * 3 + 1;
+        // Dots
+        const dotContainer = document.getElementById('dotContainer');
+        for(let i=0; i<35; i++){
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
             const left = Math.random() * 100;
-            const duration = Math.random() * 15 + 10;
-            const delay = Math.random() * 20;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = left + '%';
-            particle.style.animationDuration = duration + 's';
-            particle.style.animationDelay = delay + 's';
-            particlesContainer.appendChild(particle);
+            const duration = Math.random() * 12 + 8;
+            const delay = Math.random() * 10;
+            dot.style.left = left + '%';
+            dot.style.animationDuration = duration + 's';
+            dot.style.animationDelay = delay + 's';
+            dotContainer.appendChild(dot);
         }
 
-        // Popup message when click image
-        const imgCards = document.querySelectorAll('.img-card');
-        const modal = document.getElementById('modal');
-        const modalText = document.getElementById('modal-text');
-        const closeModal = document.getElementById('closeModal');
+        // Typing effect para sa FAMILY at FRIENDS
+        function typeText(text, element, speed = 100){
+            element.textContent = "";
+            let index = 0;
+            const interval = setInterval(()=>{
+                if(index < text.length){
+                    element.textContent += text[index];
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, speed);
+        }
+        typeText("FAMILY", document.getElementById("familyTitle"));
+        setTimeout(()=>{
+            typeText("FRIENDS", document.getElementById("friendsTitle"));
+        }, 1200);
 
-        imgCards.forEach(card => {
-            card.addEventListener('click', () => {
-                modalText.textContent = card.dataset.message;
-                modal.style.display = 'flex';
+        // Pop‑up + rotate picture
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupText = document.getElementById('popupText');
+        const closePopup = document.getElementById('closePopup');
+        document.querySelectorAll('.image-card').forEach(card=>{
+            card.addEventListener('click', ()=>{
+                card.classList.add('rotate-active');
+                setTimeout(()=>{
+                    popupText.textContent = card.dataset.message;
+                    popupOverlay.classList.add('active');
+                    card.classList.remove('rotate-active');
+                }, 600);
             })
         })
+        closePopup.addEventListener('click', ()=>{
+            popupOverlay.classList.remove('active');
+        })
 
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
+        // Navigation
+        document.getElementById('prevBtn').addEventListener('click', ()=>{
+            window.location.href = "achievements.html";
+        })
+        document.getElementById('homeBtn').addEventListener('click', ()=>{
+            window.location.href = "index.html";
         })
     </script>
 </body>
