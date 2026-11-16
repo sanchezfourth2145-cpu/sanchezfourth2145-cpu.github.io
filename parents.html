@@ -106,24 +106,24 @@
             height: 100%;
             object-fit: cover;
         }
-        /* Dito ko itinaas ang mga importanteng parte */
+        /* ✅ DITO KO ITINAAS PARA MAKITA YUNG YAKAP AT SHAKE HANDS */
         .flip-front img.brother {
-            object-position: center 10%;
-        }
-        .flip-front img.hugging {
             object-position: center 5%;
         }
+        .flip-front img.hugging {
+            object-position: center 0%;
+        }
         .flip-front img.shakehands {
-            object-position: center 10%;
+            object-position: center 0%;
         }
         .flip-front img.palaro {
-            object-position: center 20%;
+            object-position: center 15%;
         }
         .flip-front img.friends {
-            object-position: center 25%;
+            object-position: center 20%;
         }
         .flip-front img.baguio {
-            object-position: center 30%;
+            object-position: center 25%;
         }
         .flip-back {
             background: rgba(56, 189, 248, 0.18);
@@ -211,13 +211,11 @@
 
             <div class="flip-card" data-message="True friends make every moment memorable. We laugh, help each other, and create stories that I will treasure for a very long time.">
                 <div class="flip-inner">
-                    <div class="flip-inner">
-                        <div class="flip-front">
-                            <img src="friends.jpg" class="friends" alt="Friends">
-                        </div>
-                        <div class="flip-back">
-                            <p></p>
-                        </div>
+                    <div class="flip-front">
+                        <img src="friends.jpg" class="friends" alt="Friends">
+                    </div>
+                    <div class="flip-back">
+                        <p></p>
                     </div>
                 </div>
             </div>
