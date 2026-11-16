@@ -45,7 +45,7 @@
             85% { opacity: 0.7; }
             100% {
                 transform: translateY(-10vh);
-                opacity: 0;
+            opacity: 0;
             }
         }
         .container {
@@ -57,25 +57,25 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px 30px;
+            padding: 10px 20px;
         }
         .section-title {
-            font-size: 2.7rem;
+            font-size: 2.5rem;
             color: #38bdf8;
             margin-bottom: 12px;
             text-align: center;
         }
         .image-row {
             display: flex;
-            gap: 28px;
+            gap: 22px;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 18px;
             perspective: 1200px;
         }
         .flip-card {
-            width: 310px;
-            height: 220px;
+            width: 300px;
+            height: 210px;
             cursor: pointer;
             position: relative;
         }
@@ -86,7 +86,7 @@
             transition: transform 0.8s ease;
             transform-style: preserve-3d;
         }
-        .flip-card.flipped .flip-inner {
+        .flip-card.flipped {
             transform: rotateY(180deg);
         }
         .flip-front, .flip-back {
@@ -105,15 +105,33 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
+        }
+        /* Specific adjustments para sa bawat picture */
+        .flip-front img.brother {
+            object-position: center 25%;
+        }
+        .flip-front img.hugging {
+            object-position: center 35%;
+        }
+        .flip-front img.shakehands {
+            object-position: center 45%;
+        }
+        .flip-front img.palaro {
+            object-position: center 20%;
+        }
+        .flip-front img.friends {
+            object-position: center 25%;
+        }
+        .flip-front img.baguio {
+            object-position: center 30%;
         }
         .flip-back {
             background: rgba(56, 189, 248, 0.18);
             color: #e0f2fe;
             transform: rotateY(180deg);
-            padding: 22px;
+            padding: 20px;
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 0.95%;
             line-height: 1.5;
         }
         .nav-buttons {
@@ -122,39 +140,30 @@
             margin-top: 8px;
         }
         .nav-buttons button {
-            padding: 10px 22px;
+            padding: 9px 20px;
             background: transparent;
             border: 1px solid #38bdf8;
             color: #38bdf8;
             border-radius: 6px;
-            font-size: 1rem;
+            \: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         .nav-buttons button:hover {
             background: rgba(56, 189, 248, 0.15);
         }
-        @media (max-width: 768px) {
-            .flip-card {
-                width: 90%;
-                height: 250px;
-            }
-            .section-title {
-                font-size: 2rem;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="dot-bg" id="dotContainer"></div>
     <div class="container">
-        <h class="section-title" id="familyTitle"></h>
+        <h1 class="section-title" id="familyTitle"></h1>
         <div class="image-row">
 
             <div class="flip-card" data-message="My brother is one of my closest family members. We share laughs, support each other, and create many happy memories together. He is always there to cheer me on in my journey.">
                 <div class="flip-inner">
                     <div class="flip-front">
-                        <img src="brother.jpg" alt="Brother">
+                        <img src="brother.jpg" class="brother" alt="Brother">
                     </div>
                     <div class="flip-back">
                         <p></p>
@@ -165,18 +174,18 @@
             <div class="flip-card" data-message="This moment shows the warm love of my family. Their hugs, care, and constant support give me strength to keep going and chase my dreams.">
                 <div class="flip-inner">
                     <div class="flip-front">
-                        <img src="hugging.jpg" alt="Hugging">
+                        <img src="hugging.jpg" class="hugging" alt="Hugging">
                     </div>
                     <div class="flip-back">
                         <p></p>
                     </div>
-                </div>
+                    \</div>
             </div>
 
-            <div class="flip-card" data-message="A simple handshake that represents trust, respect, and the strong bond I share with my family. We face challenges hand in hand.">
+            <div class="flip-card" data-message="A simple handshake that represents trust, respects, 0 and the strong bond I share with my family. We face challenges hand in hand.">
                 <div class="flip-inner">
                     <div class="flip-front">
-                        <img src="shakehands.jpg" alt="Shakehands">
+                        <img src="shakehands.jpg" class="shakehands" alt="Shakehands">
                     </div>
                     <div class="flip-back">
                         <p></p>
@@ -192,7 +201,7 @@
             <div class="flip-card" data-message="This photo from our Palarong Pambansa in Baguio represents pride, teamwork, and the fun moments we shared as friends while competing and supporting each other.">
                 <div class="flip-inner">
                     <div class="flip-front">
-                        <img src="palaro.jpg" alt="Palaro">
+                        <img src="palaro.jpg" class="palaro" alt="Palaro">
                     </div>
                     <div class="flip-back">
                         <p></p>
@@ -203,7 +212,7 @@
             <div class="flip-card" data-message="True friends make every moment memorable. We laugh, help each other, and create stories that I will treasure for a very long time.">
                 <div class="flip-inner">
                     <div class="flip-front">
-                        <img src="friends.jpg" alt="Friends">
+                        <img src="friends.jpg" class="friends" alt="Friends">
                     </div>
                     <div class="flip-back">
                         <p></p>
@@ -214,7 +223,7 @@
             <div class="flip-card" data-message="Baguio will always be a special place for me and my friends. The cold weather, fun adventures, and happy moments we had there are unforgettable.">
                 <div class="flip-inner">
                     <div class="flip-front">
-                        <img src="baguio.jpg" alt="Baguio">
+                        <img src="baguio.jpg" class="baguio" alt="Baguio">
                     </div>
                     <div class="flip-back">
                         <p></p>
@@ -251,8 +260,7 @@
                 if(index < text.length){
                     element.textContent += text[index];
                     index++;
-                } else {
-                    clearInterval(interval);
+                } else,  clearInterval(interval);
                 }
             }, speed);
         }
