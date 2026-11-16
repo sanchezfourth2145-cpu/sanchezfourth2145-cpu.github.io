@@ -58,26 +58,26 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 8px 20px;
         }
         .section-title {
-            font-size: 2.4rem;
+            font-size: 2.5rem;
             color: #38bdf8;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             text-align: center;
         }
         .image-row {
             display: flex;
-            gap: 18px;
+            gap: 26px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 18px;
-            perspective: 1000px;
+            margin-bottom: 16px;
+            perspective: 1200px;
         }
-        /* Mas malaki na picture */
+        /* Mas malaki na pictures, sakto sa space */
         .flip-card {
-            width: 240px;
-            height: 170px;
+            width: 300px;
+            height: 210px;
             cursor: pointer;
             position: relative;
         }
@@ -85,7 +85,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform 0.7s ease;
+            transition: transform 0.8s ease;
             transform-style: preserve-3d;
         }
         .flip-card.flipped .flip-inner {
@@ -96,27 +96,32 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            border-radius: 12px;
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            border-radius: 14px;
             overflow: hidden;
-            display:flex;
-            align-items:center;
-            justify-content:center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .flip-front img {
-            width:100%;
-            height:100%;
-            object-fit:cover;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
+        /* Message sa likod ng picture */
         .flip-back {
-            background:rgba(56,189,248,0.12);
-            color:#e0f2fe;
+            background: rgba(56, 189, 248, 0.18);
+            color: #e0f2fe;
             transform: rotateY(180deg);
+            padding: 20px;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         .nav-buttons {
             display: flex;
             gap: 14px;
-            margin-top: 8px;
+            margin-top: 6px;
         }
         .nav-buttons button {
             padding: 9px 20px;
@@ -131,50 +136,6 @@
         .nav-buttons button:hover {
             background: rgba(56, 189, 248, 0.15);
         }
-        /* Smooth pop‑up */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.75);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: opacity 0.4s ease;
-        }
-        .popup-overlay.active {
-            display: flex;
-        }
-        .popup-box {
-            max-width: 480px;
-            padding: 24px;
-            background: rgba(3, 15, 64, 0.92);
-            border: 1px solid #38bdf8;
-            border-radius: 14px;
-            text-align: center;
-            transform: scale(0.85);
-            transition: transform 0.4s ease;
-        }
-        .popup-overlay.active .popup-box {
-            transform: scale(1);
-        }
-        .popup-message {
-            font-size: 1rem;
-            color: #e0f2fe;
-            min-height: 90px;
-            margin-bottom: 18px;
-        }
-        .close-btn {
-            padding: 8px 18px;
-            border: 1px solid #38bdf8;
-            color: #38bdf8;
-            background: transparent;
-            border-radius: 6px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -188,7 +149,9 @@
                     <div class="flip-front">
                         <img src="brother.jpg" alt="Brother">
                     </div>
-                    <div class="flip-back"></div>
+                    <div class="flip-back">
+                        <p></p>
+                    </div>
                 </div>
             </div>
             <div class="flip-card" data-message="This moment shows the warm love of my family. Their hugs, care, and constant support give me strength to keep going and chase my dreams.">
@@ -196,7 +159,9 @@
                     <div class="flip-front">
                         <img src="hugging.jpg" alt="Hugging">
                     </div>
-                    <div class="flip-back"></div>
+                    <div class="flip-back">
+                        <p></p>
+                    </div>
                 </div>
             </div>
             <div class="flip-card" data-message="A simple handshake that represents trust, respect, and the strong bond I share with my family. We face challenges hand in hand.">
@@ -204,7 +169,9 @@
                     <div class="flip-front">
                         <img src="shakehands.jpg" alt="Shakehands">
                     </div>
-                    <div class="flip-back"></div>
+                    <div class="flip-back">
+                        <p></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -217,7 +184,9 @@
                     <div class="flip-front">
                         <img src="palaro.jpg" alt="Palaro">
                     </div>
-                    <div class="flip-back"></div>
+                    <div class="flip-back">
+                        <p></p>
+                    </div>
                 </div>
             </div>
             <div class="flip-card" data-message="True friends make every moment memorable. We laugh, help each other, and create stories that I will treasure for a very long time.">
@@ -225,7 +194,9 @@
                     <div class="flip-front">
                         <img src="friends.jpg" alt="Friends">
                     </div>
-                    <div class="flip-back"></div>
+                    <div class="flip-back">
+                        <p></p>
+                    </div>
                 </div>
             </div>
             <div class="flip-card" data-message="Baguio will always be a special place for me and my friends. The cold weather, fun adventures, and happy moments we had there are unforgettable.">
@@ -233,7 +204,9 @@
                     <div class="flip-front">
                         <img src="baguio.jpg" alt="Baguio">
                     </div>
-                    <div class="flip-back"></div>
+                    <div class="flip-back">
+                        <p></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -241,14 +214,6 @@
         <div class="nav-buttons">
             <button id="prevBtn">PREVIOUS</button>
             <button id="homeBtn">BACK TO HOME</button>
-        </div>
-    </div>
-
-    <!-- Popup -->
-    <div class="popup-overlay" id="popupOverlay">
-        <div class="popup-box">
-            <p class="popup-message" id="popupText"></p>
-            <button class="close-btn" id="closePopup">Close</button>
         </div>
     </div>
 
@@ -267,7 +232,7 @@
             dotContainer.appendChild(dot);
         }
 
-        // Typing effect: MY FAMILY at MY FRIENDS
+        // Typing effect MY FAMILY at MY FRIENDS
         function typeText(text, element, speed = 100){
             element.textContent = "";
             let index = 0;
@@ -285,22 +250,13 @@
             typeText("MY FRIENDS", document.getElementById("friendsTitle"));
         }, 1400);
 
-        // Flip muna, tapos lalabas ang message
-        const popupOverlay = document.getElementById('popupOverlay');
-        const popupText = document.getElementById('popupText');
-        const closePopup = document.getElementById('closePopup');
+        // Flip at ilagay ang message sa likod
         document.querySelectorAll('.flip-card').forEach(card=>{
+            const backP = card.querySelector('.flip-back p');
+            backP.textContent = card.dataset.message;
             card.addEventListener('click', ()=>{
                 card.classList.add('flipped');
-                setTimeout(()=>{
-                    popupText.textContent = card.dataset.message;
-                    popupOverlay.classList.add('active');
-                    card.classList.remove('flipped');
-                },700);
             })
-        })
-        closePopup.addEventListener('click', ()=>{
-            popupOverlay.classList.remove('active');
         })
 
         // Navigation
