@@ -24,7 +24,6 @@
             padding: 40px;
         }
 
-        /* Background Dots Animation */
         .dot {
             position: absolute;
             background-color: rgba(147, 197, 253, 0.6);
@@ -119,6 +118,10 @@
             gap: 20px;
         }
 
+        .card-link {
+            text-decoration: none;
+        }
+
         .card {
             border: 1px solid rgba(148, 163, 184, 0.35);
             border-radius: 16px;
@@ -165,12 +168,10 @@
 </head>
 <body>
     <div class="container">
-        <!-- LEFT SIDE: WHOLE BODY PICTURE -->
         <div class="photo-side">
             <img src="formalwhole.jpg" alt="Formal Whole Body" class="whole-body-pic">
         </div>
 
-        <!-- RIGHT SIDE: NAME, TEXT, BUTTONS -->
         <div class="text-side">
             <p class="hello-text">HELLO, I'M</p>
             <h1 class="full-name">Ma. Luisa Victoria S. Sanchez</h1>
@@ -178,24 +179,29 @@
             <button class="explore-btn">Explore My Work →</button>
 
             <div class="cards-row">
-                <div class="card">
-                    <h3>Personal Information</h3>
-                    <p>Get to know my background, education, and skills</p>
-                </div>
-                <div class="card">
-                    <h3>Achievements</h3>
-                    <p>My awards, certifications, and milestones</p>
-                </div>
-                <div class="card">
-                    <h3>My Family and Friends</h3>
-                    <p>Dedicated to the people who made it all possible</p>
-                </div>
+                <a href="personal.html" class="card-link">
+                    <div class="card">
+                        <h3>Personal Information</h3>
+                        <p>Get to know my background, education, and skills</p>
+                    </div>
+                </a>
+                <a href="achievements.html" class="card-link">
+                    <div class="card">
+                        <h3>Achievements</h3>
+                        <p>My awards, certifications, and milestones</p>
+                    </div>
+                </a>
+                <a href="parents.html" class="card-link">
+                    <div class="card">
+                        <h3>My Family and Friends</h3>
+                        <p>Dedicated to the people who made it all possible</p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 
     <script>
-        // Generate rising dots
         function createDot() {
             const dot = document.createElement('div');
             dot.classList.add('dot');
