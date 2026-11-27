@@ -47,19 +47,19 @@
         .wrapper {
             display: flex;
             align-items: center;
-            gap: 60px;
+            gap: 70px;
             z-index: 10;
         }
         .profile-img-container {
-            width: 320px;
-            height: 520px;
-            border-radius: 20px;
+            width: 330px;
+            height: 530px;
+            border-radius: 22px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(96, 165, 250, 0.35);
+            box-shadow: 0 0 35px rgba(96, 165, 250, 0.40);
             animation: fadeInLeft 1.2s ease forwards;
         }
         @keyframes fadeInLeft{
-            0%{transform:translateX(-40px);opacity:0;}
+            0%{transform:translateX(-50px);opacity:0;}
             100%{transform:translateX(0);opacity:1;}
         }
         .profile-img-container img {
@@ -73,73 +73,75 @@
             animation: fadeInRight 1.2s ease forwards;
         }
         @keyframes fadeInRight{
-            0%{transform:translateX(40px);opacity:0;}
+            0%{transform:translateX(50px);opacity:0;}
             100%{transform:translateX(0);opacity:1;}
         }
         .small-heading {
-            font-size: 18px;
-            letter-spacing: 3px;
+            font-size: 20px;
+            letter-spacing: 4px;
             color: #bae6fd;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         h1 {
-            font-size: 42px;
-            margin-bottom: 12px;
+            font-size: 44px;
+            margin-bottom: 15px;
             color:#ffffff;
+            text-shadow: 0 0 8px rgba(255,255,255,0.35);
         }
         .subtitle {
-            font-size: 16px;
+            font-size: 17px;
             color: #cbd5e1;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
         .explore-btn {
-            padding: 12px 26px;
+            padding: 14px 30px;
             border: none;
-            border-radius: 30px;
+            border-radius: 35px;
             background-color: #38bdf8;
             color: #020617;
             font-weight: bold;
-            font-size:15px;
+            font-size:16px;
             cursor: pointer;
-            margin-bottom:45px;
+            margin-bottom:50px;
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
         .explore-btn:hover{
-            transform: translateY(-3px);
-            box-shadow:0 6px 18px rgba(56,189,248,0.45);
+            transform: translateY(-4px);
+            box-shadow:0 8px 22px rgba(56,189,248,0.50);
         }
         .cards-container {
             display: flex;
-            gap:25px;
+            gap:28px;
         }
         .card-link {
             text-decoration: none;
         }
         .card {
-            width: 210px;
-            padding:22px 15px;
-            border:1px solid rgba(148,163,184,0.4);
-            border-radius:14px;
-            background-color: rgba(15,23,42,0.55);
+            width: 220px;
+            padding:24px 16px;
+            border:1px solid rgba(148,163,184,0.45);
+            border-radius:16px;
+            background-color: rgba(15,23,42,0.60);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
         .card:hover{
-            transform: translateY(-4px);
-            box-shadow:0 5px 16px rgba(96,165,250,0.3);
+            transform: translateY(-5px);
+            box-shadow:0 7px 20px rgba(96,165,250,0.35);
         }
         .card h3 {
             color:white;
-            font-size:17px;
-            margin-bottom:8px;
+            font-size:18px;
+            margin-bottom:10px;
         }
         .card p {
             color:#cbd5e1;
-            font-size:13px;
+            font-size:14px;
+            line-height:1.5;
         }
         .cursor{
             display:inline-block;
             width:3px;
-            height:22px;
+            height:24px;
             background:#38bdf8;
             animation: blink 0.7s infinite;
         }
