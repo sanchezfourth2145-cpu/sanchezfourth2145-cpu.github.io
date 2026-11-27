@@ -21,73 +21,73 @@
         }
         .dot {
             position: absolute;
-            background-color: rgba(147, 197, 253, 0.6);
+            background-color: rgba(147, 197, 253, 0.7);
             border-radius: 50%;
-            animation: rise 12s linear infinite;
+            animation: rise 10s linear infinite;
         }
         @keyframes rise {
             0% {
                 transform: translateY(100vh);
                 opacity: 0;
             }
-            10% {
+            15% {
                 opacity: 1;
             }
-            90% {
+            85% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100px);
+                transform: translateY(-120px);
                 opacity: 0;
             }
         }
         h1 {
             text-align: center;
-            padding-top: 16px;
+            padding-top: 20px;
             font-size:34px;
             color:#38bdf8;
             text-shadow: 0 0 12px #38bdf8;
-            animation: fadeInDown 1s ease forwards;
-        }
-        @keyframes fadeInDown{
-            0%{transform:translateY(-20px);opacity:0;}
-            100%{transform:translateY(0px);opacity:1;}
         }
         .mainWrap{
             width:100%;
-            height:calc(100vh - 90px);
-            padding:15px 40px;
-            overflow-y:auto;
+            height:calc(100vh - 110px);
+            padding:15px 50px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:12px;
         }
-        .sectionBox{
+        .clickBox{
+            width:85%;
+            max-width:850px;
             background:rgba(15,23,42,0.75);
             border:1px solid #60a5fa;
             border-radius:16px;
-            padding:22px;
-            margin:18px auto;
-            max-width:850px;
-            animation: fadePop 0.7s ease forwards;
+            padding:14px 20px;
+            cursor:pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        @keyframes fadePop{
-            0%{transform:scale(0.95);opacity:0;}
-            100%{transform:scale(1);opacity:1;}
+        .clickBox:hover{
+            transform: translateY(-2px);
+            box-shadow:0 4px 12px rgba(96,165,250,0.35);
         }
-        .sectionBox h2{
+        .clickBox h2{
             color:#bae6fd;
-            margin-bottom:12px;
-            border-bottom: 1px solid #60a5fa;
-            padding-bottom:6px;
+            font-size:20px;
         }
-        .sectionBox p{
-            margin:7px 0;
-            font-size:16px;
+        .infoContent{
+            display:none;
+            margin-top:10px;
             line-height:1.6;
+            font-size:15px;
         }
         .buttonArea{
             display:flex;
             justify-content:space-between;
+            width:85%;
             max-width:850px;
-            margin:20px auto;
+            margin-top:15px;
         }
         .navButton{
             padding:11px 24px;
@@ -109,33 +109,41 @@
     <div id="dotContainer"></div>
     <h1>PERSONAL INFORMATION</h1>
     <div class="mainWrap">
-        <div class="sectionBox">
+        <div class="clickBox" onclick="openOnlyThis('basic')">
             <h2>BASIC DETAILS</h2>
-            <p><strong>Full Name:</strong> Ma. Luisa Victoria S. Sanchez</p>
-            <p><strong>Birthdate:</strong> February 24, 2008</p>
-            <p><strong>Religion:</strong> Roman Catholic</p>
-            <p><strong>Address:</strong> BGH Compound, Baguio City</p>
-            <p><strong>Email:</strong> sanchezfourth@gmail.com</p>
-            <p><strong>Phone Number:</strong> 09506920820</p>
-            <p><strong>Height:</strong> 5'1"</p>
-            <p><strong>Weight:</strong> 45kg</p>
-            <p><strong>Blood Type:</strong> Type A</p>
+            <div id="basic" class="infoContent">
+                <p><strong>Full Name:</strong> Ma. Luisa Victoria S. Sanchez</p>
+                <p><strong>Birthdate:</strong> February 24, 2008</p>
+                <p><strong>Religion:</strong> Roman Catholic</p>
+                <p><strong>Address:</strong> BGH Compound, Baguio City</p>
+                <p><strong>Email:</strong> sanchezfourth@gmail.com</p>
+                <p><strong>Phone Number:</strong> 09506920820</p>
+                <p><strong>Height:</strong> 5'1"</p>
+                <p><strong>Weight:</strong> 45kg</p>
+                <p><strong>Blood Type:</strong> Type A</p>
+            </div>
         </div>
-        <div class="sectionBox">
+        <div class="clickBox" onclick="openOnlyThis('education')">
             <h2>EDUCATIONAL BACKGROUND</h2>
-            <p><strong>Current:</strong> Bachelor of Science in Information Technology</p>
-            <p><strong>Track:</strong> Enterprise Resource Planning</p>
-            <p><strong>School:</strong> University of the Cordilleras</p>
-            <p><strong>Senior High School & Junior High School:</strong> Baguio City High School</p>
-            <p><strong>Elementary:</strong> Doña Aurora H. Bueno Elementary School</p>
+            <div id="education" class="infoContent">
+                <p><strong>Current:</strong> Bachelor of Science in Information Technology</p>
+                <p><strong>Track:</strong> Enterprise Resource Planning</p>
+                <p><strong>School:</strong> University of the Cordilleras</p>
+                <p><strong>Senior High School & Junior High School:</strong> Baguio City High School</p>
+                <p><strong>Elementary:</strong> Doña Aurora H. Bueno Elementary School</p>
+            </div>
         </div>
-        <div class="sectionBox">
+        <div class="clickBox" onclick="openOnlyThis('about')">
             <h2>ABOUT ME</h2>
-            <p>I am Ma. Luisa Victoria S. Sanchez, a dedicated BSIT student at the University of the Cordilleras. I have a strong passion for technology and continuous learning. One of my favorite hobbies is playing basketball, it keeps me active, disciplined and teaches me the value of teamwork. I believe that dedication and curiosity are the keys to turning dreams into reality.</p>
+            <div id="about" class="infoContent">
+                <p>I am Ma. Luisa Victoria S. Sanchez, a dedicated BSIT student at the University of the Cordilleras. I have a strong passion for technology and continuous learning. One of my favorite hobbies is playing basketball, it keeps me active, disciplined and teaches me the value of teamwork. I believe that dedication and curiosity are the keys to turning dreams into reality.</p>
+            </div>
         </div>
-        <div class="sectionBox">
+        <div class="clickBox" onclick="openOnlyThis('goals')">
             <h2>FUTURE GOALS</h2>
-            <p>I want to finish my college degree, become a skilled IT professional and create meaningful projects that can help other people while making my family very proud of all my achievements in life.</p>
+            <div id="goals" class="infoContent">
+                <p>I want to finish my college degree, become a skilled IT professional and create meaningful projects that can help other people while making my family very proud of all my achievements in life.</p>
+            </div>
         </div>
         <div class="buttonArea">
             <button class="navButton" onclick="window.location.href='index.html'">HOME</button>
@@ -145,13 +153,23 @@
 
     <script>
         const dotContainer = document.getElementById("dotContainer");
-        for(let i = 0; i < 35; i++){
+        for(let i = 0; i < 70; i++){
             let dot = document.createElement("div");
             dot.classList.add("dot");
-            dot.style.width = Math.random()*4 +1 + "px";
-            dot.style.height = Math.random()*4 +1 + "px";
-            dot.style.left = Math.random()*100 + "%";
+            const size = Math.random() * 5 + 2;
+            dot.style.width = size + "px";
+            dot.style.height = size + "px";
+            dot.style.left = Math.random() * 100 + "%";
+            dot.style.animationDelay = Math.random() * 6 + "s";
             dotContainer.appendChild(dot);
+        }
+
+        function openOnlyThis(selectedId){
+            const allBoxes = document.getElementsByClassName("infoContent");
+            for(let x = 0; x < allBoxes.length; x++){
+                allBoxes[x].style.display = "none";
+            }
+            document.getElementById(selectedId).style.display = "block";
         }
     </script>
 </body>
