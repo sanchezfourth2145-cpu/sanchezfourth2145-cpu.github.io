@@ -11,7 +11,6 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Inter', sans-serif;
         }
-
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
@@ -23,162 +22,112 @@
             justify-content: center;
             padding: 40px;
         }
-
         .dot {
             position: absolute;
             background-color: rgba(147, 197, 253, 0.6);
             border-radius: 50%;
             animation: rise 8s ease-out forwards;
         }
-
         @keyframes rise {
             0% {
-                bottom: 0;
+                transform: translateY(100vh);
                 opacity: 0;
             }
-            20% {
-                opacity: 0.7;
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
             }
             100% {
-                bottom: 100vh;
+                transform: translateY(-100px);
                 opacity: 0;
             }
         }
-
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 50px;
-            align-items: center;
-            z-index: 10;
-            max-width: 1400px;
-            width: 100%;
-        }
-
-        .photo-side {
+        .wrapper {
             display: flex;
-            justify-content: center;
             align-items: center;
+            gap: 60px;
+            z-index: 10;
         }
-
-        .whole-body-pic {
-            height: 80vh;
-            max-height: 750px;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(129, 212, 250, 0.25);
+        .profile-img-container {
+            width: 320px;
+            height: 520px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.35);
         }
-
-        .text-side {
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+        .text-area {
             text-align: center;
         }
-
-        .hello-text {
-            font-size: 22px;
-            letter-spacing: 4px;
-            color: #7dd3fc;
+        .small-heading {
+            font-size: 18px;
+            letter-spacing: 3px;
+            color: #bae6fd;
             margin-bottom: 12px;
         }
-
-        .full-name {
-            font-size: 52px;
-            font-weight: 700;
-            color: #f0f9ff;
-            margin-bottom: 16px;
-            line-height: 1.1;
+        h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
         }
-
         .subtitle {
-            font-size: 18px;
+            font-size: 16px;
             color: #cbd5e1;
-            margin-bottom: 32px;
+            margin-bottom: 35px;
         }
-
         .explore-btn {
-            padding: 14px 36px;
-            font-size: 18px;
-            font-weight: 600;
+            padding: 12px 26px;
             border: none;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #0ea5e9, #38bdf8);
-            color: #082f49;
+            border-radius: 30px;
+            background-color: #38bdf8;
+            color: #020617;
+            font-weight: bold;
+            font-size:15px;
             cursor: pointer;
-            margin-bottom: 45px;
-            transition: all 0.3s ease;
+            margin-bottom:45px;
         }
-
-        .explore-btn:hover {
-            box-shadow: 0 0 20px #38bdf8;
-            transform: translateY(-2px);
+        .cards-container {
+            display: flex;
+            gap:25px;
         }
-
-        .cards-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
         .card-link {
             text-decoration: none;
         }
-
         .card {
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            border-radius: 16px;
-            padding: 26px 18px;
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(8px);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            width: 210px;
+            padding:22px 15px;
+            border:1px solid rgba(148,163,184,0.4);
+            border-radius:14px;
+            background-color: rgba(15,23,42,0.55);
         }
-
-        .card:hover {
-            border-color: #38bdf8;
-            box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
-            transform: translateY(-4px);
-        }
-
         .card h3 {
-            font-size: 20px;
-            color: #7dd3fc;
-            margin-bottom: 10px;
+            color:white;
+            font-size:17px;
+            margin-bottom:8px;
         }
-
         .card p {
-            font-size: 14px;
-            color: #cbd5e1;
-            line-height: 1.4;
-        }
-
-        @media(max-width: 1024px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-            .whole-body-pic {
-                height: 55vh;
-            }
-            .full-name {
-                font-size: 36px;
-            }
-            .cards-row {
-                grid-template-columns: 1fr;
-            }
+            color:#cbd5e1;
+            font-size:13px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="photo-side">
-            <img src="formalwhole.jpg" alt="Formal Whole Body" class="whole-body-pic">
+    <div class="wrapper">
+        <div class="profile-img-container">
+            <img src="formalwhole.jpg" alt="Ma. Luisa Victoria S. Sanchez">
         </div>
-
-        <div class="text-side">
-            <p class="hello-text">HELLO, I'M</p>
-            <h1 class="full-name">Ma. Luisa Victoria S. Sanchez</h1>
+        <div class="text-area">
+            <p class="small-heading">HELLO, I'M</p>
+            <h1>Ma. Luisa Victoria S. Sanchez</h1>
             <p class="subtitle">An aspiring IT professional building digital solutions for tomorrow's world</p>
             <button class="explore-btn">Explore My Work →</button>
-
-            <div class="cards-row">
+            <div class="cards-container">
                 <a href="personal.html" class="card-link">
                     <div class="card">
                         <h3>Personal Information</h3>
@@ -191,7 +140,7 @@
                         <p>My awards, certifications, and milestones</p>
                     </div>
                 </a>
-                <a href="parents.html" class="card-link">
+                <a href="myfamilyandfriends.html" class="card-link">
                     <div class="card">
                         <h3>My Family and Friends</h3>
                         <p>Dedicated to the people who made it all possible</p>
@@ -202,7 +151,7 @@
     </div>
 
     <script>
-        function createDot() {
+        function createDot(){
             const dot = document.createElement('div');
             dot.classList.add('dot');
             const size = Math.random() * 4 + 1;
@@ -212,7 +161,6 @@
             document.body.appendChild(dot);
             setTimeout(() => dot.remove(), 8000);
         }
-
         setInterval(createDot, 250);
     </script>
 </body>
