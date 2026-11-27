@@ -41,13 +41,14 @@
                 opacity: 0;
             }
         }
+        .titleWrap{
+            text-align:center;
+            padding-top:15px;
+        }
         h1 {
-            text-align: center;
-            padding-top: 20px;
             font-size:36px;
             color:#38bdf8;
             text-shadow: 0 0 12px #38bdf8;
-            white-space: nowrap;
         }
         .cursorTitle{
             display:inline-block;
@@ -62,8 +63,8 @@
         }
         .mainWrap{
             width:100%;
-            height:calc(100vh - 110px);
-            padding:15px 50px;
+            height:calc(100vh - 130px);
+            padding:10px 50px;
             display:flex;
             flex-direction:column;
             align-items:center;
@@ -141,7 +142,10 @@
 </head>
 <body>
     <div id="dotContainer"></div>
-    <h1><span id="titleText"></span><span class="cursorTitle"></span></h1>
+    <div class="titleWrap">
+        <h1><span id="titleLine1"></span></h1>
+        <h1><span id="titleLine2"></span><span class="cursorTitle"></span></h1>
+    </div>
     <div class="mainWrap">
         <div class="clickBox boxLeft" onclick="openOnlyThis('basic')">
             <h2>BASIC DETAILS</h2>
@@ -186,19 +190,30 @@
     </div>
 
     <script>
-        // Typing effect for title
-        const titleString = "PERSONAL INFORMATION";
-        let charIndex = 0;
-        function typeTitle(){
-            if(charIndex < titleString.length){
-                document.getElementById("titleText").textContent += titleString.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeTitle, 70);
+        const textLine1 = "PERSONAL";
+        const textLine2 = "INFORMATION";
+        let i1 = 0;
+        let i2 = 0;
+        const speed = 70;
+
+        function typeFirstLine(){
+            if(i1 < textLine1.length){
+                document.getElementById("titleLine1").textContent += textLine1.charAt(i1);
+                i1++;
+                setTimeout(typeFirstLine, speed);
+            }else{
+                setTimeout(typeSecondLine, 250);
             }
         }
-        typeTitle();
+        function typeSecondLine(){
+            if(i2 < textLine2.length){
+                document.getElementById("titleLine2").textContent += textLine2.charAt(i2);
+                i2++;
+                setTimeout(typeSecondLine, speed);
+            }
+        }
+        typeFirstLine();
 
-        // Dots
         const dotContainer = document.getElementById("dotContainer");
         for(let i = 0; i < 70; i++){
             let dot = document.createElement("div");
