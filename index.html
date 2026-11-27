@@ -13,135 +13,69 @@
         }
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+            overflow: hidden;
+            background: linear-gradient(135deg, #020617 0%, #0c2240 50%, #020617 100%);
             color: #e0f2fe;
             position: relative;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding:40px;
         }
         .dot {
             position: absolute;
-            background-color: rgba(147, 197, 253, 0.6);
-            border-radius: 50%;
-            animation: rise 8s ease-out forwards;
+            background-color: rgba(147,197,253,0.6);
+            border-radius:50%;
+            animation: rise 9s linear infinite;
         }
         @keyframes rise {
-            0% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
+            0%{transform: translateY(100vh); opacity:0;}
+            15%{opacity:1;}
+            85%{opacity:1;}
+            100%{transform: translateY(-120px); opacity:0;}
         }
-        .wrapper {
-            display: flex;
-            align-items: center;
-            gap: 70px;
-            z-index: 10;
+        .container{
+            display:flex;
+            align-items:center;
+            gap:75px;
+            z-index:10;
         }
-        .profile-img-container {
-            width: 330px;
-            height: 530px;
-            border-radius: 22px;
-            overflow: hidden;
-            box-shadow: 0 0 35px rgba(96, 165, 250, 0.40);
-            animation: fadeInLeft 1.2s ease forwards;
+        .profileBox{
+            width:340px;
+            height:550px;
+            border-radius:24px;
+            overflow:hidden;
+            box-shadow: 0 0 40px rgba(56,189,248,0.42);
         }
-        @keyframes fadeInLeft{
-            0%{transform:translateX(-50px);opacity:0;}
-            100%{transform:translateX(0);opacity:1;}
+        .profileBox img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
         }
-        .profile-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
+        .textArea{
+            text-align:center;
         }
-        .text-area {
-            text-align: center;
-            animation: fadeInRight 1.2s ease forwards;
+        .greeting{
+            font-size:22px;
+            letter-spacing:4px;
+            color:#bae6fd;
+            margin-bottom:16px;
         }
-        @keyframes fadeInRight{
-            0%{transform:translateX(50px);opacity:0;}
-            100%{transform:translateX(0);opacity:1;}
-        }
-        .small-heading {
-            font-size: 20px;
-            letter-spacing: 4px;
-            color: #bae6fd;
-            margin-bottom: 15px;
-        }
-        h1 {
-            font-size: 44px;
-            margin-bottom: 15px;
+        .fullName{
+            font-size:48px;
             color:#ffffff;
-            text-shadow: 0 0 8px rgba(255,255,255,0.35);
+            text-shadow: 0 0 10px rgba(255,255,255,0.35);
+            margin-bottom:18px;
         }
-        .subtitle {
-            font-size: 17px;
-            color: #cbd5e1;
-            margin-bottom: 40px;
-        }
-        .explore-btn {
-            padding: 14px 30px;
-            border: none;
-            border-radius: 35px;
-            background-color: #38bdf8;
-            color: #020617;
-            font-weight: bold;
-            font-size:16px;
-            cursor: pointer;
-            margin-bottom:50px;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-        .explore-btn:hover{
-            transform: translateY(-4px);
-            box-shadow:0 8px 22px rgba(56,189,248,0.50);
-        }
-        .cards-container {
-            display: flex;
-            gap:28px;
-        }
-        .card-link {
-            text-decoration: none;
-        }
-        .card {
-            width: 220px;
-            padding:24px 16px;
-            border:1px solid rgba(148,163,184,0.45);
-            border-radius:16px;
-            background-color: rgba(15,23,42,0.60);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-        .card:hover{
-            transform: translateY(-5px);
-            box-shadow:0 7px 20px rgba(96,165,250,0.35);
-        }
-        .card h3 {
-            color:white;
+        .subText{
             font-size:18px;
-            margin-bottom:10px;
-        }
-        .card p {
             color:#cbd5e1;
-            font-size:14px;
-            line-height:1.5;
+            margin-bottom:45px;
         }
         .cursor{
             display:inline-block;
             width:3px;
-            height:24px;
+            height:26px;
             background:#38bdf8;
             animation: blink 0.7s infinite;
         }
@@ -149,33 +83,77 @@
             0%,100%{opacity:1;}
             50%{opacity:0;}
         }
+        .exploreBtn{
+            padding:15px 32px;
+            border:none;
+            border-radius:35px;
+            background:#38bdf8;
+            color:#020617;
+            font-weight:bold;
+            font-size:16px;
+            cursor:pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom:55px;
+        }
+        .exploreBtn:hover{
+            transform: translateY(-5px);
+            box-shadow:0 10px 28px rgba(56,189,248,0.52);
+        }
+        .cardWrapper{
+            display:flex;
+            gap:30px;
+        }
+        .homeCard{
+            width:230px;
+            padding:26px 18px;
+            border:1px solid rgba(148,163,184,0.45);
+            border-radius:18px;
+            background:rgba(15,23,42,0.62);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor:pointer;
+        }
+        .homeCard:hover{
+            transform: translateY(-6px);
+            box-shadow:0 9px 24px rgba(96,165,250,0.36);
+        }
+        .homeCard h3{
+            color:white;
+            font-size:19px;
+            margin-bottom:11px;
+        }
+        .homeCard p{
+            color:#cbd5e1;
+            font-size:14px;
+            line-height:1.55;
+        }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="profile-img-container">
+    <div id="dotContainer"></div>
+    <div class="container">
+        <div class="profileBox">
             <img src="formalwhole.jpg" alt="Ma. Luisa Victoria S. Sanchez">
         </div>
-        <div class="text-area">
-            <p class="small-heading"><span id="line1"></span><span class="cursor"></span></p>
-            <h1><span id="line2"></span></h1>
-            <p class="subtitle"><span id="line3"></span></p>
-            <button class="explore-btn">Explore My Work →</button>
-            <div class="cards-container">
-                <a href="personal.html" class="card-link">
-                    <div class="card">
+        <div class="textArea">
+            <div class="greeting"><span id="greetText"></span><span class="cursor"></span></div>
+            <h1 class="fullName"><span id="nameText"></span></h1>
+            <p class="subText"><span id="subText"></span></p>
+            <button class="exploreBtn">Explore My Work →</button>
+            <div class="cardWrapper">
+                <a href="personal.html" style="text-decoration:none;">
+                    <div class="homeCard">
                         <h3>Personal Information</h3>
                         <p>Get to know my background, education, and skills</p>
                     </div>
                 </a>
-                <a href="achievements.html" class="card-link">
-                    <div class="card">
+                <a href="achievements.html" style="text-decoration:none;">
+                    <div class="homeCard">
                         <h3>Achievements</h3>
                         <p>My awards, certifications, and milestones</p>
                     </div>
                 </a>
-                <a href="myfamilyandfriends.html" class="card-link">
-                    <div class="card">
+                <a href="myfamilyandfriends.html" style="text-decoration:none;">
+                    <div class="homeCard">
                         <h3>My Family and Friends</h3>
                         <p>Dedicated to the people who made it all possible</p>
                     </div>
@@ -183,52 +161,51 @@
             </div>
         </div>
     </div>
-
     <script>
-        function createDot(){
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            const size = Math.random() * 4 + 1;
-            dot.style.width = size + 'px';
-            dot.style.height = size + 'px';
-            dot.style.left = Math.random() * 100 + '%';
-            document.body.appendChild(dot);
-            setTimeout(() => dot.remove(), 8000);
-        }
-        setInterval(createDot, 250);
+        const greetString = "HELLO, I'M";
+        const nameString = "Ma. Luisa Victoria S. Sanchez";
+        const subString = "An aspiring IT professional building digital solutions for tomorrow's world";
+        let g=0,n=0,s=0;
+        const speed = 60;
 
-        const text1 = "HELLO, I'M";
-        const text2 = "Ma. Luisa Victoria S. Sanchez";
-        const text3 = "An aspiring IT professional building digital solutions for tomorrow's world";
-        let i1=0,i2=0,i3=0;
-        const speed = 55;
+        function typeGreet(){
+            if(g < greetString.length){
+                document.getElementById("greetText").textContent += greetString[g];
+                g++;
+                setTimeout(typeGreet,speed);
+            }else{
+                setTimeout(typeName,300);
+            }
+        }
+        function typeName(){
+            if(n < nameString.length){
+                document.getElementById("nameText").textContent += nameString[n];
+                n++;
+                setTimeout(typeName,speed);
+            }else{
+                setTimeout(typeSub,300);
+            }
+        }
+        function typeSub(){
+            if(s < subString.length){
+                document.getElementById("subText").textContent += subString[s];
+                s++;
+                setTimeout(typeSub,speed);
+            }
+        }
+        typeGreet();
 
-        function typeLine1(){
-            if(i1 < text1.length){
-                document.getElementById("line1").innerText += text1.charAt(i1);
-                i1++;
-                setTimeout(typeLine1,speed);
-            }else{
-                setTimeout(typeLine2,350);
-            }
+        const dotContainer = document.getElementById("dotContainer");
+        for(let i=0;i<75;i++){
+            let dot = document.createElement("div");
+            dot.classList.add("dot");
+            const size = Math.random()*5 + 2;
+            dot.style.width = size + "px";
+            dot.style.height = size + "px";
+            dot.style.left = Math.random()*100 + "%";
+            dot.style.animationDelay = Math.random()*7 + "s";
+            dotContainer.appendChild(dot);
         }
-        function typeLine2(){
-            if(i2 < text2.length){
-                document.getElementById("line2").innerText += text2.charAt(i2);
-                i2++;
-                setTimeout(typeLine2,speed);
-            }else{
-                setTimeout(typeLine3,350);
-            }
-        }
-        function typeLine3(){
-            if(i3 < text3.length){
-                document.getElementById("line3").innerText += text3.charAt(i3);
-                i3++;
-                setTimeout(typeLine3,speed);
-            }
-        }
-        typeLine1();
     </script>
 </body>
 </html>
