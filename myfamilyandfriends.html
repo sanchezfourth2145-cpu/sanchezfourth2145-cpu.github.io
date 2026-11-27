@@ -45,16 +45,18 @@
             text-align: center;
             padding-top: 16px;
             font-size:30px;
+            color:#38bdf8;
+            text-shadow: 0 0 12px #38bdf8;
         }
         h2 {
             text-align:center;
-            margin:10px 0;
+            margin:12px 0;
             font-size:24px;
             color:#bae6fd;
         }
         .mainContainer{
             width:100%;
-            height:calc(100vh - 90px);
+            height:calc(100vh - 95px);
             padding:10px 30px;
             overflow-y:auto;
         }
@@ -160,19 +162,13 @@
             <div class="photoCard" onclick="showMsg('friend2')">
                 <img src="palaro.jpg" alt="Palaro">
             </div>
+        </div>
+        <div class="rowWrap">
             <div class="photoCard" onclick="showMsg('friend3')">
                 <img src="baguio.jpg" alt="Baguio Trip">
             </div>
-        </div>
-        <div class="rowWrap">
             <div class="photoCard" onclick="showMsg('friend4')">
                 <img src="love.jpg" alt="Happy Memories">
-            </div>
-            <div class="photoCard" onclick="showMsg('friend5')">
-                <img src="groupone.jpg" alt="Group Photo One">
-            </div>
-            <div class="photoCard" onclick="showMsg('friend6')">
-                <img src="grouptwo.jpg" alt="Group Photo Two">
             </div>
         </div>
     </div>
@@ -205,9 +201,7 @@
             friend1: "These amazing people are my closest friends who make my school life so much brighter and fun. We celebrate our victories together and help each other whenever one of us is struggling with schoolwork or personal problems.",
             friend2: "Our palaro memories will always stay inside my heart forever! It was full of laughter, friendly competition and pure joy that made our bond much stronger than before.",
             friend3: "Our unforgettable trip to Baguio is one of my most precious memories! Seeing the beautiful scenery together with my friends made that trip so magical and something I will always look back on with a big smile.",
-            friend4: "This sweet memory reminds me how lucky I am to meet genuine friends who truly care about my wellbeing and who sincerely root for all of my success in life.",
-            friend5: "Every single person in this group has given me so many happy moments that I will keep forever. I hope that our friendship will continue to grow even after we graduate from our school.",
-            friend6: "Taking this group photo together marked another beautiful chapter of our friendship. I wish that all of us will achieve our dreams and meet again someday with bigger achievements and happier stories to share."
+            friend4: "This sweet memory reminds me how lucky I am to meet genuine friends who truly care about my wellbeing and who sincerely root for all of my success in life."
         };
 
         function showMsg(key){
