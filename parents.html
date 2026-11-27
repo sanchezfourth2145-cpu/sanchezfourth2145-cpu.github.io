@@ -12,287 +12,245 @@
             font-family: 'Segoe UI', sans-serif;
         }
         body {
+            width: 100vw;
             height: 100vh;
-            background: #030f40;
+            overflow: hidden;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
             color: #e0f2fe;
             position: relative;
-            overflow: hidden;
-        }
-        .dot-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
         }
         .dot {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: #38bdf8;
+            width: 4px;
+            height: 4px;
+            background-color: #60a5fa;
             border-radius: 50%;
-            box-shadow: 0 0 6px #38bdf8;
-            animation: dotRise linear infinite;
+            bottom: -10px;
+            animation: rise 12s linear infinite;
+            opacity: 0.6;
         }
-        @keyframes dotRise {
+        @keyframes rise {
             0% {
-                transform: translateY(100vh);
-                opacity: 0;
+                transform: translateY(0);
+                opacity: 0.6;
             }
-            15% { opacity: 0.7; }
-            85% { opacity: 0.7; }
             100% {
-                transform: translateY(-10vh);
+                transform: translateY(-100vh);
                 opacity: 0;
             }
+        }
+        h1 {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 32px;
         }
         .container {
-            position: relative;
-            z-index: 1;
+            display: flex;
             width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            height: calc(100vh - 80px);
             align-items: center;
-            justify-content: center;
-            padding: 10px 20px;
+            justify-content: space-evenly;
+            padding: 20px;
         }
-        .section-title {
-            font-size: 2.5rem;
-            color: #38bdf8;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-        .image-row {
-            display: flex;
-            gap: 22px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 18px;
-            perspective: 1200px;
-        }
-        .flip-card {
-            width: 300px;
-            height: 210px;
+        .mainCard {
+            width: 45%;
+            height: 75vh;
+            position: relative;
             cursor: pointer;
-            position: relative;
-        }
-        .flip-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s ease;
-            transform-style: preserve-3d;
-        }
-        .flip-card.flipped .flip-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-front, .flip-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border: 1px solid rgba(56, 189, 248, 0.45);
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 0 25px rgba(96,165,250,0.35);
         }
-        .flip-front img {
+        .mainCard img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        /* ✅ DITO KO ITINAAS PARA MAKITA YUNG YAKAP AT SHAKE HANDS */
-        .flip-front img.brother {
-            object-position: center 25%;
-        }
-        .flip-front img.hugging {
-            object-position: center 55%;
-        }
-        .flip-front img.shakehands {
-            object-position: center 60%;
-        }
-        .flip-front img.palaro {
-            object-position: center 15%;
-        }
-        .flip-front img.friends {
-            object-position: center 20%;
-        }
-        .flip-front img.baguio {
-            object-position: center 25%;
-        }
-        .flip-back {
-            background: rgba(56, 189, 248, 0.18);
-            color: #e0f2fe;
-            transform: rotateY(180deg);
-            padding: 20px;
+        .label {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(15,23,42,0.75);
             text-align: center;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            padding:12px;
+            font-size:22px;
+            font-weight:bold;
         }
-        .nav-buttons {
-            display: flex;
-            gap: 14px;
-            margin-top: 8px;
+        .modal {
+            display: none;
+            position: fixed;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100vh;
+            background: rgba(2,6,23,0.92);
+            z-index:10;
+            padding:30px;
         }
-        .nav-buttons button {
-            padding: 9px 20px;
-            background: transparent;
-            border: 1px solid #38bdf8;
-            color: #38bdf8;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .modal.active {
+            display:block;
         }
-        .nav-buttons button:hover {
-            background: rgba(56, 189, 248, 0.15);
+        .modalContent {
+            width:100%;
+            height:100%;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+        .closeBtn {
+            align-self:flex-end;
+            font-size:32px;
+            cursor:pointer;
+            margin-bottom:15px;
+        }
+        .galleryWrap {
+            display:flex;
+            gap:18px;
+            flex-wrap:wrap;
+            justify-content:center;
+            align-items:center;
+            max-width:100%;
+        }
+        .galleryCard {
+            width:220px;
+            height:260px;
+            cursor:pointer;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 0 15px rgba(96,165,250,0.3);
+        }
+        .galleryCard img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        .messageBox {
+            margin-top:18px;
+            background:rgba(15,23,42,0.78);
+            padding:15px 22px;
+            border-radius:12px;
+            text-align:center;
+            max-width:85%;
         }
     </style>
 </head>
 <body>
-    <div class="dot-bg" id="dotContainer"></div>
+    <div id="dotContainer"></div>
+    <h1>Family and Friends</h1>
     <div class="container">
-        <h1 class="section-title" id="familyTitle"></h1>
-        <div class="image-row">
-
-            <div class="flip-card" data-message="My brother is one of my closest family members. We share laughs, support each other, and create many happy memories together. He is always there to cheer me on in my journey.">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <img src="brother.jpg" class="brother" alt="Brother">
-                    </div>
-                    <div class="flip-back">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" data-message="This moment shows the warm love of my family. Their hugs, care, and constant support give me strength to keep going and chase my dreams.">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <img src="hugging.jpg" class="hugging" alt="Hugging">
-                    </div>
-                    <div class="flip-back">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" data-message="A simple handshake that represents trust, respect, and the strong bond I share with my family. We face challenges hand in hand.">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <img src="shakehands.jpg" class="shakehands" alt="Shakehands">
-                    </div>
-                    <div class="flip-back">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-
+        <!-- FAMILY MAIN CARD -->
+        <div class="mainCard" onclick="openFamilyModal()">
+            <img src="completefamily.jpg" alt="Complete Family">
+            <div class="label">MY FAMILY</div>
         </div>
-
-        <h1 class="section-title" id="friendsTitle"></h1>
-        <div class="image-row">
-
-            <div class="flip-card" data-message="This photo from our Palarong Pambansa in Baguio represents pride, teamwork, and the fun moments we shared as friends while competing and supporting each other.">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <img src="palaro.jpg" class="palaro" alt="Palaro">
-                    </div>
-                    <div class="flip-back">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" data-message="True friends make every moment memorable. We laugh, help each other, and create stories that I will treasure for a very long time.">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <img src="friends.jpg" class="friends" alt="Friends">
-                    </div>
-                    <div class="flip-back">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" data-message="Baguio will always be a special place for me and my friends. The cold weather, fun adventures, and happy moments we had there are unforgettable.">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <img src="baguio.jpg" class="baguio" alt="Baguio">
-                    </div>
-                    <div class="flip-back">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-
+        <!-- FRIENDS MAIN CARD -->
+        <div class="mainCard" onclick="openFriendsModal()">
+            <img src="friends_group.jpg" alt="Friends Group">
+            <div class="label">MY FRIENDS</div>
         </div>
+    </div>
 
-        <div class="nav-buttons">
-            <button id="prevBtn">PREVIOUS</button>
-            <button id="homeBtn">BACK TO HOME</button>
+    <!-- FAMILY MODAL -->
+    <div id="familyModal" class="modal">
+        <div class="modalContent">
+            <span class="closeBtn" onclick="closeAllModal()">&times;</span>
+            <div class="galleryWrap">
+                <div class="galleryCard" onclick="showMessage('hugging')">
+                    <img src="hugging.jpg" alt="Hugging">
+                </div>
+                <div class="galleryCard" onclick="showMessage('shakehands')">
+                    <img src="shakehands.jpg" alt="Shake Hands">
+                </div>
+                <div class="galleryCard" onclick="showMessage('firstsister')">
+                    <img src="firstsister.jpg" alt="First Sister">
+                </div>
+                <div class="galleryCard" onclick="showMessage('secondsister')">
+                    <img src="secondsister.jpg" alt="Second Sister">
+                </div>
+                <div class="galleryCard" onclick="showMessage('brother')">
+                    <img src="brother.jpg" alt="Brother">
+                </div>
+                <div class="galleryCard" onclick="showMessage('thirdsister')">
+                    <img src="thirdsister.jpg" alt="Third Sister">
+                </div>
+                <div class="galleryCard" onclick="showMessage('fourthsister')">
+                    <img src="fourthsister.jpg" alt="Fourth Sister">
+                </div>
+            </div>
+            <div id="familyMsg" class="messageBox"></div>
+        </div>
+    </div>
+
+    <!-- FRIENDS MODAL -->
+    <div id="friendsModal" class="modal">
+        <div class="modalContent">
+            <span class="closeBtn" onclick="closeAllModal()">&times;</span>
+            <div class="galleryWrap">
+                <div class="galleryCard" onclick="showFriendMessage('friends')">
+                    <img src="friends.jpg" alt="Friends">
+                </div>
+                <div class="galleryCard" onclick="showFriendMessage('love')">
+                    <img src="love.jpg" alt="Love">
+                </div>
+                <div class="galleryCard" onclick="showFriendMessage('palaro')">
+                    <img src="palaro.jpg" alt="Palaro">
+                </div>
+                <div class="galleryCard" onclick="showFriendMessage('baguio')">
+                    <img src="baguio.jpg" alt="Baguio">
+                </div>
+            </div>
+            <div id="friendsMsg" class="messageBox"></div>
         </div>
     </div>
 
     <script>
-        const dotContainer = document.getElementById('dotContainer');
-        for(let i=0; i<35; i++){
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            const left = Math.random() * 100;
-            const duration = Math.random() * 12 + 8;
-            const delay = Math.random() * 10;
-            dot.style.left = left + '%';
-            dot.style.animationDuration = duration + 's';
-            dot.style.animationDelay = delay + 's';
+        // BACKGROUND DOTS ANIMATION
+        const dotContainer = document.getElementById("dotContainer");
+        for(let i = 0; i < 35; i++){
+            let dot = document.createElement("div");
+            dot.classList.add("dot");
+            dot.style.left = Math.random() * 100 + "%";
+            dot.style.animationDelay = Math.random() * 12 + "s";
             dotContainer.appendChild(dot);
         }
 
-        function typeText(text, element, speed = 100){
-            element.textContent = "";
-            let index = 0;
-            const interval = setInterval(()=>{
-                if(index < text.length){
-                    element.textContent += text[index];
-                    index++;
-                } else {
-                    clearInterval(interval);
-                }
-            }, speed);
+        // FAMILY MESSAGES
+        const familyMessages = {
+            hugging: "This warm hug shows how much we care for each other. These simple, loving moments with my family make our life so much happier and meaningful.",
+            shakehands: "This photo reminds me of our fun and happy times together. I am so grateful that I have my wonderful siblings to grow up with.",
+            firstsister: "My first sister, someone I can always talk to and laugh with. She guides me and supports me in every step of my journey.",
+            secondsister: "My second sister, we share our dreams and our little secrets. I will always cherish our bond as sisters.",
+            brother: "This is my brother, my loyal playmate and protector. Even though we sometimes argue, I know he will always love and support me no matter what happens.",
+            thirdsister: "My third sister, she makes our home full of joy and laughter. I am so blessed to have her in my life.",
+            fourthsister: "My fourth sister, we may tease each other often but our love for one another will never fade away."
+        };
+
+        // FRIENDS MESSAGES
+        const friendMessages = {
+            friends: "These are my wonderful friends! We laugh together, help each other, and create so many happy memories that I will keep forever in my heart.",
+            love: "This memory reminds me of how lucky I am to meet people who genuinely care for me and cheer for my success.",
+            palaro: "Our fun palaro moments! Full of laughter, excitement and friendly competition that we will never forget.",
+            baguio: "Our fun trip to Baguio! This memory will always make me smile, I am so happy I got to experience this beautiful place with my friends."
+        };
+
+        function openFamilyModal(){
+            document.getElementById("familyModal").classList.add("active");
+            document.getElementById("familyMsg").innerText = "";
         }
-
-        typeText("MY FAMILY", document.getElementById("familyTitle"));
-        setTimeout(()=>{
-            typeText("MY FRIENDS", document.getElementById("friendsTitle"));
-        }, 1400);
-
-        const allCards = document.querySelectorAll('.flip-card');
-        allCards.forEach(card=>{
-            const backP = card.querySelector('.flip-back p');
-            backP.textContent = card.dataset.message;
-
-            card.addEventListener('click', ()=>{
-                allCards.forEach(c=>{
-                    if(c !== card) c.classList.remove('flipped');
-                });
-                card.classList.toggle('flipped');
-            });
-        })
-
-        document.getElementById('prevBtn').addEventListener('click', ()=>{
-            window.location.href = "achievements.html";
-        });
-
-        document.getElementById('homeBtn').addEventListener('click', ()=>{
-            window.location.href = "index.html";
-        });
+        function openFriendsModal(){
+            document.getElementById("friendsModal").classList.add("active");
+            document.getElementById("friendsMsg").innerText = "";
+        }
+        function closeAllModal(){
+            document.getElementById("familyModal").classList.remove("active");
+            document.getElementById("friendsModal").classList.remove("active");
+        }
+        function showMessage(key){
+            document.getElementById("familyMsg").innerText = familyMessages[key];
+        }
+        function showFriendMessage(key){
+            document.getElementById("friendsMsg").innerText = friendMessages[key];
+        }
     </script>
 </body>
 </html>
-Compose
-Write to Ma Luisa Victoria Sanchez
