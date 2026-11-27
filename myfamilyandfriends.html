@@ -11,6 +11,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Inter', sans-serif;
         }
+
         body {
             width: 100vw;
             height: 100vh;
@@ -19,12 +20,14 @@
             color: #e0f2fe;
             position: relative;
         }
+
         .dot {
             position: absolute;
             background-color: rgba(147, 197, 253, 0.7);
             border-radius: 50%;
             animation: rise 10s linear infinite;
         }
+
         @keyframes rise {
             0% {
                 transform: translateY(100vh);
@@ -41,122 +44,160 @@
                 opacity: 0;
             }
         }
+
         h1 {
             text-align: center;
             padding-top: 20px;
-            font-size:30px;
-            color:#38bdf8;
+            font-size: 30px;
+            color: #38bdf8;
             text-shadow: 0 0 12px #38bdf8;
         }
-        .mainContainer{
-            width:100%;
-            height:calc(100vh - 95px);
-            padding:10px 30px;
+
+        .mainContainer {
+            width: 100%;
+            height: calc(100vh - 95px);
+            padding: 10px 30px;
         }
-        .coverRow{
-            display:flex;
-            justify-content:center;
-            gap:40px;
-            margin-top:40px;
+
+        .coverRow {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
         }
-        .coverBox{
-            width:420px;
-            cursor:pointer;
+
+        .coverBox {
+            width: 420px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .coverBox img{
-            width:100%;
-            height:320px;
-            object-fit:cover;
-            border-radius:16px;
-            box-shadow:0 0 20px rgba(96,165,250,0.3);
+
+        .coverBox:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.45);
         }
-        .clickText{
-            text-align:center;
-            margin-top:10px;
-            color:#93c5fd;
-            font-weight:bold;
+
+        .coverBox img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
         }
-        .gallerySection{
-            display:none;
+
+        .clickText {
+            text-align: center;
+            margin-top: 10px;
+            color: #93c5fd;
+            font-weight: bold;
+            font-size: 15px;
         }
+
+        .gallerySection {
+            display: none;
+        }
+
         h2 {
-            text-align:center;
-            margin:20px 0 15px;
-            font-size:24px;
-            color:#bae6fd;
+            text-align: center;
+            margin: 20px 0 15px;
+            font-size: 24px;
+            color: #bae6fd;
         }
-        .rowWrap{
-            display:flex;
-            justify-content:center;
-            gap:22px;
-            margin-bottom:22px;
+
+        .rowWrap {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin-bottom: 22px;
         }
-        .flipCard{
-            width:200px;
-            height:240px;
+
+        .flipCard {
+            width: 200px;
+            height: 240px;
             perspective: 1000px;
-            cursor:pointer;
+            cursor: pointer;
         }
-        .flipInner{
-            width:100%;
-            height:100%;
-            transition: transform 0.6s;
+
+        .flipInner {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease;
             transform-style: preserve-3d;
         }
-        .flipCard.flipped .flipInner{
+
+        .flipCard.flipped .flipInner {
             transform: rotateY(180deg);
         }
-        .flipFront, .flipBack{
-            position:absolute;
-            width:100%;
-            height:100%;
+
+        .flipFront,
+        .flipBack {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             backface-visibility: hidden;
-            border-radius:14px;
-            overflow:hidden;
-            box-shadow:0 0 18px rgba(96,165,250,0.32);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 0 18px rgba(96, 165, 250, 0.32);
         }
-        .flipFront img{
-            width:100%;
-            height:100%;
-            object-fit:cover;
+
+        .flipFront img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        .flipBack{
-            background:rgba(15,23,42,0.85);
-            border:1px solid #60a5fa;
+
+        .flipBack {
+            background: rgba(15, 23, 42, 0.88);
+            border: 1px solid #60a5fa;
             transform: rotateY(180deg);
-            padding:12px;
-            display:flex;
-            align-items:center;
-            font-size:13px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.6;
         }
-        .backButtonTop{
-            text-align:center;
-            margin:15px 0;
+
+        .backButtonTop {
+            text-align: center;
+            margin: 15px 0;
         }
-        .backBtn{
-            padding:10px 20px;
-            border:none;
-            border-radius:25px;
-            background:#38bdf8;
-            color:#020617;
-            font-weight:bold;
-            cursor:pointer;
+
+        .backBtn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #38bdf8;
+            color: #020617;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .backBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.45);
         }
     </style>
 </head>
+
 <body>
     <div id="dotContainer"></div>
+
     <h1>My Family and Friends</h1>
+
     <div class="mainContainer">
         <!-- MAIN COVER PAGE -->
         <div id="coverPage">
             <div class="coverRow">
                 <div class="coverBox" onclick="openFamilyGallery()">
-                    <img src="familycover.jpg" alt="My Family">
+                    <img src="completefamily.jpg" alt="My Family">
                     <div class="clickText">CLICK HERE TO VIEW FAMILY GALLERY</div>
                 </div>
+
                 <div class="coverBox" onclick="openFriendsGallery()">
-                    <img src="friendscover.jpg" alt="My Friends">
+                    <img src="friends_group.jpg" alt="My Friends">
                     <div class="clickText">CLICK HERE TO VIEW FRIENDS GALLERY</div>
                 </div>
             </div>
@@ -167,7 +208,10 @@
             <div class="backButtonTop">
                 <button class="backBtn" onclick="backToCover()">BACK</button>
             </div>
+
             <h2>MY FAMILY</h2>
+
+            <!-- 3 pictures sa taas -->
             <div class="rowWrap">
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
@@ -177,6 +221,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
                         <div class="flipFront"><img src="shakehands.jpg" alt="Shake Hands"></div>
@@ -185,6 +230,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
                         <div class="flipFront"><img src="brother.jpg" alt="Brother"></div>
@@ -194,6 +240,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 4 pictures sa baba -->
             <div class="rowWrap">
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
@@ -203,6 +251,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
                         <div class="flipFront"><img src="secondsister.jpg" alt="Second Sister"></div>
@@ -211,6 +260,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="thirdsister.jpg" alt="Third Sister"></div>
+                        <div class="flipBack">
+                            <p>She always listens to me and supports every decision that I make.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
                         <div class="flipFront"><img src="fourthsister.jpg" alt="Fourth Sister"></div>
@@ -227,7 +286,10 @@
             <div class="backButtonTop">
                 <button class="backBtn" onclick="backToCover()">BACK</button>
             </div>
+
             <h2>MY FRIENDS</h2>
+
+            <!-- 2 pictures sa taas -->
             <div class="rowWrap">
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
@@ -237,6 +299,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
                         <div class="flipFront"><img src="palaro.jpg" alt="Palaro"></div>
@@ -246,6 +309,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 2 pictures sa baba -->
             <div class="rowWrap">
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
@@ -255,6 +320,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="flipCard" onclick="this.classList.toggle('flipped')">
                     <div class="flipInner">
                         <div class="flipFront"><img src="love.jpg" alt="Happy Memories"></div>
@@ -269,7 +335,7 @@
 
     <script>
         const dotContainer = document.getElementById("dotContainer");
-        for(let i = 0; i < 70; i++){
+        for (let i = 0; i < 70; i++) {
             let dot = document.createElement("div");
             dot.classList.add("dot");
             const size = Math.random() * 5 + 2;
@@ -280,20 +346,22 @@
             dotContainer.appendChild(dot);
         }
 
-        function openFamilyGallery(){
-            document.getElementById("coverPage").style.display="none";
-            document.getElementById("familyGallery").style.display="block";
-            document.getElementById("friendsGallery").style.display="none";
+        function openFamilyGallery() {
+            document.getElementById("coverPage").style.display = "none";
+            document.getElementById("familyGallery").style.display = "block";
+            document.getElementById("friendsGallery").style.display = "none";
         }
-        function openFriendsGallery(){
-            document.getElementById("coverPage").style.display="none";
-            document.getElementById("familyGallery").style.display="none";
-            document.getElementById("friendsGallery").style.display="block";
+
+        function openFriendsGallery() {
+            document.getElementById("coverPage").style.display = "none";
+            document.getElementById("familyGallery").style.display = "none";
+            document.getElementById("friendsGallery").style.display = "block";
         }
-        function backToCover(){
-            document.getElementById("coverPage").style.display="block";
-            document.getElementById("familyGallery").style.display="none";
-            document.getElementById("friendsGallery").style.display="none";
+
+        function backToCover() {
+            document.getElementById("coverPage").style.display = "block";
+            document.getElementById("familyGallery").style.display = "none";
+            document.getElementById("friendsGallery").style.display = "none";
         }
     </script>
 </body>
