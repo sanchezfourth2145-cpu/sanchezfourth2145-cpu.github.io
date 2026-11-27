@@ -48,17 +48,43 @@
             color:#38bdf8;
             text-shadow: 0 0 12px #38bdf8;
         }
-        h2 {
-            text-align:center;
-            margin:12px 0;
-            font-size:24px;
-            color:#bae6fd;
-        }
         .mainContainer{
             width:100%;
             height:calc(100vh - 95px);
             padding:10px 30px;
             overflow-y:auto;
+        }
+        .coverRow{
+            display:flex;
+            justify-content:center;
+            gap:40px;
+            margin:30px 0;
+        }
+        .coverBox{
+            width:420px;
+            cursor:pointer;
+        }
+        .coverBox img{
+            width:100%;
+            height:320px;
+            object-fit:cover;
+            border-radius:16px;
+            box-shadow:0 0 20px rgba(96,165,250,0.3);
+        }
+        .clickText{
+            text-align:center;
+            margin-top:10px;
+            color:#93c5fd;
+            font-weight:bold;
+        }
+        .gallerySection{
+            display:none;
+        }
+        h2 {
+            text-align:center;
+            margin:30px 0 15px;
+            font-size:24px;
+            color:#bae6fd;
         }
         .rowWrap{
             display:flex;
@@ -66,63 +92,55 @@
             gap:22px;
             margin-bottom:22px;
         }
-        .photoCard{
+        .flipCard{
             width:200px;
             height:240px;
+            perspective: 1000px;
             cursor:pointer;
+        }
+        .flipInner{
+            width:100%;
+            height:100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flipCard.flipped .flipInner{
+            transform: rotateY(180deg);
+        }
+        .flipFront, .flipBack{
+            position:absolute;
+            width:100%;
+            height:100%;
+            backface-visibility: hidden;
             border-radius:14px;
             overflow:hidden;
             box-shadow:0 0 18px rgba(96,165,250,0.32);
-            transition: transform 0.3s ease;
         }
-        .photoCard:hover{
-            transform: scale(1.04);
-        }
-        .photoCard img{
+        .flipFront img{
             width:100%;
             height:100%;
             object-fit:cover;
         }
-        .messageOverlay{
-            position:fixed;
-            top:0;
-            left:0;
-            width:100vw;
-            height:100vh;
-            background:rgba(2,6,23,0.88);
-            z-index:20;
-            display:none;
-            justify-content:center;
-            align-items:center;
-            padding:40px;
-        }
-        .messageOverlay.active{
-            display:flex;
-        }
-        .messageBox{
-            background:rgba(15,23,42,0.82);
+        .flipBack{
+            background:rgba(15,23,42,0.85);
             border:1px solid #60a5fa;
-            border-radius:18px;
-            padding:26px;
-            max-width:720px;
-            animation: fadePop 0.45s ease;
+            transform: rotateY(180deg);
+            padding:15px;
+            display:flex;
+            align-items:center;
         }
-        @keyframes fadePop{
-            0%{
-                transform:scale(0.92);
-                opacity:0;
-            }
-            100%{
-                transform:scale(1);
-                opacity:1;
-            }
+        .backButtonTop{
+            text-align:center;
+            margin:20px 0;
         }
-        .closeText{
-            text-align:right;
+        .backBtn{
+            padding:10px 20px;
+            border:none;
+            border-radius:25px;
+            background:#38bdf8;
+            color:#020617;
+            font-weight:bold;
             cursor:pointer;
-            color:#93c5fd;
-            font-size:17px;
-            margin-bottom:12px;
         }
     </style>
 </head>
@@ -130,53 +148,122 @@
     <div id="dotContainer"></div>
     <h1>My Family and Friends</h1>
     <div class="mainContainer">
-        <h2>MY FAMILY</h2>
-        <div class="rowWrap">
-            <div class="photoCard" onclick="showMsg('family1')">
-                <img src="hugging.jpg" alt="Family Hug">
-            </div>
-            <div class="photoCard" onclick="showMsg('family2')">
-                <img src="shakehands.jpg" alt="Shake Hands">
-            </div>
-            <div class="photoCard" onclick="showMsg('family3')">
-                <img src="brother.jpg" alt="Brother">
-            </div>
-        </div>
-        <div class="rowWrap">
-            <div class="photoCard" onclick="showMsg('family4')">
-                <img src="firstsister.jpg" alt="First Sister">
-            </div>
-            <div class="photoCard" onclick="showMsg('family5')">
-                <img src="secondsister.jpg" alt="Second Sister">
-            </div>
-            <div class="photoCard" onclick="showMsg('family6')">
-                <img src="fourthsister.jpg" alt="Fourth Sister">
+        <!-- MAIN COVER PAGE -->
+        <div id="coverPage">
+            <div class="coverRow">
+                <div class="coverBox" onclick="openFamilyGallery()">
+                    <img src="familycover.jpg" alt="My Family">
+                    <div class="clickText">CLICK HERE TO VIEW FAMILY GALLERY</div>
+                </div>
+                <div class="coverBox" onclick="openFriendsGallery()">
+                    <img src="friendscover.jpg" alt="My Friends">
+                    <div class="clickText">CLICK HERE TO VIEW FRIENDS GALLERY</div>
+                </div>
             </div>
         </div>
 
-        <h2>MY FRIENDS</h2>
-        <div class="rowWrap">
-            <div class="photoCard" onclick="showMsg('friend1')">
-                <img src="friends.jpg" alt="Friends">
+        <!-- FAMILY GALLERY -->
+        <div id="familyGallery" class="gallerySection">
+            <div class="backButtonTop">
+                <button class="backBtn" onclick="backToCover()">BACK</button>
             </div>
-            <div class="photoCard" onclick="showMsg('friend2')">
-                <img src="palaro.jpg" alt="Palaro">
+            <h2>MY FAMILY</h2>
+            <div class="rowWrap">
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="hugging.jpg" alt="Family Hug"></div>
+                        <div class="flipBack">
+                            <p>This warm and heartfelt hug captures the endless love that our family shares. No matter what challenges we face in our daily lives, we always have each other to lean on, comfort one another, and remind everyone that we are never alone in this journey of life.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="shakehands.jpg" alt="Shake Hands"></div>
+                        <div class="flipBack">
+                            <p>This wonderful moment reminds me of the fun, respect and happiness we have inside our home. I am truly blessed to grow up surrounded by kind and supportive family members who teach me good values that I will carry with me for the rest of my life.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="brother.jpg" alt="Brother"></div>
+                        <div class="flipBack">
+                            <p>My brother is one of the most important people in my life. Even if we sometimes argue and tease each other, I know that he will always protect me, cheer for my dreams, and stay by my side through every happy and difficult moment that comes our way.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rowWrap">
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="firstsister.jpg" alt="First Sister"></div>
+                        <div class="flipBack">
+                            <p>My first sister is someone I can always run to whenever I need advice or someone to listen to my worries. She guides me patiently and encourages me to keep chasing my goals even whenever I feel tired and want to give up.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="secondsister.jpg" alt="Second Sister"></div>
+                        <div class="flipBack">
+                            <p>My second sister is my best friend inside our home. We share our biggest dreams, our small secrets and our happiest laughs together. I will always treasure our special sister bond that nothing in this world can ever break.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="fourthsister.jpg" alt="Fourth Sister"></div>
+                        <div class="flipBack">
+                            <p>My fourth sister fills our whole house with so much joy and laughter every single day. She makes every ordinary day feel special and I am endlessly grateful to our parents for giving me such a complete and loving family.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="rowWrap">
-            <div class="photoCard" onclick="showMsg('friend3')">
-                <img src="baguio.jpg" alt="Baguio Trip">
-            </div>
-            <div class="photoCard" onclick="showMsg('friend4')">
-                <img src="love.jpg" alt="Happy Memories">
-            </div>
-        </div>
-    </div>
 
-    <div id="msgOverlay" class="messageOverlay" onclick="closeMessage()">
-        <div class="messageBox" onclick="event.stopPropagation()">
-            <div class="closeText" onclick="closeMessage()">Click here to close</div>
-            <p id="finalMessage"></p>
+        <!-- FRIENDS GALLERY -->
+        <div id="friendsGallery" class="gallerySection">
+            <div class="backButtonTop">
+                <button class="backBtn" onclick="backToCover()">BACK</button>
+            </div>
+            <h2>MY FRIENDS</h2>
+            <div class="rowWrap">
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="friends.jpg" alt="Friends"></div>
+                        <div class="flipBack">
+                            <p>These amazing people are my closest friends who make my school life so much brighter and fun. We celebrate our victories together and help each other whenever one of us is struggling with schoolwork or personal problems.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="palaro.jpg" alt="Palaro"></div>
+                        <div class="flipBack">
+                            <p>Our palaro memories will always stay inside my heart forever! It was full of laughter, friendly competition and pure joy that made our bond much stronger than before.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rowWrap">
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="baguio.jpg" alt="Baguio Trip"></div>
+                        <div class="flipBack">
+                            <p>Our unforgettable trip to Baguio is one of my most precious memories! Seeing the beautiful scenery together with my friends made that trip so magical and something I will always look back on with a big smile.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flipCard" onclick="this.classList.toggle('flipped')">
+                    <div class="flipInner">
+                        <div class="flipFront"><img src="love.jpg" alt="Happy Memories"></div>
+                        <div class="flipBack">
+                            <p>This sweet memory reminds me how lucky I am to meet genuine friends who truly care about my wellbeing and who sincerely root for all of my success in life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -191,25 +278,20 @@
             dotContainer.appendChild(dot);
         }
 
-        const allMessages = {
-            family1: "This warm and heartfelt hug captures the endless love that our family shares. No matter what challenges we face in our daily lives, we always have each other to lean on, comfort one another, and remind everyone that we are never alone in this journey of life.",
-            family2: "This wonderful moment reminds me of the fun, respect and happiness we have inside our home. I am truly blessed to grow up surrounded by kind and supportive family members who teach me good values that I will carry with me for the rest of my life.",
-            family3: "My brother is one of the most important people in my life. Even if we sometimes argue and tease each other, I know that he will always protect me, cheer for my dreams, and stay by my side through every happy and difficult moment that comes our way.",
-            family4: "My first sister is someone I can always run to whenever I need advice or someone to listen to my worries. She guides me patiently and encourages me to keep chasing my goals even whenever I feel tired and want to give up.",
-            family5: "My second sister is my best friend inside our home. We share our biggest dreams, our small secrets and our happiest laughs together. I will always treasure our special sister bond that nothing in this world can ever break.",
-            family6: "My fourth sister fills our whole house with so much joy and laughter every single day. She makes every ordinary day feel special and I am endlessly grateful to our parents for giving me such a complete and loving family.",
-            friend1: "These amazing people are my closest friends who make my school life so much brighter and fun. We celebrate our victories together and help each other whenever one of us is struggling with schoolwork or personal problems.",
-            friend2: "Our palaro memories will always stay inside my heart forever! It was full of laughter, friendly competition and pure joy that made our bond much stronger than before.",
-            friend3: "Our unforgettable trip to Baguio is one of my most precious memories! Seeing the beautiful scenery together with my friends made that trip so magical and something I will always look back on with a big smile.",
-            friend4: "This sweet memory reminds me how lucky I am to meet genuine friends who truly care about my wellbeing and who sincerely root for all of my success in life."
-        };
-
-        function showMsg(key){
-            document.getElementById("finalMessage").innerText = allMessages[key];
-            document.getElementById("msgOverlay").classList.add("active");
+        function openFamilyGallery(){
+            document.getElementById("coverPage").style.display="none";
+            document.getElementById("familyGallery").style.display="block";
+            document.getElementById("friendsGallery").style.display="none";
         }
-        function closeMessage(){
-            document.getElementById("msgOverlay").classList.remove("active");
+        function openFriendsGallery(){
+            document.getElementById("coverPage").style.display="none";
+            document.getElementById("familyGallery").style.display="none";
+            document.getElementById("friendsGallery").style.display="block";
+        }
+        function backToCover(){
+            document.getElementById("coverPage").style.display="block";
+            document.getElementById("familyGallery").style.display="none";
+            document.getElementById("friendsGallery").style.display="none";
         }
     </script>
 </body>
