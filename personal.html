@@ -1,321 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Personal Information</title>
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Arial, sans-serif;
-}
-
-body {
-  background: #0f1730;
-  min-height: 100vh;
-  overflow: hidden;
-  padding: 40px;
-  position: relative;
-}
-
-/* ===== BACKGROUND EFFECTS ===== */
-.bg-effect {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.bg-effect span {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(0, 204, 255, 0.4);
-  border-radius: 50%;
-  animation: float 8s infinite ease-in-out;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(100vh); opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { transform: translateY(-10vh); opacity: 0; }
-}
-
-.container {
-  max-width: 750px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-/* ===== TYPING EFFECT ===== */
-.title-wrapper {
-  margin-bottom: 25px;
-}
-
-h1 {
-  display: inline-block;
-  color: #00ccff;
-  font-size: 2.5rem;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px #00ccff, 0 0 25px #0099cc;
-  border-right: 3px solid #00ccff;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  animation: typing 2.5s steps(20, end) forwards, blink 0.7s infinite;
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  0%, 100% { border-color: #00ccff; }
-  50% { border-color: transparent; }
-}
-
-/* ===== EACH SECTION ===== */
-.section-wrapper {
-  margin-bottom: 15px;
-  opacity: 0;
-}
-
-.section-wrapper:nth-child(1) { animation: slideLeft 0.6s ease-out 2.6s forwards; }
-.section-wrapper:nth-child(2) { animation: slideRight 0.6s ease-out 2.9s forwards; }
-.section-wrapper:nth-child(3) { animation: slideLeft 0.6s ease-out 3.2s forwards; }
-.section-wrapper:nth-child(4) { animation: slideRight 0.6s ease-out 3.5s forwards; }
-.section-wrapper:nth-child(5) { animation: slideLeft 0.6s ease-out 3.8s forwards; }
-
-@keyframes slideLeft {
-  from { opacity: 0; transform: translateX(-80px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideRight {
-  from { opacity: 0; transform: translateX(80px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.section-btn {
-  width: 100%;
-  padding: 15px 25px;
-  background: transparent;
-  border: 1px solid rgba(0, 204, 255, 0.3);
-  color: #66ccff;
-  font-size: 1rem;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.section-btn:hover {
-  border-color: #00ccff;
-  color: #ffffff;
-  background: rgba(0, 80, 160, 0.2);
-}
-
-.section-btn.active {
-  background: rgba(0, 80, 160, 0.35);
-  border-color: #00ccff;
-  color: #ffffff;
-}
-
-/* ===== CONTENT BOX — SA ILALIM NG BUTTON LANG ===== */
-.content-box {
-  border: 1px solid rgba(0, 204, 255, 0.4);
-  background: rgba(0, 30, 60, 0.4);
-  padding: 18px 25px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  display: none;
-  line-height: 2;
-  text-align: left;
-  animation: fadeIn 0.4s ease-out;
-}
-
-.content-box.show {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.content-box h2 {
-  color: #00ccff;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 10px;
-}
-
-.content-box p {
-  color: #99ddff;
-  font-size: 0.95rem;
-}
-
-.content-box strong {
-  color: #66ccff;
-  display: inline-block;
-  width: 140px;
-}
-
-/* ===== NAV BUTTONS ===== */
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  opacity: 0;
-  animation: fadeIn 0.7s ease-out 4.3s forwards;
-}
-
-.nav-btn {
-  padding: 12px 30px;
-  border: 1px solid rgba(0, 204, 255, 0.4);
-  color: #66ccff;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.nav-btn:hover {
-  border-color: #00ccff;
-  color: #ffffff;
-  background: rgba(0, 80, 160, 0.15);
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information | Ma. Luisa Victoria S. Sanchez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', sans-serif;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+            color: #e0f2fe;
+            position: relative;
+        }
+        .dot {
+            position: absolute;
+            background-color: rgba(147, 197, 253, 0.6);
+            border-radius: 50%;
+            animation: rise 12s linear infinite;
+        }
+        @keyframes rise {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+        h1 {
+            text-align: center;
+            padding-top: 16px;
+            font-size:34px;
+            color:#38bdf8;
+            text-shadow: 0 0 12px #38bdf8;
+            animation: fadeInDown 1s ease forwards;
+        }
+        @keyframes fadeInDown{
+            0%{transform:translateY(-20px);opacity:0;}
+            100%{transform:translateY(0px);opacity:1;}
+        }
+        .mainWrap{
+            width:100%;
+            height:calc(100vh - 90px);
+            padding:15px 40px;
+            overflow-y:auto;
+        }
+        .sectionBox{
+            background:rgba(15,23,42,0.75);
+            border:1px solid #60a5fa;
+            border-radius:16px;
+            padding:22px;
+            margin:18px auto;
+            max-width:850px;
+            animation: fadePop 0.7s ease forwards;
+        }
+        @keyframes fadePop{
+            0%{transform:scale(0.95);opacity:0;}
+            100%{transform:scale(1);opacity:1;}
+        }
+        .sectionBox h2{
+            color:#bae6fd;
+            margin-bottom:12px;
+            border-bottom: 1px solid #60a5fa;
+            padding-bottom:6px;
+        }
+        .sectionBox p{
+            margin:7px 0;
+            font-size:16px;
+            line-height:1.6;
+        }
+        .buttonArea{
+            display:flex;
+            justify-content:space-between;
+            max-width:850px;
+            margin:20px auto;
+        }
+        .navButton{
+            padding:11px 24px;
+            border:none;
+            border-radius:30px;
+            background-color:#38bdf8;
+            color:#020617;
+            font-weight:bold;
+            cursor:pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .navButton:hover{
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(56,189,248,0.45);
+        }
+    </style>
 </head>
 <body>
-
-<!-- BACKGROUND EFFECTS -->
-<div class="bg-effect" id="bg-dots"></div>
-
-<div class="container">
-  <div class="title-wrapper">
-    <h1 id="main-title">Personal Information</h1>
-  </div>
-
-  <!-- 1. BASIC DETAILS -->
-  <div class="section-wrapper">
-    <button class="section-btn" onclick="toggleInfo('basic')" id="btn-basic">Basic Details</button>
-    <div class="content-box" id="basic">
-      <h2>Basic Details</h2>
-      <p>
-        <strong>Full Name:</strong> Ma. Luisa Victoria S. Sanchez<br>
-        <strong>Birthdate:</strong> February 24, 2008<br>
-        <strong>Religion:</strong> Roman Catholic<br>
-        <strong>Address:</strong> BGH Compound, Baguio City<br>
-        <strong>Email:</strong> sanchezfourth@gmail.com<br>
-        <strong>Phone Number:</strong> 09506920820<br>
-        <strong>Height:</strong>5'1<br>
-        <strong>Weight:</strong>45kg
-      </p>
+    <div id="dotContainer"></div>
+    <h1>PERSONAL INFORMATION</h1>
+    <div class="mainWrap">
+        <div class="sectionBox">
+            <h2>BASIC DETAILS</h2>
+            <p><strong>Full Name:</strong> Ma. Luisa Victoria S. Sanchez</p>
+            <p><strong>Birthdate:</strong> February 24, 2008</p>
+            <p><strong>Religion:</strong> Roman Catholic</p>
+            <p><strong>Address:</strong> BGH Compound, Baguio City</p>
+            <p><strong>Email:</strong> sanchezfourth@gmail.com</p>
+            <p><strong>Phone Number:</strong> 09506920820</p>
+            <p><strong>Height:</strong> 5'1"</p>
+            <p><strong>Weight:</strong> 45kg</p>
+            <p><strong>Blood Type:</strong> Type A</p>
+        </div>
+        <div class="sectionBox">
+            <h2>EDUCATIONAL BACKGROUND</h2>
+            <p><strong>Current:</strong> Bachelor of Science in Information Technology</p>
+            <p><strong>Track:</strong> Enterprise Resource Planning</p>
+            <p><strong>School:</strong> University of the Cordilleras</p>
+            <p><strong>Senior High School & Junior High School:</strong> Baguio City High School</p>
+            <p><strong>Elementary:</strong> Doña Aurora H. Bueno Elementary School</p>
+        </div>
+        <div class="sectionBox">
+            <h2>ABOUT ME</h2>
+            <p>I am Ma. Luisa Victoria S. Sanchez, a dedicated BSIT student at the University of the Cordilleras. I have a strong passion for technology and continuous learning. One of my favorite hobbies is playing basketball, it keeps me active, disciplined and teaches me the value of teamwork. I believe that dedication and curiosity are the keys to turning dreams into reality.</p>
+        </div>
+        <div class="sectionBox">
+            <h2>FUTURE GOALS</h2>
+            <p>I want to finish my college degree, become a skilled IT professional and create meaningful projects that can help other people while making my family very proud of all my achievements in life.</p>
+        </div>
+        <div class="buttonArea">
+            <button class="navButton" onclick="window.location.href='index.html'">HOME</button>
+            <button class="navButton" onclick="window.location.href='achievements.html'">ACHIEVEMENTS</button>
+        </div>
     </div>
-  </div>
 
-  <!-- 2. EDUCATIONAL BACKGROUND -->
-  <div class="section-wrapper">
-    <button class="section-btn" onclick="toggleInfo('education')" id="btn-education">Educational Background</button>
-    <div class="content-box" id="education">
-      <h2>Educational Background</h2>
-      <p>
-        <strong>Current:</strong> Bachelor of Science in Information Technology<br>
-        <strong>Track:</strong> Enterprise Resource Planning<br>
-        <strong>School:</strong> University of the Cordilleras<br><br>
-        <strong>Previous:</strong><br>
-        Baguio City High School
-      </p>
-    </div>
-  </div>
-
-  <!-- 3. ABOUT ME -->
-  <div class="section-wrapper">
-    <button class="section-btn" onclick="toggleInfo('about')" id="btn-about">About Me</button>
-    <div class="content-box" id="about">
-      <h2>About Me</h2>
-      <p>
-        I am Ma. Luisa Victoria S. Sanchez, a dedicated BSIT student at the University of the Cordilleras. I have a strong passion for technology and continuous learning. I believe that dedication and curiosity are the keys to turning dreams into reality.
-      </p>
-    </div>
-  </div>
-
-  <!-- 4. FUTURE GOALS -->
-  <div class="section-wrapper">
-    <button class="section-btn" onclick="toggleInfo('future')" id="btn-future">Future Goals</button>
-    <div class="content-box" id="future">
-      <h2>Future Goals</h2>
-      <p>
-        My goal is to become a successful IT professional. I want to specialize in enterprise systems and business solutions that can help organizations work more efficiently. I also want to build a career that allows me to give back to my family and contribute to my community.
-      </p>
-    </div>
-  </div>
-
-  <!-- 5. SKILLS -->
-  <div class="section-wrapper">
-    <button class="section-btn" onclick="toggleInfo('skills')" id="btn-skills">Skills</button>
-    <div class="content-box" id="skills">
-      <h2>My Skills</h2>
-      <p>
-        <strong>Web Development:</strong> Basic HTML & CSS<br>
-        <strong>Computer Skills:</strong> MS Office, Basic Troubleshooting<br>
-        <strong>Communication:</strong> Written & Verbal Communication<br>
-        <strong>Soft Skills:</strong> Teamwork, Time Management, Organization<br>
-        <strong>Personal Traits:</strong> Adaptability, Willingness to Learn, Resilience
-      </p>
-    </div>
-  </div>
-
-  <div class="nav-container">
-    <a href="index.html" class="nav-btn">Home</a>
-    <a href="achievements.html" class="nav-btn">Achievements</a>
-  </div>
-</div>
-
-<script>
-// Background floating dots
-const bgDots = document.getElementById('bg-dots');
-for (let i = 0; i < 40; i++) {
-  const dot = document.createElement('span');
-  dot.style.left = Math.random() * 100 + '%';
-  dot.style.animationDelay = Math.random() * 8 + 's';
-  dot.style.animationDuration = (6 + Math.random() * 6) + 's';
-  bgDots.appendChild(dot);
-}
-
-// Toggle — lalabas lang sa ilalim ng button na pinindot
-function toggleInfo(id) {
-  const box = document.getElementById(id);
-  const btn = document.getElementById('btn-' + id);
-  
-  // Kung nakabukas na, isara
-  if (box.classList.contains('show')) {
-    box.classList.remove('show');
-    btn.classList.remove('active');
-  } else {
-    // Isara lahat ng iba
-    document.querySelectorAll('.content-box').forEach(b => b.classList.remove('show'));
-    document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
-    // Buksan ang pinindot
-    box.classList.add('show');
-    btn.classList.add('active');
-  }
-}
-</script>
-
+    <script>
+        const dotContainer = document.getElementById("dotContainer");
+        for(let i = 0; i < 35; i++){
+            let dot = document.createElement("div");
+            dot.classList.add("dot");
+            dot.style.width = Math.random()*4 +1 + "px";
+            dot.style.height = Math.random()*4 +1 + "px";
+            dot.style.left = Math.random()*100 + "%";
+            dotContainer.appendChild(dot);
+        }
+    </script>
 </body>
 </html>
