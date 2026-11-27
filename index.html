@@ -56,6 +56,11 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 0 30px rgba(96, 165, 250, 0.35);
+            animation: fadeInLeft 1.2s ease forwards;
+        }
+        @keyframes fadeInLeft{
+            0%{transform:translateX(-40px);opacity:0;}
+            100%{transform:translateX(0);opacity:1;}
         }
         .profile-img-container img {
             width: 100%;
@@ -65,6 +70,11 @@
         }
         .text-area {
             text-align: center;
+            animation: fadeInRight 1.2s ease forwards;
+        }
+        @keyframes fadeInRight{
+            0%{transform:translateX(40px);opacity:0;}
+            100%{transform:translateX(0);opacity:1;}
         }
         .small-heading {
             font-size: 18px;
@@ -75,6 +85,7 @@
         h1 {
             font-size: 42px;
             margin-bottom: 12px;
+            color:#ffffff;
         }
         .subtitle {
             font-size: 16px;
@@ -91,6 +102,11 @@
             font-size:15px;
             cursor: pointer;
             margin-bottom:45px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .explore-btn:hover{
+            transform: translateY(-3px);
+            box-shadow:0 6px 18px rgba(56,189,248,0.45);
         }
         .cards-container {
             display: flex;
@@ -105,6 +121,11 @@
             border:1px solid rgba(148,163,184,0.4);
             border-radius:14px;
             background-color: rgba(15,23,42,0.55);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .card:hover{
+            transform: translateY(-4px);
+            box-shadow:0 5px 16px rgba(96,165,250,0.3);
         }
         .card h3 {
             color:white;
@@ -115,6 +136,17 @@
             color:#cbd5e1;
             font-size:13px;
         }
+        .cursor{
+            display:inline-block;
+            width:3px;
+            height:22px;
+            background:#38bdf8;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink{
+            0%,100%{opacity:1;}
+            50%{opacity:0;}
+        }
     </style>
 </head>
 <body>
@@ -123,9 +155,9 @@
             <img src="formalwhole.jpg" alt="Ma. Luisa Victoria S. Sanchez">
         </div>
         <div class="text-area">
-            <p class="small-heading">HELLO, I'M</p>
-            <h1>Ma. Luisa Victoria S. Sanchez</h1>
-            <p class="subtitle">An aspiring IT professional building digital solutions for tomorrow's world</p>
+            <p class="small-heading"><span id="line1"></span><span class="cursor"></span></p>
+            <h1><span id="line2"></span></h1>
+            <p class="subtitle"><span id="line3"></span></p>
             <button class="explore-btn">Explore My Work →</button>
             <div class="cards-container">
                 <a href="personal.html" class="card-link">
@@ -162,6 +194,39 @@
             setTimeout(() => dot.remove(), 8000);
         }
         setInterval(createDot, 250);
+
+        const text1 = "HELLO, I'M";
+        const text2 = "Ma. Luisa Victoria S. Sanchez";
+        const text3 = "An aspiring IT professional building digital solutions for tomorrow's world";
+        let i1=0,i2=0,i3=0;
+        const speed = 55;
+
+        function typeLine1(){
+            if(i1 < text1.length){
+                document.getElementById("line1").innerText += text1.charAt(i1);
+                i1++;
+                setTimeout(typeLine1,speed);
+            }else{
+                setTimeout(typeLine2,350);
+            }
+        }
+        function typeLine2(){
+            if(i2 < text2.length){
+                document.getElementById("line2").innerText += text2.charAt(i2);
+                i2++;
+                setTimeout(typeLine2,speed);
+            }else{
+                setTimeout(typeLine3,350);
+            }
+        }
+        function typeLine3(){
+            if(i3 < text3.length){
+                document.getElementById("line3").innerText += text3.charAt(i3);
+                i3++;
+                setTimeout(typeLine3,speed);
+            }
+        }
+        typeLine1();
     </script>
 </body>
 </html>
