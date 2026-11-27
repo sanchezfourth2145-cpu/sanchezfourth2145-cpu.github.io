@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Family and Friends</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', sans-serif;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+            color: #e0f2fe;
+            position: relative;
+        }
+        .dot {
+            position: absolute;
+            background-color: rgba(147, 197, 253, 0.6);
+            border-radius: 50%;
+            animation: rise 12s linear infinite;
+        }
+        @keyframes rise {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+        h1 {
+            text-align: center;
+            padding-top: 20px;
+            font-size:32px;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            height: calc(100vh - 80px);
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 20px;
+        }
+        .mainCard {
+            width: 45%;
+            height: 75vh;
+            position: relative;
+            cursor: pointer;
+            border-radius:16px;
+            overflow:hidden;
+            box-shadow: 0 0 25px rgba(96,165,250,0.35);
+        }
+        .mainCard img {
+            width:100%;
+            height:100%;
+            object-fit: cover;
+        }
+        .label {
+            position:absolute;
+            bottom:0;
+            width:100%;
+            background: rgba(15,23,42,0.75);
+            text-align:center;
+            padding:12px;
+            font-size:22px;
+            font-weight:bold;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100vh;
+            background: rgba(2,6,23,0.92);
+            z-index:10;
+            padding:30px;
+        }
+        .modal.active {
+            display:block;
+        }
+        .modalContent {
+            width:100%;
+            height:100%;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+        .closeBtn {
+            align-self:flex-end;
+            font-size:32px;
+            cursor:pointer;
+            margin-bottom:15px;
+        }
+        .galleryWrap {
+            display:flex;
+            gap:18px;
+            flex-wrap:wrap;
+            justify-content:center;
+            align-items:center;
+            max-width:100%;
+        }
+        .galleryCard {
+            width:220px;
+            height:260px;
+            cursor:pointer;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 0 15px rgba(96,165,250,0.3);
+        }
+        .galleryCard img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        .messageBox {
+            margin-top:18px;
+            background:rgba(15,23,42,0.78);
+            padding:15px 22px;
+            border-radius:12px;
+            text-align:center;
+            max-width:85%;
+        }
+    </style>
+</head>
+<body>
+    <div id="dotContainer"></div>
+    <h1>My Family and Friends</h1>
+    <div class="container">
+        <div class="mainCard" onclick="openFamilyModal()">
+            <img src="completefamily.jpg" alt="Complete Family">
+            <div class="label">MY FAMILY</div>
+        </div>
+        <div class="mainCard" onclick="openFriendsModal()">
+            <img src="friends_group.jpg" alt="Friends Group">
+            <div class="label">MY FRIENDS</div>
+        </div>
+    </div>
+
+    <div id="familyModal" class="modal">
+        <div class="modalContent">
+            <span class="closeBtn" onclick="closeAllModal()">&times;</span>
+            <div class="galleryWrap">
+                <div class="galleryCard" onclick="showMessage('hugging')">
+                    <img src="hugging.jpg" alt="Hugging">
+                </div>
+                <div class="galleryCard" onclick="showMessage('shakehands')">
+                    <img src="shakehands.jpg" alt="Shake Hands">
+                </div>
+                <div class="galleryCard" onclick="showMessage('firstsister')">
+                    <img src="firstsister.jpg" alt="First Sister">
+                </div>
+                <div class="galleryCard" onclick="showMessage('secondsister')">
+                    <img src="secondsister.jpg" alt="Second Sister">
+                </div>
+                <div class="galleryCard" onclick="showMessage('brother')">
+                    <img src="brother.jpg" alt="Brother">
+                </div>
+                <div class="galleryCard" onclick="showMessage('fourthsister')">
+                    <img src="fourthsister.jpg" alt="Fourth Sister">
+                </div>
+            </div>
+            <div id="familyMsg" class="messageBox"></div>
+        </div>
+    </div>
+
+    <div id="friendsModal" class="modal">
+        <div class="modalContent">
+            <span class="closeBtn" onclick="closeAllModal()">&times;</span>
+            <div class="galleryWrap">
+                <div class="galleryCard" onclick="showFriendMessage('friends')">
+                    <img src="friends.jpg" alt="Friends">
+                </div>
+                <div class="galleryCard" onclick="showFriendMessage('love')">
+                    <img src="love.jpg" alt="Love">
+                </div>
+                <div class="galleryCard" onclick="showFriendMessage('palaro')">
+                    <img src="palaro.jpg" alt="Palaro">
+                </div>
+                <div class="galleryCard" onclick="showFriendMessage('baguio')">
+                    <img src="baguio.jpg" alt="Baguio">
+                </div>
+            </div>
+            <div id="friendsMsg" class="messageBox"></div>
+        </div>
+    </div>
+
+    <script>
+        const dotContainer = document.getElementById("dotContainer");
+        for(let i = 0; i < 35; i++){
+            let dot = document.createElement("div");
+            dot.classList.add("dot");
+            dot.style.width = Math.random()*4 +1 + "px";
+            dot.style.height = Math.random()*4 +1 + "px";
+            dot.style.left = Math.random()*100 + "%";
+            dotContainer.appendChild(dot);
+        }
+
+        const familyMessages = {
+            hugging: "This warm hug shows how much we care for each other. These simple, loving moments with my family make our life so much happier and meaningful.",
+            shakehands: "This photo reminds me of our fun and happy times together. I am so grateful that I have my wonderful siblings to grow up with.",
+            firstsister: "My first sister, someone I can always talk to and laugh with. She guides me and supports me in every step of my journey.",
+            secondsister: "My second sister, we share our dreams and our little secrets. I will always cherish our bond as sisters.",
+            brother: "This is my brother, my loyal playmate and protector. Even though we sometimes argue, I know he will always love and support me no matter what happens.",
+            fourthsister: "My fourth sister, she makes our home full of joy and laughter. I am so blessed to have her in my life."
+        };
+
+        const friendMessages = {
+            friends: "These are my wonderful friends! We laugh together, help each other, and create so many happy memories that I will keep forever in my heart.",
+            love: "This memory reminds me of how lucky I am to meet people who genuinely care for me and cheer for my success.",
+            palaro: "Our fun palaro moments! Full of laughter, excitement and friendly competition that we will never forget.",
+            baguio: "Our fun trip to Baguio! This memory will always make me smile, I am so happy I got to experience this beautiful place with my friends."
+        };
+
+        function openFamilyModal(){
+            document.getElementById("familyModal").classList.add("active");
+            document.getElementById("familyMsg").innerText = "";
+        }
+        function openFriendsModal(){
+            document.getElementById("friendsModal").classList.add("active");
+            document.getElementById("friendsMsg").innerText = "";
+        }
+        function closeAllModal(){
+            document.getElementById("familyModal").classList.remove("active");
+            document.getElementById("friendsModal").classList.remove("active");
+        }
+        function showMessage(key){
+            document.getElementById("familyMsg").innerText = familyMessages[key];
+        }
+        function showFriendMessage(key){
+            document.getElementById("friendsMsg").innerText = friendMessages[key];
+        }
+    </script>
+</body>
+</html>
